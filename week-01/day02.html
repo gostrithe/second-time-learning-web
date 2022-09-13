@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        无序列表：
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            li标签可以包裹任意标签
+            type类型，list-style的值可以是 disc默认黑色实心圆点、circle空心圆、square黑色实心方块、none。
+
+        有序列表：
+            <ol type="" start="7">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+            type属性值可以是 A、a、I、i、1 默认为1，start属性表示从数字7开始有序
+        
+        自定义列表：
+            <dl>
+                <dt>帮助中心</dt>
+
+                <dd>账户管理</dd>
+                <dd>购物指南</dd>
+                <dd>订单操作</dd>
+            </dl>
+            一般在网页底部导航中使用。
+        
+            
+        表格： 
+            <table border="1">  
+                // 表格顶部的大标题
+                <caption>学生成绩单</caption>   
+
+                <thead>
+                    <tr>
+                        // th为单元格标题
+                        <th>姓名</th>
+                        <th>成绩</th>
+                        <th>评语</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>小哥哥</td>
+                        <td rowspan="2">100分</td>  // rowspan属性表示这个格子占多少行，行跨度
+                        <td>小哥哥真帅气</td>
+                    </tr>
+
+                    <tr>
+                        <td>小姐姐</td>
+                        <td>小姐姐真漂亮</td>
+                    </tr>
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td>总结</td>
+                        <td colspan="2">郎才女貌</td>   // colspan属性表示这个格子占多少列，列跨度
+                    </tr>
+                </tfoot>
+            </table>
+            单元格合并时候，注意不能跨结构标签(thead, tbody, tfoot)合并
+
+
+        表单：
+            input系列标签：
+
+            outline: none; ---- 取消点击后的高亮框，外线
+
+            文本框：<input type="text" placeholder="请输入文本">    // placeholder属性为框内提示灰字
+            <br>
+
+            密码框：<input type="password">  
+            <br>
+
+            单选框：<input type="radio" name="sex" checked>男<input type="radio" name="sex">女
+            <br>                    // 同一个name属性的属性值实现了单选功能，同一名字的单选框只能选择一个框。
+
+            复选框：<input type="checkbox">唱<input type="checkbox" >跳<input type="checkbox">rap<input type="checkbox">篮球
+            <br>                // 多选框
+
+            上传文件：<input type="file" multiple>  // multiple是多种的意思，加上该属性可以选择多个文件，上传多个文件
+            <br>
+
+            // form表单域用来包裹所有的表单元素。
+            <form action="https://www.baidu.com">   // form表单域的action属性用来提交后跳转的链接或者html文件      
+                提交按钮：<input type="submit">     // 没有form表单域则无法提交。     
+                <br>
+                重置按钮：<input type="reset">
+                <br>
+                普通按钮：<input type="button">
+            </form>
+
+
+            button按钮标签：
+                <button>普通按钮，谷歌浏览器默认为提交按钮</button>
+                <button type="submit">提交按钮</button>
+                <button type="reset">重置按钮</button>
+                <button type="button">配合js使用按钮</button>
+
+            select下拉框：
+                <select name="" id="">
+                    <option value="">唱</option>
+                    <option value="">跳</option>
+                    <option value="">rap</option>
+                    <option value="">篮球</option>
+                    <option value="" selected>鸡</option>   // selected属性为默认选项
+                </select>
+
+            textarea文本域标签：
+                // cols和rows属性分别规定了文本区域初始的列数和行数
+                <textarea name="" id="" cols="30" rows="10"> 
+                    lololololol
+                </textarea>
+
+
+            **************
+            label标签的两种用法：
+                label标签通常和input标签绑定使用，用来绑定表单标签和内容，点击内容可以达到点击表单元素的效果
+
+                1. 用laber标签包裹所需要与表单绑定的文本，然后用for属性与表单的id建立链接绑定
+                    <input type="radio" name="citys" id="city1">
+                    <label for="city1">
+                        北京
+                    </label>
+
+                    <input type="radio" name="citys" id="city2">
+                    <label for="city2">
+                        上海
+                    </label>
+
+                2. 直接用laber标签包裹需要绑定在一起的表单和文本
+                        注意：必须把laber的for属性删掉，空着也不行
+                    <label>
+                        <input type="checkbox">英雄联盟
+                    </label>
+                    
+        
+        -------------------
+
+        语义化标签：
+            常用没有语义化的标签，用来布局：
+                div标签、span标签----走遍天下
+            
+            H5新语义化标签，丰富标签和页面结构：
+                header标签----网页头部
+                nav标签-------网页导航
+                footer标签----网页底部
+                aside标签-----网页侧边栏
+                section标签---网页区块
+                article标签---网页文章
+
+        字符实体：
+            常用的：
+                &nbsp; ---- 空格    注意：就是文本中写再多的空格，浏览器也是显示一个空格
+                &lt;   ---- 小于号<
+                &gt;   ---- 大于号>
+                &copy;   ---- 版权copyright ©
+
+     -->
+        
+     
+</body>
+</html>

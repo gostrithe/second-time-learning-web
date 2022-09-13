@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        CSS三大特性：
+            1.继承性、2.层叠性
+            3.优先级：
+                优先级公式：
+                    继承 < 通配符*选择器 < 标签选择器 < 类选择器 < id选择器 < 行内样式 < !important
+                    
+                注意点： !important为最高权重，慎用，加在属性值后面，分号前面
+                        color: red !important; 另外!important不提高继承的优先级，继承优先级最低
+                
+                权重叠加计算：
+                    （行内样式的个数，id选择器的个数，类选择器的个数，标签选择器的个数）
+
+                全是继承的特殊情况：
+                    里目标最近的那个继承优先。
+
+        
+        PS的基本使用：
+            常用快捷键：
+                1. 放大 ---- ctrl 加 +
+                2. 缩小 ---- ctrl 加 -
+                3. 移动图片 ---- 按住空格不放，鼠标拖动
+            
+
+        *************
+        盒子模型：
+            每一个标签，都可以看做一个盒子
+
+            CSS中规定每个盒子由：内容区域content、内边距区域padding、边框border、外边距margin 构成
+
+            width和height属性默认设置的是盒子的内容区域的宽高。
+
+            border: width style color;  ---- （bd）
+                style的取值：solid实线、dashed虚线、dotted点线
+
+            padding:
+                padding: 上    右   下   左;
+                padding: 上    左右   下;
+                padding: 上下  左右;
+                padding: 上右下左;
+                   
+            盒子实际宽高 = 边框 + 内边距 + 内容宽高
+
+            --------------
+            拓展：
+                如果子盒子没有设置宽度，此时宽度默认是父盒子的宽度。
+                且左右padding、margin不会撑大 子盒子 实际宽度还是父盒子宽度
+            -------------
+
+            margin:
+                margin: 上右下左;  和padding同理
+
+            清除内外边距：
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                **********************************
+                一个盒子包裹一个盒子（块级元素）；
+                    子盒子不设置宽高，宽度默认为父盒子的100%，此时给子盒子设置边距不会撑大子盒子实际大小。
+
+                水平布局，两个相邻盒子的左右外边距累加
+
+                垂直布局，两个相邻盒子(块级元素)的上下外边距会折叠合并，取最大的那个。
+                    --解决办法，只给一个盒子设置上下边距
+
+                父元素被迫往下 塌陷 现象：
+                    互相嵌套的块级元素，子元素的margin-top会作用在父元素上
+                        --子元素的外边距导致父元素塌陷问题。
+                        导致结果：父元素一起往下移动
+                            解决方法：
+                                1. 给父元素设置border-top或者padding-top（内边距用来分隔两个盒子,边框用来给子元素踹）
+                                2. 给父元素设置overflow: hidden; （原理是隐藏子元素凸出的那部位margin-top，从而不影响父元素）
+                                3. 给父元素或者子元素转为行内块 （原理在下面，利用行内元素特点）
+                                4. 设置浮动 （脱离父元素的流层）
+
+                                    <style>
+                                        .big {
+                                            width: 200px;
+                                            height: 200px;
+                                            background-color: orange;
+                                            1. /* border: 1px solid #000; */
+                                            1. /* padding-top: 10px; */
+                                            2. /* overflow: hidden; */
+                                            3. /* display: inline-block; */
+                                        }
+                                        .small {
+                                            width: 100px;
+                                            height: 100px;
+                                            background-color: red;
+
+                                            互相嵌套的块级元素，子元素的margin-top会作用在父元素上
+                                            导致结果：父元素一起往下移动
+                                            margin-top: 50px;
+
+                                            3. /* display: inline-block; */
+                                            4. /* float: left; */
+                                        }
+                                    </style>
+                                    <div class="big">
+                                        <div class="small">
+                                        </div>
+                                    </div>
+
+                行内元素布局只有水平方向的margin和padding有效！
+                (垂直方向是加上了，但不起作用，无法影响布局，无法影响内容)
+                            ---但是是虚的，不是实在的,实际盒子，实际盒子高度仍然为文字那行撑开的高度
+                                            ---可以使用line-height撑开行内元素的高度
+
+                <style>    
+                    a {
+                        background-color: red;
+                        margin-top: 100px;  ----  垂直反向不生效     
+                        padding-top: 50px;  ----  垂直反向不生效
+                        padding-right: 50px;
+                    }
+                    span {
+                        background-color: orange;
+                    }
+                </style>
+                <a href="">我是a标签</a><span>我是span标签</span> 
+
+
+                ***********************
+                box-sizing: border-box;     将盒子设置为边框盒子--此时width和height属性为盒子实际大小
+                            content-box     盒子默认为内容盒子，默认设置宽高为内容区域
+     -->
+</body>
+</html>

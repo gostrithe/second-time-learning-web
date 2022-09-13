@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        常见的布局方式：
+            标准流、浮动、定位
+
+        定位：
+            完全脱离文档流（标准流）。
+            有压盖就使用定位。
+            position: relative;  ---  相对
+                      absolute;  ---  绝对
+                      fixed;     ---  固定
+
+                      static;    ---  静态(默认，标准流，后面说定位不包括静态)
+            
+            定位使用  方向词：数值;
+                      -- 注意，方向词垂直和水平方向各一个就行。
+                      -- top和left优先。           
+
+            相对定位：
+                相对自己原来的位置进行定位。
+                原来的位置仍然占着位置。
+
+                理解为，本体仍然占在标准流，分身出去脱离标准流。分身的display显示形式没变。
+            -- 相对定位在布局中一般用于微调元素。
+
+            绝对定位：
+                绝对定位后，脱离标准流，不在标准流中占据位置了。且具有行内块特点。
+                要有一个参考系作为参考，如果没有。
+                                        -- 相对于浏览器可视窗口进行移动
+
+                参考最近一个开启定位的父级（或祖先）元素。一般配合相对定位作为参考使用
+            
+            @@子绝父相@@  相对定位占据位置，对页面布局不影响
+                子绝父绝，父元素原本存在绝对定位时，就不需改动了。
+
+
+            ***************
+            绝对定位实现居中问题：
+                position: absolute;
+                // 垂直居中
+                top: 50%;
+                margin-top: -盒子高度的一半;
+                // 水平居中
+                left: 50%;
+                margin-left: -盒子宽度的一半;
+                
+                优化写法，全部使用百分比，不用考虑盒子大小
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);  ---  利用变形位移，移动自身宽高的50%
+                // 分开写的话
+                transform: translateX(-50%) translateY(-50%);
+
+
+
+            固定定位：
+                固定在浏览器（窗口）可视区域的定位。脱标
+
+
+        布局的层级关系：
+            标准流 < 浮动 < 定位
+            写在HTML后面的定位元素，会更高一点，盖住写在前面的
+
+            @@使用 
+                z-index: 数字; 
+                    可以更改设置层级关系，数字越大层级越高，一般使用-9999 -1 999 9999 
+
+
+
+
+        装饰：
+            1. 垂直对齐方式
+                -- 行内和行内块元素，浏览器默认为文字，文字默认基线对齐
+                    -- 出现对不齐问题时候使用。
+            vertical-align: middle; -- 图片下面出现白边问题时候使用，line-height实现图片垂直居中。
+                            top
+                            bottom
+                            baseline(默认基线对齐)
+
+            2. 光标类型
+                cursor: pointer;  --- 鼠标变小手状
+
+                        text  工字形，提醒是文本，可以选择，复制
+                        move  十字光标，提醒可以移动，拖动
+                        default(默认箭头)
+
+            3. 边框圆角
+                border-radius: 50%;  --- 正方形变正圆，长方形变椭圆
+                长方形实现胶囊形状：
+                    border-radius: 盒子高度的一半px;
+
+                border-radius: 10px 20px 30px 40px; 有左上角开始，顺时针，没有的值看对角。
+
+            4. 盒子溢出部分显示效果：
+                    -- 盒子内容部分超出盒子范围的区域
+                overflow: hidden;  --- 隐藏溢出
+                  
+                          scroll  滚动条
+                          visible(默认，溢出可见)
+                          auto
+
+            *****************
+            5. 元素本身隐藏：  
+                display: none;  --  隐藏元素本身，且在页面中不占位置
+                    -- 开发中经常通过display的none和block实现隐藏和显示。
+
+                visibility: hidden;  --  可见部分隐藏，仍然占有位置，相当元素隐身。
+
+
+
+            元素整体透明度：
+                opacity: 0;  --- 元素整体（包括盒子及其内容、文字）一起变透明。0为完全透明
+                         0~1  
+                         1   --- 1表示完全不透明
+
+
+            边框合并：
+                border-collapse: collapse;  --- 表格中重复的边框塌下倒塌，合并成一个边框。
+                    -- 给table标签加，让table自己的边框塌陷倒塌，让table自己的边框消失。
+
+
+            **********
+            用CSS画三角形（面试题）：
+                -- 利用盒子边框完成
+
+
+            选择器拓展：
+                1. 链接伪类选择器
+                    a:link  ----  a链接未访问过的状态
+                    a:visited  ----  访问之后的状态
+                    a:hover  ----  鼠标悬停的状态
+                    a:active  ----  鼠标按下的状态
+
+                    上面四种状态按照LVHA顺序书写      
+
+                2. 焦点伪类选择器
+                        -- 选中元素获得焦点时状态，常用于表单
+                            -- 表单获取焦点时默认显示外线outline
+                    input:focus
+
+                3. 属性选择器
+                        -- 通过标签的属性名或属性值选取元素
+                    E[属性] ---- 选择具有该属性的E元素
+                    E[属性='value'] ---- 选择具有该属性值，且属性值为value的E元素
+ -->    
+
+     <style>
+        /* line-height实现图片垂直居中。 */
+
+        div.box {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(10, 21, 18);
+            border: 1px solid #000;
+
+            /* 给父盒子设置文本水平对齐 */
+            text-align: center; 
+            /* 把图片看成是文字，给父盒子设置行高 */
+            line-height: 400px;
+        }
+        
+        div img {
+            width: 200px;
+            height: 200px;
+            
+            /* 搭配这line-height使用，实现垂直对齐 */
+            vertical-align: middle;
+        } 
+        
+
+        /* 用CSS画三角形 */
+        /* 1. 设置宽高为0
+           2. 加上透明边框bd
+           3. 选择对应三角赋予颜色
+        */
+        .triangle {
+            width: 0;
+            height: 0;
+            /* border: 20px solid blue; */
+            border: 20px solid transparent;
+            border-left: 30px solid blue;
+            border-right: 30px solid blue;
+            border-bottom: 60px solid red;
+        }
+
+        .libox {
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: pink;
+        }
+
+        .triangle2 {
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-bottom: 10px solid #000;
+            display: inline-block;
+            position: relative;
+            top: -2px;
+        }
+
+        .triangle2:hover {
+            border-bottom: 10px solid transparent;
+            border-top: 10px solid #000;
+            top: 10px;
+        }
+        
+        
+        a:link {
+            color: #000;
+        }
+
+        a:active {
+            font-size: 20px;
+        }
+
+        input:focus {
+            outline: none;
+            background-color: skyblue;
+            border: 1px solid blue;
+        } 
+        input[placeholder] {
+            padding-left: 6px;
+        }
+        input[type="text"] {
+            height: 60px;
+            /* vertical-align: bottom; */
+        }
+
+        table {
+            width: 300px;
+            height: 200px;
+            border: 10px solid red;
+            /* 让自己的红色边框塌陷，自己的边框消失了 */
+            border-collapse: collapse;   
+        }
+        
+        tr,
+        td {
+            border: 10px solid #000;
+        }
+     </style>
+     <div class="box">
+        <img src="./ghostRider.jpg" alt="">
+     </div>
+
+     <!-- 利用边框画盒子 -->
+     <div class="triangle"></div>
+     
+     <a href="#">鼠标按下，字体变大</a>
+     <input type="text" placeholder="点击获取焦点">
+
+     <!-- 表格边框合并 -->
+     <table>
+        <caption>表格边框合并</caption>
+        <tr>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+        </tr>
+        <tr>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+        </tr>
+        <tr>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+            <td>td小格子</td>
+        </tr>
+     </table>
+     <div class="libox">
+        导航栏
+        <div class="triangle2"></div>
+     </div>
+</body>
+</html>

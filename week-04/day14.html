@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 100px;
+        }
+        .box {
+            /* 单位的转换 */
+            /* iPhone678中设计稿宽为68px，高为29px的盒子 */
+            /* 转rem 68 / 单位rem（这里为375/10） */
+            /* 68 / 37.5 得到68px等于多少rem*/
+            width: 1.813rem;
+            height: 0.773rem;
+            background-color: red;
+        }
+        @media (width: 375px) {
+            html {
+                /* 一般将字号设置为可视窗口的1/10，方便计算 */
+                font-size: 37.5px;  
+            }
+        }
+        @media (width: 320px) {
+            html {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        移动适配：
+            rem: 目前多数企业在用的解决方案
+            vw/vh: 未来的解决方案
+
+        rem:
+            rem单位是相对于HTML跟标签的字号的font-size大小
+            1rem = 1HTML字号大小
+
+        媒体查询：
+            @media
+
+        Less:
+            -- Less是一个CSS预处理器。后缀名为.less
+            语法：
+                // 单行注释
+                /*
+                    多行注释
+                */  
+
+                后代选择器嵌套
+                    -- 嵌套中&表示当前选择器
+                 
+                变量：
+                    定义：
+                        @变量名: 变量值;
+                    使用：
+                        直接使用 @变量名
+                
+                运算：
+                    6 + 6px
+                    7 - 1em
+                    5 * 5rem
+                    注意除法的写法:
+                    (68 / 37.5rem) 或者  68 ./ 37.5rem
+                                        -- 后者不推荐，会报红，但不影响运行
+                
+                导入文件：
+                    使用 @import './base.less';  .less后缀可以省略
+
+                导出文件：
+                    1. 设置默认导出
+                        配置插件：
+                            设置 → 搜索EasyLess → 在setting.json中编辑 → 添加代码（注意，必须是双引号）
+                                                                        -- "out": "../css/"
+                    2. less文件内部导出
+                            -- 在less文件第一行添加注释
+                                // out: ./css/
+                                导出并重命名
+                                // out: ./css/common.css
+                            
+                            禁止导出：
+                                // out: false
+
+
+
+
+     -->
+    <div class="box"></div>
+    <!-- <script src="./flexible.js"></script> -->
+</body>
+</html>

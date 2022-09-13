@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            /* width: 200px; */
+            height: 38px;
+            background-color: red;
+            display: flex;
+            overflow: auto;
+        }
+        .son {
+            flex-shrink: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        移动适配：
+            目前大厂在用
+            vw / vh 单位：
+                -- 相对于可视窗口，v是viewport的缩写
+                   把可视窗口分为100份。
+
+                   1vw = 1/100 视口宽度(viewport width)
+                   1vh = 1/100 视口高度(viewport height)
+
+                开发中，一般不会vw和vh混用，全面屏视口高度尺寸大，如果混用可能会导致盒子变形。
+
+        rem 和 vw/vh 区别：
+            rem
+                --  市场比较常见
+            vw/vh
+                --  将来(马上)趋势
+
+
+        *************
+        flex-shrink 的补充：
+            flex-shrink: 0;    默认值为1。所占弹性容器变化量的收缩比例份额
+                -- 可以使flex项不压缩，不会随着弹性容器变化而被压缩。
+                    -- 这样就可以用来写移动端有水平滚动的导航栏。
+                        -- flex项过长，但是不会被压缩，flex项也不会撑大弹性容器。再给弹性容器开溢出自动即可。
+     -->
+
+    <div class="box">
+        <div class="son">sdfasdf awe fa asd fw awsdfasdf awe fa asd fw aw sdfasdf awe fa asd fw aw  </div>
+    </div>
+</body>
+</html>

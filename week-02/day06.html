@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        结构伪类选择器：
+            E:first-child     -----  父元素中第一个子元素，且是E元素
+            E:last-child     -----  父元素中最后一个子元素，且是E元素
+            E:nth-child(n)     -----  父元素中第个子元素，且是E元素
+            E:nth-last-child(n)     -----  父元素中倒数第n个子元素，且是E元素
+
+                n为：0、1、2、3、....
+                常见的n公式：
+                    2n、even  ----  偶数
+                    2n+1、2n-1、odd  ---- 奇数
+                    -n+3  ----  前3个
+                    n+3  ----  第3个及第3个之后
+
+            
+            E:nth-of-type(n)  ----  子元素中，和E同类型范围中，第n个E元素
+                注意，区别于nth-child(n)的第n个子元素，nth-of-type(n)是第n个E类型的元素
+
+        
+        伪元素：
+            E::before  ---- 必须写content,在元素内容之前（标签里面）生成一个伪元素，他是行内元素。
+            E::after  ---- 必须写content,在元素内容之后（标签里面）生成一个伪元素，他是行内元素。
+
+            E::first-letter  ---- 选择第一个字母或字
+            E::first-line  ---- 选择第一行字，随着窗口放大缩小而适应
+            E::selection  ---- 选择用户选择的文字。设置高光等等，但不能改变文字的大小。直接写::selection默认为全部文字。 
+
+
+        ********
+        标准流（文档流）：
+            是浏览器在渲染显示网页内容时默认采用的一套排版规则，规定了应该以何种方式排列元素
+                块级元素：从上往下，垂直布局，独占一行
+                行内元素 或 行内块元素：从左往右，水平布局，空间不够自动折行
+
+
+        浮动：
+            早期的作用：浮动就是设计出来，实现图文环绕效果。
+                -- 脱离标准流，高出半个级别。和图片文字同一级别。行内元素不会占用浮动元素的空间，给浮动元素让出位置，文字同样
+                    -- 部分脱离标准流，文档流
+
+            现在的作用：用于网页布局
+
+            注意：
+                元素浮动之后可以设置宽高
+                浮动的元素使用margin:0 auto;居中
+
+
+        清除浮动：
+            底层原理：
+                clear: both;的真正含义。
+                    -- 清除当前元素的 前面兄弟级浮动元素 对当前元素的影响。
+
+                        使当前元素可以看到浮动流的元素，即浮动流的元素对于当前元素是有高度的。
+                        所以当前元素不会因为看不到浮动流的元素而跑到他下面去。
+                        inline元素本来就看到浮动流的元素。
+                        所以一般用块级元素，放在父元素的最下方，清除浮动，达到在父盒子最底部撑起整个父盒子的高度
+
+                        从而解决父盒子高度塌陷问题。
+
+            方式1：
+                .clearfix {
+                    clear: both;
+                }
+
+                <div class="father">
+                    <div class="son1">左浮动的元素</div>
+                    <div class="son2">右浮动的元素</div>
+
+                    <div class="clearfix">利用空标签，清除浮动</div>
+                </div>            
+                    
+            方式2：
+                .clearfix::after {
+                    content: '';
+                    display: block;
+                    clear: both;
+                    
+                    // 补充代码，照顾可以看到伪元素的浏览器
+                    height: 0;
+                    visibility: hidden;
+                }
+
+            终极clearfix:
+                -- 同时解决高度塌陷 和 外边距塌陷问题（由父子盒子紧密嵌套引起）
+
+                .clearfix::before,
+                .clearfix::after {
+                    content: '';
+                    display: table;     // 这里table为块级表格，作用类似border，有分隔，让子元素可以真正踹到父盒子
+                }
+                
+                .clearfix::after {
+                    clear: both;        // 清除浮动。
+                }
+
+            overflow: hidden;方式：
+                给父元素设置overflow: hidden;  不推荐
+        
+        
+        %%%%%%%%
+        BFC:
+            -- 块级格式化上下文
+
+            理解为独立的渲染区域？这片渲染区域有自己的渲染规则。
+                盒子开启BFC区域后，就会形成一个独立隔离的容器，容器里面和外面互不影响。
+                    常用来解决外边距塌陷问题。
+
+            注意，html根标签是BFC盒子
+            
+            BFC布局规则:
+                1. 在BFC下，内部的Box会在垂直方向，一个接一个地放置。
+                
+                @2. Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻嵌套Box 的margin会发生重叠
+
+                3. 在BFC中，每一个盒子的左外边缘（margin-left）会触碰到容器的左边缘(border-left)（对于从右到左的格式来  说，则触碰到右边缘），即使存在浮动也是如此。
+                4. BFC的区域不会与float box重叠。
+
+            开启BFC:
+                浮动元素，float 除 none 以外的值
+                绝对定位元素，position（absolute，fixed）
+                display 为以下其中之一的值inline-block, table-cell, table-caption, flex,inline-flex
+                overflow 除了 visible 以外的值（hidden，auto，scroll）
+
+
+     -->
+    <style>
+        ul li:first-child a {
+            color: red;
+        }
+        
+        .test p:nth-child(2) {
+            color: green;
+        }
+        
+        /* 注意区分 */
+        .test p:nth-of-type(1) {
+            font-size: 20px;
+        }
+
+        .box {
+            width: 500px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        .box2 img {
+            float: left;
+        }
+
+        /* .box2 p {
+            clear: both;
+        } */
+
+    </style>
+    <ul>
+        <li><a href="#">找到第1个a标签</a></li>
+        <li><a href="#">我是第2个a标签</a></li>
+    </ul>
+
+    <div class="test">
+        <span>我是第一个子元素，且是span标签</span>
+        <p>我p标签 找到我</p>
+        <p>我p标签</p>
+    </div>
+
+    <div class="box">
+        <img src="./效果图01小案例/img/效果图01副本2.png" alt="">
+        我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字
+    </div>
+    <h1>浮动的早期使用</h1>实现图文环绕效果
+    <div class="box2 box">
+        <img src="./效果图01小案例/img/效果图01副本2.png" alt="">
+        <p>
+            我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字
+        </p>
+    </div>
+    
+</body>
+</html>

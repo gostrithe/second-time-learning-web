@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <style>
+        div.icon-favorites-fill {
+            width: 100px;
+            padding: 0;
+            margin: 70px auto;
+            border: 1px solid #000;
+            background-color: blue;
+        }
+        
+        .icon-favorites-fill {
+            color: red;
+            font-size: 100px;
+            line-height: 100px;
+            text-decoration: line-through                              ;
+            cursor: pointer;
+            transition: all 1s ease 0s;
+        }
+
+        .icon-favorites-fill:hover {
+            transform: translateY(50%);
+        }
+
+        .box {
+            width: 200px;
+            margin: 0 auto;
+        }
+
+        a span:last-child::after {
+            content: '\e7b2';
+            font-family: 'iconfont';
+        }
+
+
+        .bigbox {
+            width: 100%;
+            height: 600px;
+            margin-top: 70px;
+            background-image: url(./ghostRider.jpg);
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+        .bigbox::before,
+        .bigbox::after {
+            content: '';
+            float: left;
+            width: 50%;
+            height: 100%;
+            background-image: url(./ghostRider.jpg);
+            background-size: 100% 100%;
+            transition: transform 2s ease 0s;
+        }
+        .bigbox::before {
+            transform: rotateY(360deg);
+        }
+        .bigbox::after {
+            /* background-position: right 0; */
+            transform: rotateY(180deg);
+        }
+        .bigbox:hover::before {
+            transform: translateX(-100%);
+        }
+        .bigbox:hover::after {
+            transform: translateX(100%) rotateY(180deg);
+            /* 这里hover后会覆盖之前的transform */
+        }
+
+
+        .grder {
+            width: 200px;
+            height: 250px;
+            margin: 10px auto;
+        }
+        .grder li {
+            width: 200px;
+            border: 1px solid #000;
+            list-style: none;
+        }
+        .grder li img {
+            width: 100%;
+        }
+
+        .picbox {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .picbox::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* margin-top: -29px;
+            margin-left: -29px; */
+            width: 58px;
+            height: 58px;
+            background-image: url(./play.png);
+
+            transform: translate(-50%, -50%) scale(3);
+
+            opacity: 0;
+            transition: all 1s ease 0s;
+        }
+
+        .picbox:hover::before {
+            opacity: 1;
+             
+            transform: scale(1) translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        字体图标：
+            下载 --  https://www.iconfont.cn/
+            上传 --  上传 → 上传SVG图标
+                     浏览本地图标 → 去除颜色提交
+                     加入购物车 → 下载使用
+
+        平面转换：
+            位移translate
+                transform: translate(x, y);
+            旋转rotate
+                transform: rotateX(角度deg);
+                transform: rotateY(角度deg);
+
+            改变转换原点：
+                -- 默认为盒子中心点
+                transform-origin: x y;
+                    常使用方位名词 center left
+
+            注意点，注意transform的复合使用，比如先旋转还是先位移，以及覆盖问题
+
+            缩放scale
+                transform: scale(缩放倍数);
+
+            渐变背景
+                注意，随意是渐变的颜色，但不是加在background-color上
+                注意是，background-image 的值
+
+                线性渐变
+                background-image: linear-gradient(to bottom, red, yellow);
+            
+                径向渐变
+                backgroud-image: radial-gradient(circle, red 5%, yellow 15%, green 60%);
+
+                重复径向渐变
+                background-image: repeating-radial-gradient(red, yellow 10%, green 15%);
+     -->    
+    <div class="iconfont icon-favorites-fill"></div>
+    <div class="box">
+        <ul>
+            <li>
+                <a href="#">
+                    <span class="iconfont icon-cart-Empty-fill"></span>
+                    <span>购物车</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bigbox">
+    </div>
+
+    <ul class="grder">
+        <li>
+            <div class="picbox">
+                <img src="./ghostRider.jpg" alt="">
+            </div>
+            <p class="info">ghosrghostRider</p>
+        </li>
+    </ul>
+</body>
+</html>

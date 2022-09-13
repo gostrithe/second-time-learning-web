@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="shortcut icon" href="https://edu-wenku.bdimg.com/v1/pc/2020%E6%96%B0%E9%A6%96%E9%A1%B5/wenku-header-icon.ico" type="image/x-icon"> -->
+    
+    <title>Document</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style>
+        ul {
+            padding: 0;
+            width: 78px;
+            height: 64px;
+            border: 1px solid #000;
+        }
+        li {
+            height: 30px;
+            width: 24px;
+            border: 1px solid red;
+            list-style: none;
+            float: left;
+            background-image: url(./taobao.png);
+        }
+        li:nth-child(1) {
+            /* background: black url(./taobao.png) no-repeat center center/24px 30px; */
+            background-position: 0 3px;
+        }
+        li:nth-child(2) {
+            background-position: 0 -40px;
+        }
+        li:nth-child(3) {
+            background-position: 0 -85px;
+        }
+        li:nth-child(4) {
+            background-position: 0 -129px;
+        }
+        li:nth-child(5) {
+            background-position: 0 -172px;
+        }
+        li:nth-child(6) {
+            background-position: 0 -218px;
+        }
+
+        p {
+            font-size: 30px;
+            text-shadow: 15px 15px 3px #666;
+    
+            /* text-shadow: hoff voff blur #000; */
+                        /* 水平偏移 垂直偏移 模糊度 阴影颜色 */
+
+            width: 500px;
+            height: 100px;
+            background-color: rgb(145, 236, 244);
+            border: 1px solid #000;
+            box-shadow: 10px 10px 4px 2px #333 inset;
+                    /* 水平偏移 垂直偏移 模糊度 阴影扩大 阴影颜色 内阴影 */
+
+            transition: all 1s ease 0s;
+        }
+
+        p:hover {
+            height: 200px;
+            background-color: pink;
+            transform: translate(0, 50px);
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- 
+        精灵图：
+            一张图片一次请求。
+            使用精灵图减少服务器发送次数，减轻服务器压力，提高页面加载速度
+
+            1. 创建一个盒子，设置宽高
+            2. 用background-image将精灵图设置为盒子的背景图片
+            3. 通过background-position定位我们需要的精灵图中的图。
+                -- 和相对定位方位一样，取负值进行精灵图上拉
+
+        css样式补充：
+            background-size: 特殊补充;
+                             contain -- 包含的意思，让盒子包含整张完整的图片。图片全部显示，但会有留白，随盒子大小等比例变大缩小。
+                             cover -- 覆盖的意思，让图片覆盖整个盒子。这种图片可能显示不全，同样也是等比例变大缩小。
+            完整连写：
+                background: color image repeat position/size;   /号不可以省略，否则语法错误，浏览器不知道是定位还是大小。
+
+            文字阴影：
+                text-shadow: hoff voff blur color; 
+                        // 水平偏移量 垂直偏移量 模糊度 阴影颜色
+                注意，文字阴影可以叠加设置，就是可以有多个阴影。
+                    text-shadow: hoff voff blur color， hoff voff blur color; 
+
+            盒子阴影：
+                box-shadow: hoff voff blur spread color inset;
+                    // 水平偏移量 垂直偏移量 模糊度 阴影拓大 阴影颜色 inset设置为内阴影。
+
+            过度：
+                transition: 需要过度的属性 过度的时长;
+                           all过度全部属性
+
+                    transition: transform 1s ease 0s;
+                注意，给需要过度的元素本身添加。
+
+
+
+        项目前置认知：
+            网页和网站的关系
+                网页 -- 一张纸。网站中的每一页
+                网站 -- 很多张纸。提供特定服务的一组网页集合
+
+            DOCTYPE
+                <!DOCTYPE html>文档类型声明，告诉浏览器HTML的版本，写在第一行，不属于HTML标签
+            网页语言
+                <html lang="en">作用：搜索引擎归类+浏览器翻译。zh-CN简体中文。
+            字符编码
+                <meta charset="UTF-8">防止乱码，UTF-8王国码
+
+            SEO
+                -- 搜索引擎优化，让网站在搜索引擎上的排名考前
+
+                1. 竞价排名，给钱
+                2. 将网页制作成html后缀
+                3. 标签语义化
+
+                SEO三大标签：   
+                    <title>Document</title>  -- 网页标题
+                    <meta name="description" content="">  -- 网页描述
+                    <meta name="keywords" content="">  -- 网页关键字
+
+            HTML5新版本语义布局标签
+                header  -- 网页头部
+                nav     -- 网页导航
+                footer  -- 网页底部
+                aside   -- 网页侧边栏
+                section -- 网页区块
+                article -- 网页文章
+
+            ico图标：
+                <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+            版心：
+                注意提取成公共类，设置宽度width和居中margin: 0 auto;
+
+            CSS书写顺序：
+                1. 布局属性
+                2. 盒子模型+背景
+                3. 文本内容属性
+                4. 点缀装饰属性
+            
+            开发中推荐多用类 + 后代。
+
+            项目结构搭建：
+                文件夹准备。
+                文件准备
+                    base.css  -- 基础公共样式（样式重置表）
+                    common.css  --  相同模块的重复样式
+                    index.css  --  首页样式
+     -->
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+    <p>文字阴影text shadow</p>
+</body>
+</html>

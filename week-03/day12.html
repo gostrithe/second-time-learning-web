@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 600px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            justify-content: space-around;
+            /* justify-content: space-evenly; */
+            align-items: center;
+            align-items: stretch;
+            align-content: center;
+            background-color: skyblue;
+
+            /* 完美居中 */
+            justify-content: center;
+            align-items: center;
+        }
+        .box div {
+            font-size: 30px;
+            background-color: rgb(218, 226, 229);
+            padding: 20px;
+            /* margin: 10px; */
+            text-align: center;
+            border: 1px solid #000;
+        }
+
+        .box2 {
+            display: flex;
+            justify-content: space-evenly;
+            height: 500px;
+            background-color: yellowgreen;
+        }
+        .box2 div {
+            padding: 20px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+
+        .box3 {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .box3 img {
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        PC端网页和移动端网页
+            PC屏幕大，网页固定版心
+            手机屏幕小，网页宽度多数为100%
+
+            注意，PC端和移动端网页是不同的两个网页，区分开发
+
+            使用谷歌模拟器，用iPhone6/7/8设备型号测试移动端
+            屏幕尺寸是屏幕对角线的英寸
+
+            谷歌模拟器，双击可以模拟手机屏幕放大效果，但是不知道怎么缩小。
+
+        分辨率：
+            物理分辨率，实打实的分辨率，生产屏幕时候就已经固定了，即一块屏幕含有的真实像素。
+            逻辑分辨率，物理分辨率转化后的分辨率，缩放后的分辨率。
+
+            注意，我们制作网页参考的是逻辑分辨率。
+                -- 如果一块很小的屏幕，他的分辨率很高，越高越清晰，屏幕塞了过多的像素，像素越小，假如还是参考物理分辨率，当然画面也小，显然不合理。
+                -- 这时候，参考缩放后的逻辑分辨率，使画面大小合适且清晰度高。两种分辨率一般成比例。
+
+        适配不同设备宽度：
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            viewport -- 视口
+            width=device-width -- 视口宽度=设备宽度
+            initial-scale=1.0 -- 缩放1倍（不缩放）
+
+        移动端中hover仍然可以应用，只不过需要点击才有效果。
+            -- 点击后触发hover，触发后一直生效，直到再次点击其他地方。
+
+
+        
+        ------------------------------------
+        百分比布局（流式布局）：
+            -- 宽度自适应，高度固定
+
+        
+        ********
+        flex布局：
+            -- 常用于移动端开发
+            @@在弹性容器里，所有的元素都是块，可以设置宽高。
+
+            给父元素开启display: flex; 父元素变为flex container弹性容器。
+                -- 里面的子元素变为flex item弹性盒子（flex项或flex元素），
+
+            弹性容器内存在主轴和侧轴（交叉轴）。默认规定了从左到右，从上到下的布局。
+
+            
+            主轴对齐方式：
+                justify-content  ----  主轴内容对齐
+                justify-content: flex-start;  默认值，起点对齐
+                                 flex-end;    终点对齐
+                                 
+                                 center       主轴居中
+                                 space-around 间隙围绕flex项
+                                 space-between间隙存在flex项之间
+                                 space-evenly 所有间隙均匀分布，包括flex项和容器之间，evenly是均匀的意思
+
+            侧轴对齐方式：
+                align-items  ----   侧轴flex项对齐
+                align-items: flex-start;  默认值
+                             flex-end
+                             
+                             center       侧轴居中
+                             stretch      默认值，stretch拉伸的意思，flex项没有高度，自动拉伸铺满容器的高度。
+
+
+                也可以给flex项单独添加，属性align-self，控制这个单独的flex项的侧轴对齐。             
+
+                align-items: center;配合justify-content: center;可以实现绝对居中。
+
+            伸缩比例：
+                flex: 数字;  ----  子元素添加的属性
+
+                    注意区分flex-grow，
+                        flex 所占份额是当前容器可利用的空间，弹性项设置宽度时，也会出现吃掉对方宽度的现象。
+                            -- 没有写flex属性的子元素不算入当前空间。
+                    
+                    补充，flex其实是flex-grow flex-shrink flex-basis 的连写。
+                        flex-grow 容器剩余空间所占份额。增长
+                        flex-shrink 收缩
+                        flex-basis 设置弹性项初始的宽高
+            
+            改变主轴方向:
+                flex-direction  ----  改变flex元素的排列方向。   
+                flex-direction: row;  默认值，行，水平从左到右
+                                column 列，垂值从上到下
+                                row-reverse
+                                column-reverse  reverse为反向
+
+            弹性盒子换行：
+                -- 实现多行排序效果
+                flex-wrap: wrap;    wrap是换行的意思
+                           nowrap   默认值，不换行
+
+                    换行也有方向，wrap-reverse可以在相反行换行
+
+                        当多行排序的时候，使用align-content 内容垂直对齐
+                        align-content使用和justify-content基本相同，取值一样
+                        注意区别align-items,
+                            align-content多行时使用，单行没效果。
+
+            补充
+            flex-flow 是flex-direction和flex-wrap的连写
+
+            order: 负数0正数;  ----  指定某flex项的排序顺序序号
+                              ----  他的默认值为0，数字用小到大排列。 
+     -->
+     <div class="box">
+        <div style="flex-shrink: 0;">1</div>
+        <div style="flex-grow: 1;">2</div>
+        <div>3</div>
+        <div style="flex-basis: 200px;">4</div>
+        <div>5</div>
+        <div>6</div>
+        <div style="flex-grow: 1; order: -1;">7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div style="flex: 0 0 150px;">12</div>
+     </div>
+
+     <div class="box2">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+     </div>
+
+    <div class="box3">
+        <img src="./play.png" alt="">
+        <span>播放</span>
+    </div>
+</body>
+</html>

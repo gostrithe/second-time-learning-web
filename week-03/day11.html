@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+
+        ul {
+            width: 500px;
+            margin: 60px auto;
+            /* transform: rotateX(30deg) rotateY(-30deg); */
+            /* transform-style: preserve-3d; */
+        }
+        li {
+            float: left;
+            position: relative;
+            width: 100px;
+            height: 50px;
+            border-right: 1px solid #000;
+            background-color: aqua;
+            list-style: none;
+            transform: rotateX(30deg) rotateY(-30deg);
+            transform-style: preserve-3d;
+            transition: all 2s ease 0s;
+        }
+
+        a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 50px;
+            border-right: 1px solid #000;
+            background-color: greenyellow;
+        }
+
+        li a:first-child {
+            transform: translateZ(25px);
+        }
+
+        li a:last-child {
+            background-color: orange;
+            transform: rotateX(90deg) translateZ(25px);
+        }
+
+        li:hover {
+            transform: rotateY(-30deg) rotateX(30deg)  rotateX(-90deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        空间转换：
+            ****
+            透视：
+                perspective: 数字px;  -- 数值一般在800-1200
+                透视距离也称视距，人的眼睛到屏幕的距离。
+                    -- 用于看到平面z轴的变化，实现远小近大的视觉效果
+                    -- 注意不能呈现立体效果
+                
+                注意点，给父级添加，看作是舞台。舞台里面有人表演，我们是观众。
+
+            空间旋转的左手法则：
+                握住旋转轴，让大拇指方向指向正方向。四指握的方向为顺时针方向（即正值方向）。
+                    -- 注意平面下方为y轴的的正方向。
+
+            空间旋转的自定义旋转轴：
+                transform: rotate3d(x, y, z, deg);  -- x,y,z在[0,1]区间取值
+
+
+            *****
+            立体呈现：
+                -- 给盒子添加立体呈现，开启真正的3d空间，里面的子元素有3d立体的效果。
+                transform-style: preserve-3d;
+
+                注意，同样是给父盒子添加，且子元素的有自己独立的坐标轴。
+
+
+        -------------------------
+        动画:
+            使用前先定义动画。
+            @keyframes 动画名称 {
+                from {
+
+                }
+                to {
+
+                }
+            }
+
+            @keyframes 动画名称 {
+                0% {}
+                10% {}
+                15% {}
+                100% {}
+            }
+
+            animation: 动画名称 时长 速度曲线 延迟 重复次数 动画方向 执行完毕时的状态;
+            
+                animation-name  ----  动画名称                
+                animation-duration  ----  时长
+
+            @@@ animation-timing-function  ----  速度曲线
+                    -- 注意 steps(步数帧数) 属于速度曲线，一般配合精灵图，用于实现逐帧动画
+
+                animation-delay  ----  延迟
+
+            @@@ animation-iteration-count  ----  重复次数
+                    -- infinite无限循环 
+
+            @@@ animation-direction  ----  动画方向
+                    -- alternate交替转向执行
+
+            @@@ animation-play-state  ----  执行完毕时的状态
+                    -- forwards向前看，停在最后一帧 backwards默认返回起点第一帧
+
+            @@@ animation-play-state  ----  播放状态
+                    -- paused常配合hover用于暂停动画。
+
+            最后，一个元素可以添加多个动画，用逗号隔开
+
+     -->
+    <ul>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+        <li>
+            <a href="#">首页</a>
+            <a href="#">index</a>
+        </li>
+    </ul>
+</body>
+</html>
