@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 给一段文章中的全部指定词语进行过滤 */
+        function filtDirtyWord(str, dirtyWord) {
+            return str.replaceAll(dirtyWord, stars(dirtyWord));
+        }
+
+        function stars(str) {
+            var sum = '';
+            for (var i = 0; i < str.length; i++) {
+                sum += '*';
+            }
+            return sum;
+        }
+
+        var str = 'asdasdNHasdasdasdNHsdasdasdNHsadasdFUCK';
+        console.log(filtDirtyWord(str, 'NH'));
+
+        var dirtyWords = ['NH', 'sda', 'FUCK'];
+        var resultStr = '';
+        for (const item of dirtyWords) {
+            str = filtDirtyWord(str, item);
+        }
+        console.log(str);
+
+
+
+        /* 2. 反转字符串 */
+        var str = 'abcdefg';
+        function reverseStr(str) {
+            return str.split('').reverse().join('');
+        }
+        console.log(reverseStr(str));
+
+
+        /* 3. 统计字符串中每个字符的个数？ */
+        var str = 'abcdacbabcbababcbabcabd';
+        function count(str) {
+            var obj = {};
+
+            // 遍历每一个字符
+            for (var i = 0; i < str.length; i++) {
+                /* 思路，如果obj中还没有该字符的属性名，则插入key为该字符，value为1
+                    否则，就是已经存在了该字符的属性名，则value++
+                */
+                // if (!obj[str[i]]) {
+                //     obj[str[i]] = 1;
+                // } else {
+                //     obj[str[i]]++;
+                // }
+                !obj[str[i]] ? obj[str[i]] = 1 : obj[str[i]]++;
+                // 没有则设置属性且赋值 ： 有了修改其属性值
+            }
+            return obj;
+        }
+        console.log(count(str));
+
+
+
+        /* 1. aabccd 统计每个字符出现的次数，去掉重复的字符，使结果显示 abcd */
+        var str7 = "话说天下大势，分久必合，合久必分";
+        function deleteRepeatedChars(str) {
+            console.log(count(str));
+            // 思路一，循环判断indexOf(),判断首次出现的下标是否===当前下标
+            // 思路二，利用数组的过滤
+            return str.split('').filter(function (item, index, _arr) {
+                return _arr.indexOf(item) === index;
+            }).join('');
+        }
+        console.log(deleteRepeatedChars(str7));
+
+
+
+        /* 2. 编写函数，判断一个字符串是否是 “可回文字符串” */
+        function isReversableStr(str) {
+            return str === str.split('').reverse().join('');
+        }
+        console.log(isReversableStr("黄山落叶松叶落山黄"));
+        console.log(isReversableStr("黄山落你又山又黄"));
+        console.log(isReversableStr("上海自来水来自海上"));
+    </script>
+</body>
+
+</html>

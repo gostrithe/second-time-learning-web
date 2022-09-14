@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 1. 编写一个函数，能够获得一个随机的 0 ～ 255 之间的数字 */
+        function randomInt(a, b) {
+            console.log(`得到了[${a}, ${b}]区间的随机整数：`);
+            return parseInt(Math.random() * (b - a + 1)) + a;
+        }
+        console.log(randomInt(0, 255));
+
+
+        /* 2. 编写一个函数，获得一个十六进制的随机颜色的字符串(例如：#20CD4F)【√】 */
+        function randomColorHex() {
+            var red = randomInt(0, 255).toString(16);
+            var green = randomInt(0, 255).toString(16);
+            var blue = randomInt(0, 255).toString(16);
+            var colorHex = '#' + addPrefix(red, 2) + addPrefix(green, 2) + addPrefix(blue, 2);
+
+            return colorHex;
+        }
+        console.log(randomColorHex());
+        // 添加前缀补齐
+        function addPrefix(str, len, prefix = '0') {
+            var prefixLen = len - str.length;
+            var prefixStr = '';
+            for (var i = 0; i < prefixLen; i++) {
+                prefixStr += prefix;
+            }
+            return prefixStr + str;
+        }
+
+
+        /* 1. 编写函数，把当前时间格式化成 `YYYY-MM-DD HH-mm-ss`【√】 */
+        var date = new Date();
+
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var seconds = date.getSeconds();
+
+            var result = `${addPrefix(year + '', 2)}-${addPrefix(month + '', 2)}-${addPrefix(day + '', 2)} ${addPrefix(hour + '', 2)}-${addPrefix(minute + '', 2)}-${addPrefix(seconds + '', 2)}`
+            return result;
+        }
+        console.log(formatDate(date));
+
+
+        /* 2. 编写函数，要求传入两个时间节点，能返回两个时间节点之间相差 `多少天多少小时多少分钟多少秒` */
+        var date1 = Date.now();
+        var date2 = new Date('2000-05-16T00:00:00');
+
+        function showDifferTime(date1, date2) {
+            var differ = Math.abs(date1 - date2);
+
+            // 求出天   一天 (60*60*24*1000) 毫秒
+            var days = parseInt(differ / (60 * 60 * 24 * 1000));
+            // 剩余小时数   得到不足一天的总毫秒数  一小时(60*60*1000)毫秒
+            var hours = parseInt(differ % (60 * 60 * 24 * 1000) / (60 * 60 * 1000));
+            // 分钟     得到不足一小时的总毫秒数  一分钟(60*1000)毫秒
+            var minutes = parseInt(differ % (60 * 60 * 1000) / (60 * 1000));
+            // 秒       得到不足一分钟的总毫秒数  一秒钟1000毫秒
+            var seconds = parseInt(differ % (60 * 1000) / 1000);
+
+            return `${days}天${hours}小时${minutes}分钟${seconds}秒`
+        }
+        console.log(showDifferTime(date1, date2));
+
+
+
+        /* 1. 在页面上出现一个倒计时，显示现在到某一时间点的倒计时 */
+        var date = new Date('2023-01-01T00:00:00');
+        function countDown(date) {
+            var h2 = document.createElement('h2');
+            var script = document.querySelector('script');
+            var body = document.getElementsByTagName('body')[0];
+
+            var str = date - Date.now() > 0 ? '还有' : '过去了';
+
+            body.insertBefore(h2, script);
+            h2.innerText = str + showDifferTime(date, Date.now());
+            setInterval(function () {
+                h2.innerText = str + showDifferTime(date, Date.now());
+            }, 1000)
+        }
+        countDown(date);
+
+
+        /* 1. 用户输入任意年月日 告知该日为星期几【√】 */
+        function tellWeekday(year, month, date) {
+            var dayArr = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+            var weekdayIndex = new Date(year, --month, date).getDay();
+            return dayArr[weekdayIndex];
+        }
+        console.log(tellWeekday(2022, 9, 10));
+
+
+        /* 2. 用户输入任意年月日生日 告知用户他的年龄、属相、星座 */
+        function birthdayInfo(birthyear, birthmonth, birthdate) {
+            var dateUser = new Date(birthyear, --birthmonth, birthdate);
+            var dateNow = new Date();
+
+            var differ = dateNow - dateUser;
+            var age = parseInt(differ / (60 * 60 * 24 * 1000 * 365));
+
+            var arr = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+            // 2000 % 12 == 8 龙 -> arr[4]
+            console.log(age, '岁,属', arr[birthyear % 12 - 4]);
+
+            // 星座不写了，辣鸡题
+        }
+        birthdayInfo(2000, 5, 16)
+
+
+
+        /* 3. 用户输入任意年月日 告知距离这一天已经过去多少天 或显示距离这一天的倒计时 */
+        function countDay(year, month, date) {
+            var dateUser = new Date(year, --month, date);
+            countDown(dateUser);
+            
+        }
+        countDay(2000, 1, 1);
+    </script>
+</body>
+
+</html>

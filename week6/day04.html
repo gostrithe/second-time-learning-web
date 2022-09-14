@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        ----------------------------------
+        字符串API:
+            字符串长度
+            str.length
+
+            字符串中内容首次出现的下标
+            str.indexOf("dog");
+                -- 搜索"dog"首次出现的下标。
+                -- 如果找不到，返回-1，表示子串不存在。
+
+                如果我想返回第二次出现的下标，可以
+                str.indexOf("dog", str.indexOf("dog") + 1)
+                                    -- 故意从首次出现的下标加1开始搜寻。
+
+            查询子串最后一次出现的下标
+            str.lastIndexOf("brave");
+                注意点，区分indexOf的第二个参数。
+                str.lastIndexOf('brave', 7);
+                                -- 这里的第二个参数是从第7为往回搜寻的。
+
+            检测str中是否包含子串，返回true或false
+            str.includes("jack");
+
+            替换子串
+            str.replace("dog", "monkey");
+                -- 第二个参数可以是函数。函数的形参为匹配的子串
+                str.replace("dog", function(math) {
+                    return math + '狗';
+                })
+                全部替换
+                str.replaceAll("dog", "monkey");
+
+
+            截取子串，字符串切片
+                str.substring(0, 3);    // 截取0，1，2位，不包含3
+                    注意，substring的参数不能取负值，取负值和其他不合法的参数(NaN)或者超出索引。都会默认为0。
+                    substring的两个参数可以顺序颠倒
+
+                str.slice(7);       // 从7位截取到末尾
+                str.slice(0,3);     // 同str.substring(0, 3)
+                str.slice(-4);      // 从倒数第四位一直截取到末尾
+                    注意，slice的两个参数要从小到大排序，可以取负值
+                    
+
+            字符串拆分。肢解为子串的数组
+                str.split(""); 以空字符串拆分
+                str.split(" "); 以空格拆分
+                str.split("-"); 以-拆分
+
+                str.split(); 将字符串存于数组中的唯一项
+
+                str.split(" ", 3) 炸碎后，前三个元素形成数组。
+                    -- 注意，分裂后子串组成数组的每一项。
+
+            转大小写
+                str.toLowerCase() -- 小写
+                str.toUpperCase() -- 大写
+
+            裁掉头尾空格（空白字符：空格 \t \n）
+                str.trim()
+                str.trimStart()
+                str.trimEnd()
+
+            判断str是否以特定子串开头/结尾
+                str.startsWith('jack')
+                str.endsWith('jack')
+     -->
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" placeholder="请设置爆炸时间（秒）" id="ipCount" />
+    <p id="pBomb">我有一种不详的预感...</p>
+    <button id="btnSet">设置炸弹</button>
+    <button id="btnClear">拆除炸弹</button>
+
+    <script>
+      // 炸弹定时器
+      var bombTimer = null;
+
+      // 倒计时定时器
+      var clockTimer = null;
+
+      // 爆炸剩余秒数
+      var timeout = null;
+
+      btnSet.onclick = function () {
+        // 设置炸弹延时爆炸
+        timeout = ipCount.value * 1;
+        bombTimer = setTimeout(function () {
+          pBomb.innerText = "BOOOM!!!";
+
+          // 炸弹爆炸后钟表也香消玉殒
+          if (clockTimer) {
+            clearInterval(clockTimer);
+          }
+        }, timeout * 1000);
+
+        // 炸弹设置好后立即显示剩余时间
+        pBomb.innerText = timeout;
+
+        /* 开始倒计时 */
+        clockTimer = setInterval(
+          // 更新剩余时间
+          function () {
+            timeout--;
+            pBomb.innerText = timeout;
+          },
+          1000
+        );
+      };
+
+      btnClear.onclick = function () {
+        // 如果炸弹定时器并不存在
+        if (!bombTimer) {
+          console.log("当前并没有炸弹");
+          return;
+        }
+
+        clearTimeout(bombTimer);
+        pBomb.innerText = "炸弹已拆除";
+
+        // 一并拆除钟表
+        if (clockTimer) {
+          clearInterval(clockTimer);
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+[
+    {
+        "name": "JackMa",
+        "age": 50,
+        "position": "CEO",
+        "friends": [
+            {
+                "name": "李刚",
+                "geyan": "吾儿牛逼也"
+            },
+            {
+                "name": "建林",
+                "geyan": "想成为首富是极好的，但一定要先实现一个小目标！"
+            }
+        ]
+    },
+    {
+        "name": "董小姐",
+        "age": 60,
+        "position": "董事长",
+        "friends": [
+            {
+                "name": "军哥",
+                "geyan": "hello are you ok?"
+            }
+        ]
+    }
+]

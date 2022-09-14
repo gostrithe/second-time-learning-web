@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 提升难度 */
+
+        /* 17. 输出100 - 200之间所有的素数 */
+        var arr = [];
+        for (var i = 100; i < 201; i++) {
+            for (var j = 2; j <= i - 1; j++) {
+                if (i % j === 0) break;
+                if (j == i - 1) arr.push(i);
+            }
+        }
+        console.log('100 - 200之间所有的素数', arr);
+
+        /* 18. 求s = a + aa + aaa + aaaa +….+aa...a的值，其中a是一个数字。例如2 + 22 + 222 + 2222
+        a = 1;
+        1 + 11 + 111 + 1111 */
+        function cal(a, n) {
+            var sum = 0;
+            var number = a;
+            var print = '';
+            for (var i = 0; i < n; i++) {
+                sum += a;
+                i == n - 1 ? print += a + '' : print += a + '+';
+                a = ('' + number + a) * 1;
+            }
+            console.log(print, '=', sum);
+        }
+        cal(1, 4);
+
+        /* 19. 操场上 100 多人排队, 3 人一组多 1 人, 4 人一组多 2 人, 5 人一组多 3 人, 共多少人 */
+        var people = 100;
+        var condition;
+        while (!condition) {
+            people++;
+            condition = (people % 3 === 1) && (people % 4 === 2) && (people % 5 === 3);
+        }
+        console.log(`操场上 100 多人排队, 3 人一组多 1 人, 4 人一组多 2 人, 5 人一组多 3 人,共${people}人`);
+        //可能存在多个答案
+        for (var i = 100; i < 200; i++) {
+            if ((i % 3 === 1) && (i % 4 === 2) && (i % 5 === 3)) {
+                console.log(`操场上 100 多人排队, 3 人一组多 1 人, 4 人一组多 2 人, 5 人一组多 3 人,共${i}人`);
+            }
+        }
+
+        /* 20. 两个自然数相除, 商 3 余 10, 被除数, 除数, 商, 余数的和是 163, 求被除数, 除数 */
+        var Chu = 2;
+        var beiChu = 150 - Chu;
+        // parseInt(beiChu / Chu) = 3;
+        // beiChu % Chu = 10;
+        // beiChu + Chu = 150;
+        var condition2;
+        while (!condition2) {
+            Chu++;
+            beiChu = 150 - Chu;
+            condition2 = parseInt(beiChu / Chu) === 3 && beiChu % Chu === 10;
+        }
+        console.log(`两个自然数相除, 商 3 余 10, 被除数, 除数, 商, 余数的和是 163,被除数为${beiChu}, 除数为${Chu}`);
+
+        /* 21. 假设某人有 100, 000 现金。 每经过一次路口需要进行一次交费。 交费规则为当他现金大于
+        50, 000 时每次需要交 5 %
+            如果现金小于等于 50, 000 时每次交 5, 000 。 请写一程序计算此人可以经过多少次这个路口 */
+        var cash = 100000;
+        var count = 0;
+        while (cash > 50000) {
+            cash -= 0.05 * cash;
+            count++;
+            console.log(`第${count}次经过路口，交费${(0.05 * cash).toFixed(2)}，剩余现金${cash.toFixed(2)}`);
+        }
+        while (cash <= 50000 && cash >= 5000) {
+            cash -= 5000;
+            count++;
+            console.log(`第${count}次经过路口，交费5000，剩余现金${cash.toFixed(2)}`);
+        }
+        console.log(`此人可以经过${count}次这个路口，剩余现金为${cash.toFixed(2)}，不足以下次进行交费`);
+
+        /* 22. 《张丘建算经》 成书于公元 5 世纪， 作者是北魏人． 书中最后一道题堪称亮点， 通常也被称为
+                “ 百钱买百鸡 ” 问题，
+        民间则流传着县令考问神童的佳话书中原文如下：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。百
+        钱买百鸡，问鸡翁、鸡母、鸡雏各几何？ */
+        // x5 + 3y + 1/3z = 100
+        // x+y+z = 100
+
+        // 优化一下性能
+        var start = Date.now();
+        for (var i = 0; i <= 100; i++) {  // 设公鸡买了i只 买了之后，再去买母鸡
+            for (var j = 0; j <= 100; j++) {  // 设母鸡买了j只 买了之后，再去买小鸡
+                for (var k = 0; k <= 100; k++) {  // 设小鸡买了k只
+                    if (i + j + k === 100 && i * 5 + j * 3 + k / 3 === 100) {
+                        console.log(`百钱买百鸡，鸡翁${i}只、鸡母${j}只、鸡雏${k}只`);
+                    }
+                }
+            }
+        }
+        console.log('程序运行了', Date.now() - start , '毫秒');
+        // 算法小小优化后
+        var start = Date.now();
+        for (var i = 0; i <= 20; i++) {  // 设公鸡买了i只 买了之后，再去买母鸡
+            for (var j = 0; j <= 34; j++) {  // 设母鸡买了j只 买了之后，再去买小鸡
+                for (var k = 0; k <= 100; k++) {  // 设小鸡买了k只
+                    if (i + j + k === 100 && i * 5 + j * 3 + k / 3 === 100) {
+                        console.log(`百钱买百鸡，鸡翁${i}只、鸡母${j}只、鸡雏${k}只`);
+                    }
+                }
+            }
+        }
+        console.log('程序运行了', Date.now() - start , '毫秒');
+    </script>
+</body>
+
+</html>

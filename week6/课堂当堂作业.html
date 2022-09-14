@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" placeholder="请设置爆炸时间（秒）" id="input" />
+    <p id="pBomb">我有一种不详的预感...</p>
+    <button id="btnSet">设置炸弹</button>
+    <button id="btnClear">拆除炸弹</button>
+
+    <script>
+        var timer;
+        var boom;
+        var count;
+
+        var lock = true;
+        btnSet.onclick = function () {
+            if (!lock) return;
+            
+            count = input.value;
+            if (count === '') {
+                pBomb.innerText = '请先设置爆炸时间';
+                return;
+            }
+
+            lock = false;
+            
+
+            pBomb.innerText = count;
+
+            timer = setInterval(function () {
+                count--;
+                pBomb.innerText = count;
+            }, 1000)
+
+            boom = setTimeout(function () {
+                pBomb.innerText = 'Boooom!!!!';
+
+                clearInterval(timer)
+            }, count * 1000)
+
+            setTimeout(function () {
+                lock = true;
+            }, count * 1000)
+        }
+
+        btnClear.onclick = function () {
+            // input.value === '' && (count = 0);
+            lock = true;
+
+            if (!boom) {
+                pBomb.innerText = '没有炸弹你拆个p';
+                return;
+            }
+            clearInterval(timer);
+            clearTimeout(boom);
+            pBomb.innerText = '炸弹已拆除';
+        }
+    </script>
+</body>
+
+</html>

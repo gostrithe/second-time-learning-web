@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. 定义一个含有30个整型元素的数组，按顺序分别赋予从2开始的偶数；
+      // 然后按顺序每五个数求出一个平均值，放在另一个数组中并输出。试编程。
+      function fn1() {
+        var arr = [];
+
+        /* 丢入30个偶数 */
+        // for循环
+        // for(var i=2;i<=60;i+=2){
+        //     arr.push(i)
+        // }
+
+        // 只要arr的长度尚不够30 就继续循环
+        var start = 2;
+        while (arr.length < 30) {
+          // 每次往arr中丢入一个偶数 首次先丢2
+          arr.push(start);
+
+          // 2更新为4 下次再丢
+          start += 2;
+        }
+        console.log(arr);
+
+        /* 五五一组 求平均值 均值入新数组 */
+        var sum = 0;
+
+        // average平均 avg
+        var avgs = [];
+
+        // 遍历所有元素
+        for (var i = 0; i < arr.length; i++) {
+          // 将元素的和并入sum
+          sum += arr[i];
+
+          /* 每够5个求一下平均值 */
+          // 4 9 14 19 24 29... i+1是5的倍数
+          if ((i + 1) % 5 === 0) {
+            // 将当前批次的sum求平均值 入avgs
+            avgs.push(sum / 5);
+
+            // sum归零 开始累计下一批次的和
+            sum = 0;
+          }
+        }
+        console.log(avgs);
+      }
+      //   fn1();
+
+      /* 2. 通过循环按执行顺序，做一个5×5的二维数组，赋1到25的自然数，然后输出该数组的左下半三角。试编程。 */
+      //    结果
+      //   [
+      //     [1, 2, 3, 4, 5],
+      //     [6, 7, 8, 9, 10],
+      //     [11, 12, 13, 14, 15],
+      //     [16, 17, 18, 19, 20],
+      //     [21, 22, 23, 24, 25]
+      //   ]
+      function fn2() {
+        /* 先准备一个5*5的二维数组的空壳 填充null */
+        var arr = [];
+        /* 外层循环丢入5个行 */
+        for (var row = 0; row < 5; row++) {
+          // 丢入一行 该行的下标为i
+          arr.push([]);
+
+          /* 在当前行丢入5个元素（形成5列） */
+          for (var col = 0; col < 5; col++) {
+            // 暴力丢入12345
+            // arr[row].push(col+1);
+
+            // row  base(row*5)
+            // 0    0           +12345
+            // 1    5           +12345
+            // 2    10          +12345
+            // 3    15          +12345
+            // 4    20          +12345
+            arr[row].push(5 * row + col + 1);
+          }
+        }
+        console.log(arr);
+
+        // 遍历[1,25]
+      }
+
+      function fn2X() {
+        var arr = [];
+        var row = [];
+
+        // 遍历[1,25]
+        for (var i = 1; i <= 25; i++) {
+          // 先丢入一个一维数组
+          row.push(i);
+
+          // 一旦row满5
+          if (row.length === 5) {
+            // 一脚将row踹入arr
+            arr.push(row);
+
+            // 准备一个新的row
+            row = [];
+          }
+        }
+        console.log(arr);
+      }
+
+      function fn2XX() {
+        var arr = [];
+        var row = [];
+
+        // 遍历[1,25]
+        for (var i = 1; i <= 25; i++) {
+          // 先丢入一个一维数组
+          row.push(i);
+
+          // 一旦row满5
+          if (row.length === 5) {
+            // 一脚将row踹入arr
+            arr.push(row);
+
+            // 准备一个新的row
+            row = [];
+          }
+        }
+        console.log(arr);
+
+        /* 打印下三角 */
+        for (var i = 1; i <= 5; i++) {
+          // 第i行有i列
+          for (var j = 1; j <= i; j++) {
+            // document.write("@")
+
+            // 到二维数组中取值
+            document.write(arr[i - 1][j - 1] + "&nbsp;");
+          }
+          // 换行
+          document.write("<br>");
+        }
+      }
+      //   fn2XX();
+
+      // 3. 随机生成一个五位以内的数，然后输出该数共有多少位，每位分别是什么
+      function fn3() {
+        // 100000
+        var num = parseInt(Math.random() * 100000);
+        console.log(num);
+
+        // 将字符串 "12345"以空字符串分割为 ["1","2","3","4","5"]
+        var arr = (num + "").split("");
+        console.log(arr);
+
+        console.log("位数", arr.length);
+        console.log("每一位");
+        for (var item of arr) {
+          console.log(item);
+        }
+      }
+
+      function fn3X() {
+        // 100000
+        var num = parseInt(Math.random() * 100000);
+        console.log(num);
+
+        if (num === 0) {
+          console.log(0, 0);
+        } else {
+          // 12345 5
+          // 1234.5 1234 4
+          // 123.45 123 3
+          // 12.345 12 2
+          // 1.2345 1
+          // 0.12345 循环停止
+          var arr = []; //[1 2 3 4 5]
+          while (num > 0) {
+            // 5 4 3 2 1
+            var ge = num % 10;
+
+            // [1 2 3 4 5]
+            arr.unshift(ge);
+
+            // 将num更新为1234 123 12 1 0
+            num = parseInt(num / 10);
+          }
+
+          console.log(arr, arr.length);
+        }
+      }
+      //   fn3X();
+
+      // 4. 编写函数mymap(arr) 把数组中的每一位数字都增加30%，并【返回一个新数组】
+      function fn4() {
+        function mymap(arr) {
+          //   var newMap = arr.map(
+          //       function(item){
+          //           return (1.3*item).toFixed(2)*1
+          //       }
+          //   )
+          //   return newMap
+
+          return arr.map(function (item) {
+            return (1.3 * item).toFixed(2) * 1;
+          });
+        }
+        console.log(mymap([1, 2, 3]));
+      }
+
+      /* 在4的基础上自定义映射规则 */
+      function fn4X() {
+        // myRule是一个函数 item进去 新的item出来
+        function mymap(arr, myRule) {
+          return arr.map(function (item) {
+            //  return 1.3*item
+
+            //  使用自定义规则进行映射 myRule(item)的时候 item进去 2*item出来
+            return myRule(item);
+          });
+        }
+
+        // 自定义映射规则 item进去 2*item出来
+        var myRule = function (item) {
+          return 2 * item;
+        };
+
+        // console.log(
+        //     // 调用mymap 传入arr 传入自定义规则函数（函数本身作为一种数据类型 可以作为值传递）
+        //     mymap([1, 2, 3], myRule)
+        // );
+
+        console.log(
+          mymap(
+            [1, 2, 3],
+
+            // 原地构造规则函数
+            function (item) {
+              return item + 10;
+            }
+          )
+        );
+      }
+      // fn4X();
+
+      // 5. 编写函数has(arr , 60) 判断数组中是否存在60这个元素，返回布尔类型
+      function fn5() {
+        function has(arr, item) {
+          // arr.indexOf(item) !== -1成立（true）则有item
+          // indexOf兼容性更好
+          //   return arr.indexOf(item) !== -1;
+
+          // arr.includes(item)为true即有 否则无
+          // indexOf兼容性更好
+          return arr.includes(item);
+        }
+        console.log(has([1, 2, 3], 3));
+        console.log(has([1, 2, 3], 3.5));
+      }
+      // fn5();
+
+      // 6. 编写函数noRepeat(arr) 将数组的重复元素去掉，并返回新的数组
+      function fn6() {
+        function noRepeat(arr) {
+          //
+          var newArr = arr.filter(function (item, index) {
+            // item是首次出现时放行 arr.indexOf(item)===index
+            var shoucichuxian = arr.indexOf(item) === index;
+            console.log(
+              "item,arr.indexOf(item),index,shoucichuxian",
+              item,
+              arr.indexOf(item),
+              index,
+              shoucichuxian
+            );
+            return shoucichuxian;
+          });
+
+          return newArr;
+        }
+
+        console.log(noRepeat([1, 3, 1, 4, 5, 2, 0]));
+      }
+      // fn6();
+
+      // 2. 有一个从小到大排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。
+      function fn7() {
+        function insert(arr, item) {
+          /* 升序 */
+          if (arr[arr.length - 1] >= arr[0]) {
+            if (item <= arr[0]) {
+              arr.unshift(item);
+            } else if (item >= arr[arr.length - 1]) {
+              arr.push(item);
+            } else {
+              //   遍历所有位置 如果发现item>=arr[i-1]且item<=arr[i]
+              for (var i = 0; i < arr.length; i++) {
+                if (item >= arr[i - 1] && item <= arr[i]) {
+                  arr.splice(i, 0, item);
+                  break;
+                }
+              }
+            }
+          } else {
+            if (item >= arr[0]) {
+              arr.unshift(item);
+            } else if (item <= arr[arr.length - 1]) {
+              arr.push(item);
+            } else {
+              //   遍历所有位置 如果发现item=arr[i-1]且item<=arr[i]
+              for (var i = 0; i < arr.length; i++) {
+                if (item <= arr[i - 1] && item >= arr[i]) {
+                  arr.splice(i, 0, item);
+                  break;
+                }
+              }
+            }
+          }
+
+          return arr;
+        }
+
+        // console.log(insert([1, 2, 3, 4, 5], 0));
+        // console.log(insert([1, 2, 3, 4, 5], 10));
+        // console.log(insert([1, 2, 3, 4, 5], 3.5));
+
+        console.log(insert([5, 4, 3, 2, 1], 0));
+        console.log(insert([5, 4, 3, 2, 1], 10));
+        console.log(insert([5, 4, 3, 2, 1], 3.5));
+      }
+
+      function fn7X() {
+        function insert(arr, item) {
+          var head = arr[0];
+          var tail = arr[arr.length - 1];
+
+          // 先拿到是否升序
+          var asc = tail >= head;
+
+          // 插头
+          if ((asc && item <= head) || (!asc && item >= head)) {
+            arr.unshift(item);
+          }
+
+          // 插尾
+          else if((asc && item>=tail)||(!asc && item<=tail)){
+              arr.push(item)
+          }
+
+          // 插中间
+          else{
+              for(var i=0;i<arr.length;i++){
+                // 判断到item位于arr[i-1]和arr[i]之间 暴力插入i号位
+                if(
+                    // // 升序时 3<=item<=5
+                    // (asc && item>=arr[i-1] && item<=arr[i])
+                    // ||
+                    // // 降序时 5>=item>=3
+                    // (!asc && item<=arr[i-1] && item>=arr[i])
+
+                    // 管你升序还是降序（管你小朋友先进来还是泰森先进来）
+                    // 只要确认我比小朋友（ab间的小者）厉害 没泰森（ab间的大者）厉害 直接插入中间
+                    item >= Math.min(arr[i-1],arr[i]) && item<=Math.max(arr[i-1],arr[i])
+                ){
+                    arr.splice(i,0,item)
+                    break
+                }
+              }
+          }
+
+          return arr
+
+        }
+
+        console.log(insert([1, 2, 3, 4, 5], 0));
+        console.log(insert([1, 2, 3, 4, 5], 10));
+        console.log(insert([1, 2, 3, 4, 5], 3.5));
+
+        console.log(insert([5, 4, 3, 2, 1], 0));
+        console.log(insert([5, 4, 3, 2, 1], 10));
+        console.log(insert([5, 4, 3, 2, 1], 3.5));
+      }
+      // fn7X();
+    </script>
+  </body>
+</html>

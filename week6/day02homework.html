@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" placeholder="学号" id="ipCode" />
+    <input type="text" placeholder="年龄" id="ipAge" />
+    <input type="text" placeholder="性别" id="ipGender" />
+    <input type="text" placeholder="专业" id="ipMajor" />
+    <button id="btn1">提交</button>
+    <button id="btnSelfTell">自白</button>
+    <hr />
+    <p id="pJson">哥的innerText将会放置JSON</p>
+
+    <script>
+      var student = {};
+
+      // 给student对象添加selfTell属性 值是一个函数
+      // 后续就可以调用该函数了：student.selfTell()
+      student.selfTell = function () {
+        // var infoJson = JSON.stringify(student)
+        // console.log(infoJson);
+
+        // 将student的JSON信息日志输出
+        console.log(JSON.stringify(student));
+      };
+
+      btnSelfTell.onclick = function () {
+        student.selfTell();
+      };
+
+      btn1.onclick = function () {
+        // 给学号赋值
+        student.code = ipCode.value;
+        student.age = ipAge.value;
+        student.gender = ipGender.value;
+        student.major = ipMajor.value;
+
+        var stuJson = JSON.stringify(student);
+        pJson.innerText = stuJson;
+      };
+    </script>
+
+    <hr />
+    <h3>新增或修改key-value</h3>
+    <input type="text" id="ipKey" placeholder="骚年请输入一个key" />
+    <input type="text" id="ipValue" placeholder="骚年请输入对应的value" />
+    <button id="btnUpdate">更新</button>
+    <script>
+      btnUpdate.onclick = function(){
+        // 更新了学生数据
+        student[ipKey.value] = ipValue.value
+
+        // 更新页面
+        pJson.innerText = JSON.stringify(student)
+      }
+    </script>
+  </body>
+</html>

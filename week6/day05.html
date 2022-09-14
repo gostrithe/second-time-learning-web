@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        一些API：
+
+            Math数学api：
+                Math.random()方法 取[0,1)之间的随机浮点数
+                    高手公式：
+                    [a, b]双闭区间的随机整数。
+                    parseInt(Math.random() * (b - a + 1)) + a 
+
+                    高手公式原理：
+                    parseInt(Math.random()*10)  ~~  [0, 9]这个不用说了吧
+                    同理对应
+                    parseInt(Math.random()*(b-a+1))  ~~  [0, b-a]
+                    最后加a操作
+                    [0, b-a]  ~~  [a, b]得到高手双闭区间！！！
+
+
+
+                最值与绝对值
+                    Math.max(a, b, ...)
+                    Math.min(a, b, ...)
+
+                    Math.abs(-7)  // 7
+
+
+
+                取整与舍入：
+                    Math.ceil(3.3)  ceil天花板，向上取整，4
+                    Math.floor(3.8)  floor地板，向下取整，3
+
+                    四舍五入的原理：
+                    数轴方向上，以0.5划分两相邻整数间隔的区间为左右区域，
+                        -- 右边的区域包含0.5！！！
+                    实验数落在拿哪边区域，便向哪边方向舍入。
+                    不用考虑正负数，看数轴。
+                    
+                    Math.round(1.5)  // 2
+                    Math.round(-1.5)  // -1
+
+
+
+                乘方与开方：
+                    Math.pow(2, 3)  2的3次方
+
+                    Math.sqrt(4)  4的平方根
+                    Math.cbrt(8)  8的立方根 
+
+
+
+                三角函数：
+                    Math.sin(Math.PI)  // 0
+                    Math.cos()
+                    Math.tan()
+
+                    注意，必须使用弧度制，即带有π
+                        -- Math.PI  ===  π
+
+
+
+            Date对象：
+                时间戳的概念 -- 距离1970年0时以来逝去的时间毫秒
+                    -- number 1662030551513
+
+                Date对象的创建：
+                    new Date()
+
+                    new Date(时间戳)
+
+                    new Date('December 17, 1995 03:24:00')
+                    new Date('2022-09-01T19:18:00')
+
+                    new Date(2022,8,1,19,20)
+                        注意点，月份为序号，8是9月。[0, 11]
+
+                date.toLocalString()方法转为当地字符串        
+                date.toLocaleDateString()
+                date.toLocaleTimeString()
+
+                date.toString()
+                date.toDateString()
+                date.toTimeString()
+
+
+                date.getFullYear()  //2022
+                date.getMonth()  //月份序号 [0,11]    
+                date.getDate()  // 1
+                date.getDay()   // 4  [0, 6]表示[星期天，星期六]
+                date.getHours()  // 19
+                date.getMinutes()  // 19
+                date.getSeconds()
+                date.getMilliseconds()
+
+                *******************
+                时间戳之差：
+                    -- 直接拿两个Date对象相减即可，注意拿到的是时间戳
+                            -- 或者时间戳，或者混合减，自动隐式转为时间戳
+                    var timeDiffer = Date.now() - new Date(0)
+                    Date.now()拿到当前时间的时间戳
+
+
+
+            timerAPI:
+                定时器api，是BOM的api
+
+                    延时器 setTimeout()
+                        --延时执行的定时器
+                        window.setTimeout(function() {3秒后执行函数}, 3000)
+
+                    定时器 setInterval()    interval时间间隔
+                        --周期性执行的定时器(时间间隔定时器)
+                        window.setInterval(function() {每1秒执行一次}, 1000)
+                            -- 注意点，第一次执行函数也要等1秒后。
+                               即延迟1秒，执行第一次函数，后面每间隔1秒执行一次函数，周期执行，重复执行。
+     -->
+    
+    <!-- 时间戳换算 -->
+    <h2 id="show">计算时差</h2>
+    <button id="btn">计算</button>
+
+    <script>
+        var targetDate = new Date("2008-08-08T08:00:00");
+        var differ = Date.now() - targetDate;
+
+        // 求出天   一天 (60*60*24*1000) 毫秒
+        var days = parseInt(differ / (60*60*24*1000)); 
+        // 剩余小时数   得到不足一天的总毫秒数  一小时(60*60*1000)毫秒
+        var hours = parseInt(differ % (60*60*24*1000) / (60*60*1000));
+        // 分钟     得到不足一小时的总毫秒数  一分钟(60*1000)毫秒
+        var minutes = parseInt(differ % (60*60*1000) / (60*1000)); 
+        // 秒       得到不足一分钟的总毫秒数  一秒钟1000毫秒
+        var seconds = parseInt(differ % (60*1000) / 1000);
+
+        btn.onclick = function () {
+            show.innerText = `距离奥运开幕过去了,${days}天零${hours}小时${minutes}分${seconds}秒`
+        }
+    </script>
+</body>
+
+</html>

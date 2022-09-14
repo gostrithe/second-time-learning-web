@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="pCountDown">倒计时</p>
+    <button id="btn">开始/暂停倒计时</button>
+
+    <!-- 计算时差函数封装 -->
+    <script>
+      function getTimeDiffer(startDate, endDate) {
+        // var startDate = new Date("2008-08-08T08:00:00");
+        // var endDate = new Date();
+
+        // 计算时间戳之差
+        var timeDiffer = endDate - startDate;
+        console.log(timeDiffer);
+
+        // 计算过去了多少天
+        var daysDiffer = parseInt(timeDiffer / (24 * 3600 * 1000));
+        console.log(daysDiffer);
+
+        // 计算不足一天的时分秒 odd奇数，零头
+        var oddMillis = timeDiffer % (24 * 3600 * 1000);
+        var hoursDiffer = parseInt(oddMillis / (3600 * 1000));
+        console.log(hoursDiffer);
+
+        // 不足一小时的零头毫秒
+        oddMillis = oddMillis % (3600 * 1000);
+        var minutesDiffer = parseInt(oddMillis / (60 * 1000));
+        console.log(minutesDiffer);
+
+        // 计算秒
+        var secondsDiffer = Math.round((oddMillis % (60 * 1000)) / 1000);
+        console.log(secondsDiffer);
+
+        // 组装显式
+        var differStr = `${daysDiffer}天零${hoursDiffer}小时${minutesDiffer}分${secondsDiffer}秒`;
+        // console.log("距离奥运开幕过去了", differStr);
+
+        // 将时差字符串丢还调用者
+        return differStr;
+      }
+    </script>
+
+    <script>
+      // 目标时间 target目标
+      var targetDate = new Date("2022-09-30T18:00:00");
+
+      // 定时器
+      var timer = null;
+
+      /* 往国庆放假倒计时 2022-09-30T18:00:00 */
+      btn.onclick = function () {
+        /* 如果定时器不存在就设置定时器 */
+        // 通吃timer为0 nan "" null undefined
+        if (!timer) {
+          // 立刻更新时间（周期性执行的定时器的首次执行需要等待1000毫秒）
+          pCountDown.innerText =
+            "距离国庆放假剩余:" + getTimeDiffer(new Date(), targetDate);
+
+          timer = setInterval(function () {
+            // 计算将当前时间距离目标时间剩余的日时分秒
+            // 将数据显式在P标签上
+            // pCountDown.innerText = new Date().toLocaleString();
+            pCountDown.innerText =
+              "距离国庆放假剩余:" + getTimeDiffer(new Date(), targetDate);
+          }, 1000);
+        } 
+        
+        /* 定时器已经在运行就清除之 */
+        else {
+          clearInterval(timer);
+          pCountDown.innerText = "倒计时已停止";
+          timer = null
+        }
+        
+      };
+    </script>
+  </body>
+</html>

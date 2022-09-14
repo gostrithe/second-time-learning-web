@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        IDE（integrated development environment） 集成开发环境 VSCode
+
+
+        初始对象。
+            对象由很多的【键值对(key-value-pair)】组成，键又叫属性(property)
+
+            对象打点.访问属性
+            使用中括号[]访问对象属性
+                -- 两者的区别，
+                    .点操作符必须提前知道你要访问的属性名。
+                        -- 必须程序员，自己把想访问的属性名亲自打上去，不能点.一个字符串，不能点.一个变量。
+                    []中括号操作符，可以动态计算出想要访问的属性名。
+                        -- 完美弥补点操作符的不足
+
+
+        创建对象。
+            字面量创建
+            var obj = {}
+            new一个
+            var obj = new Object()
+
+
+        增删改查 CRUD create创建/新 retrieve获取/查 update更新/改 delete删除/删
+
+            删除属性
+            delete obj.wife
+            delete obj['wife']
+
+
+        
+        ************
+        对象的for-in循环：
+            for (var key in obj) {
+                注意，这里的key，得到的是obj的属性名，为字符串类型。
+                console.log(key, obj[key])
+                            -- []中括号操作符，里面放属性名字符串
+            }
+
+    -----------------------------------
+        
+        数组。
+            数组的创建
+                字面量创建
+                var arr = []
+                new一个
+                var arr = new Array()
+                创建一个长度为7的数组
+                var arr = new Array(7)
+
+            数组的长度。
+                -- 数组中元素的个数
+                arr.length
+
+            访问元素
+                -- 通过序号、下标、索引、index访问
+                -- 0为第一项
+                arr[0]
+                arr[arr.length] => undefined
+
+            数组的遍历：
+                for(var i = 0; i < arr.length; i++) {
+                    console.log(i, arr[i]);
+                }
+
+            
+            **********
+            for-of 循环：
+                -- 遍历数组中的每一项
+                for (var item of arr) {
+                    遍历数组中的每一项，item为每一项
+                    console.log(item);
+                }
+
+    -------------------------------------
+        
+        JSON字符串。
+            -- 所有的key都要用双引号引起来    
+            -- 注意json字符串的引号为双引号""
+
+            将JS数据（对象与数组的相互嵌套）转换为JSON字符串       
+                var json1 = JSON.stringify(js数据);
+            
+            将JSON字符串转为js数据
+                var jsDate = JSON.parse(json字符串);
+                                -- json解析
+
+
+    
+    ------------------------------------------------
+
+        ****************
+        选择排序：
+            -- 思路：
+                选择第一个数，作为最小数，检测后面的数，发现有比这个数还小的数，则交互他们的位置，直到最后一个数检测完成。
+                    -- 第一轮结束，已经选出了最小的数。继续第二轮
+                选择下一个数，最为最小数，检测后面的数，发现有比这个数还小的数，则交互他们的位置，直到最后一个数检测完成。
+                    -- 第二轮结束，继续以此类推。
+                。。。
+                直到倒数第二个数选择完成，完成选择排序。
+            代码如下：
+        ****************
+        冒泡排序：
+            -- 思路：
+                冒泡冒泡，大气泡会往水面浮起。
+                依次两两比较相邻的两个数，大数往后移动，即两数交换位置。直到大数到达末尾，冒泡得到最大的数，一轮结束。
+                    第一轮需要依次比较 01 12 23 34
+                        -- 共需要比较 (n - 1)次
+                依此类推，第二轮直到大数到达倒数第二的位置，冒泡得到倒数第二大的数。二轮结束。
+                    第二轮需要依次比较 01 12 23 
+                        -- 共需要比较 (n - 2)次
+                。。。
+                n个数，整个过程需要进行(n - 1)轮,
+                    每轮共需要比较 (n - 轮次)次
+            代码如下： 
+            
+            
+        算法时间复杂度：
+            如：
+                这两种排序算法的都是双层循环，复杂度为o(n²)
+     -->
+    <script>
+        // 选择排序
+        var arr = [3, 6, 4, 5, 9, 2, 1, 8, 7, 0];
+
+        var temp;
+        for (var i = 0; i < arr.length - 1; i++) {
+            for (var j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[i]) {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        console.log(arr);
+
+        // 冒泡排序
+        var arr2 = [3, 6, 4, 5, 9, 2, 1, 8, 7, 0];
+        
+        var temp;
+        for (var i = 1; i <= arr2.length - 1; i++) {
+            for (var j = 0; j < arr2.length - i; j++) {
+                if (arr2[j] > arr2[j + 1]) {
+                    temp = arr2[j];
+                    arr2[j] = arr2[j + 1];
+                    arr2[j + 1] = temp;
+                }
+            }
+        }
+        console.log(arr2);
+    </script>
+</body>
+</html>
