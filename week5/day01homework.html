@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+      // 为抵抗洪水，战士连续作战89小时，编程计算共多少天零多少小时？
+      // ·在input中采集用户输入的小时数，点击按钮时弹窗运算结果；（选做）
+    -->
+    <!-- <script>
+            var hours = 89;
+            // 先求余，得到零头小时。
+            var resultHours = hours % 24;
+            // 减掉零头小时，再除一天，得到天数
+            var resultDay = (hours - resultHours) / 24;
+            console.log(resultDay, resultHours);
+        </script> -->
+    <input type="text" id="ipt" placeholder="请输入小时数">
+    <button id="btn">运算</button>
+
+    <script>
+        var ipt = document.getElementById('ipt');
+        var btn = document.getElementById('btn');
+
+        btn.onclick = function () {
+            var data = ipt.value * 1;
+            var hours = data % 24;
+            var days = (data - hours) / 24;
+            ipt.value = "运算结果为：" + days + "天" + hours + "小时"
+            alert("运算结果为：" + days + "天" + hours + "小时");
+        }
+    </script>
+
+
+
+    <!-- 
+      // 小明要到美国旅游，可是那里的温度是以华氏度为单位记录的。
+      // 它需要一个程序将华氏温度（80度）转换为摄氏度，并以华氏度和摄氏度为单位分别显示该温度。
+      // 提示：摄氏度与华氏度的转换公式为：摄氏度 = 5/9.0*(华氏度-32)。
+      // ·在input中采集用户输入的摄氏度，点击按钮时弹窗显示华氏温度（选做）
+    -->
+    <!-- <script>
+            var f = 80;
+            var s = 5 / 9.0 * (f - 32);
+            console.log(f, s);
+        </script> -->
+    <br>
+    <br>
+    <br>
+    <input type="text" id="ipt2" placeholder="请输入摄氏度"> = <span id="sp1"></span>℉ <button id="btn2">转华氏</button>
+    <input type="text" id="ipt3" placeholder="请输入华氏温度"> = <span id="sp2"></span>℃ <button id="btn3">转摄氏</button>
+
+    <script>
+        var btn2 = document.getElementById('btn2');
+        var btn3 = document.getElementById('btn3');
+        var ipt2 = document.getElementById('ipt2');
+        var ipt3 = document.getElementById('ipt3');
+        var sp1 = document.getElementById('sp1');
+        var sp2 = document.getElementById('sp2');
+
+        btn2.onclick = function () {
+            var data = ipt2.value * 1;
+            var result = data * 9 / 5 + 32;
+            sp1.innerText = result;
+            alert("华氏温度为：" + result + "℉");
+        }
+        btn3.onclick = function () {
+            var data = ipt3.value * 1;
+            var result = 5 / 9 * (data - 32);
+            sp2.innerHTML = result;
+            alert('摄氏度为；' + result + '℃');
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 1．入职薪水10K，每年涨幅5%，50年后工资多少？ */
+        var salary = 10;
+        for (var i = 1; i <= 50; i++) {
+            salary *= 1.05;
+            console.log(`1. ${i}年后的工资为${salary.toFixed(1)}k`);
+        }
+
+        /* 2．打印100以内 7的倍数 */
+        for (var i = 1; i <= 100; i++) {
+            if (i % 7 == 0) console.log(`2. ${i}是7的倍数`)
+        }
+
+        /* 3．打印100以内的奇数 */
+        for (var i = 1; i <= 100; i++) {
+            if (i % 2 == 1) console.log(`3. 100以内的奇数${i}`);
+            // 短路操作，if单分支语法糖
+            // i % 2 == 1 && console.log(i);
+        }
+        // 老师高尚写法。不浪费每一次循环
+        // for (var i = 1; i <= 100; i += 2) {console.log(i);}
+
+        /* 4. 打印100以内所有偶数的和 */
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 2 == 0) sum += i;
+        }
+        console.log(`4. 100以内所有偶数的和为${sum}`);
+
+        /* 5. 打印图形
+            **********
+            **********
+            **********
+            **********
+
+            * 
+            ** 
+            *** 
+            ****
+            ***** 
+
+              *
+             ***
+            *****
+             ***
+              * 
+        
+               @
+              @@@
+             @@@@@
+            @@@@@@@
+        */
+        for (var i = 1; i <= 4; i++) {
+            for (var j = 1; j <= 10; j++) {
+                document.write('*');
+            }
+            document.write('<br>');
+        }
+        document.write('<br>');
+        for (var i = 1; i <= 5; i++) {
+            for (var j = 1; j <= i; j++) {
+                document.write('*');
+            }
+            document.write('<br>');
+        }
+        document.write('<br>');
+        function diamond(n) {
+            for (var i = 1; i <= n / 2 + 1; i++) {
+                for (var j = 1; j <= n; j++) {
+                    if (j <= (n - (2 * i - 1)) / 2 || j > i + n / 2) {
+                        document.write(`&nbsp;1 `);
+                    } else {
+                        document.write(`&nbsp;0 `);
+                    }
+                }
+                document.write('<br>');
+            }
+
+            for (var i = n / 2; i >= 1; i--) {
+                for (var j = 1; j <= n; j++) {
+                    if (j <= ((n - (2 * parseInt(i) - 1)) / 2) || j > (parseInt(i) + n / 2)) {
+                        document.write('&nbsp;1 ');
+                    } else {
+                        document.write('&nbsp;0 ');
+                    }
+                }
+                document.write('<br>');
+            }
+        }
+        // diamond(77);
+        diamond(7);
+        document.write('绝对值规律<br>');
+        function printDiamond(n) {
+            // 得到中间行
+            var midRow = (n + 1) / 2;
+            for (var i = 1; i <= n; i++) {
+                for (var j = 1; j <= n; j++) {
+                    if (j <= Math.abs(midRow - i) || j > n - Math.abs(midRow - i)) {
+                        document.write('&nbsp;X&nbsp;');
+                    } else {
+                        document.write('&nbsp;R&nbsp;');
+                    }
+                }
+                document.write('<br>');
+            }
+        }
+        printDiamond(11);
+
+        // 只打印前面空格 
+        for (var i = 1; i <= 4; i++) {
+            for (var j = 1; j <= i + 3; j++) {
+                if (j <= 4 - i) {
+                    document.write('&nbsp;&nbsp;&nbsp;&nbsp;');
+                } else {
+                    document.write('@');
+                }
+            }
+            document.write('<br>');
+        }
+        // 写法二：只打印前面空格
+        for (var i = 1; i <= 4; i++) {
+            for (var j = 1; j <= (7 - (2 * i - 1)) / 2; j++) {
+                document.write('&nbsp;&nbsp;&nbsp;')
+            }
+            for (var k = 1; k <= 2 * i - 1; k++) {
+                document.write('@')
+            }
+            document.write('<br>');
+        }
+
+
+        /* 6. 打印100–200之间所有能被3或者7整除的数 */
+        for (var i = 100; i <= 200; i++) {
+            if (i % 3 == 0 || i & 7 == 0) console.log(`5. ${i}能被3或者7整除`);
+        }
+
+        /* 7. 计算10的阶乘 10 */
+        var factorial = 1;
+        for (var i = 10; i >= 1; i--) {
+            factorial *= i;
+        }
+        console.log(factorial);
+
+        /* 8. 计算1+3+5+...+99的和 */
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            if (i % 2 == 1) {
+                sum += i;
+            }
+        }
+        console.log(sum);
+
+        /* 9. 99乘法表 */
+        for (var i = 1; i <= 9; i++) {
+            for (var j = 1; j <= 9; j++) {
+                document.write(`${j}×${i}=${j * i} || `)
+            }
+            document.write('<br>')
+        }
+
+        /* 10. 求100-999之间的水仙花数。 算法 : abc = a ³ + b³ + c ³ */
+        for (var i = 100; i < 1000; i++) {
+            var a = parseInt(i / 100);
+            var b = parseInt(i % 100 / 10);
+            var c = i % 10;
+            if (i == a * a * a + b * b * b + c * c * c) {
+                console.log(i);
+            }
+            // // 老师的操作
+            // var isShuixianhua = 
+            //     i === Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3);
+            //     // 这里为判断。把布尔值赋给isShuixianhua
+            // if (isShuixianhua === true) {
+            //     console.log(i);
+            // }
+        }
+
+        /* 11. 输出20-80之间能被3整除的整数，每5个一行 */
+        var count = 0;
+        for (var i = 20; i <= 80; i++) {
+            if (i % 3 == 0) {
+                document.write(`${i}&nbsp;`)
+                count++;
+                if (count % 5 == 0) {
+                    document.write('<br>')
+                }
+            }
+        }
+
+        /* 12. 打印出1000-2000年中所有的闰年，并以每行四个数的形式输出 */
+        var count = 0;
+        for (var i = 1000; i <= 2000; i++) {
+            if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0) {
+                document.write(`${i}&nbsp;`);
+                count++;
+                // if (count % 4 == 0) {
+                //     document.write('<br>')
+                // }
+
+                // 高尚写法。短路写法。
+                count % 4 == 0 && document.write('<br>');
+                // 如果前面不成立，则短路，不用开后面了
+                // 如果前面成立，则看后面，且执行后面。
+            }
+        }
+
+        /* 13 . 求1+2!+3!+...+20!的值 */
+        var sum = 0;
+        for (var i = 1; i <= 20; i++) {
+            var factorial = 1;
+            for (var j = i; j >= 1; j--) {
+                factorial *= j;
+            }
+            sum += factorial;
+        }
+        console.log(sum);
+
+        /* 14. 打印出1-100里所有的偶数 */
+        for (var i = 1; i <= 100; i++) {
+            i % 2 == 0 && console.log(i);
+        }
+
+        /* 15. 打印出1-100里所有的奇数 */
+        for (var i = 1; i <= 100; i++) {
+            i % 2 == 1 && console.log(i);
+        }
+
+        /* 16. 求出1/1-1/2+1/3-1/4…..1/100的和 */
+        var sum = 0;
+        for (var i = 1; i <= 100; i++) {
+            // if (i % 2 == 1) {
+            //     sum += 1 / i;
+            // } else {
+            //     sum -= 1 / i;
+            // }
+            (i % 2 == 1) ? sum += 1 / i : sum -= 1 / i;
+        }
+        console.log(sum);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>判断一个整数，属于哪个范围：大于0；小于0；等于0</h2>
+    <input type="text" id="input" placeholder="请输入一个整数">
+    <button id="btn">判断</button>
+
+    <h2>判断一个整数是偶数还是奇数，并输出判断结果</h2>
+    <input type="text" id="input2" placeholder="请输入一个整数">
+    <button id="btn2">判断</button>
+
+    <h2>开发一款软件，根据公式（身高-108）*2=标准体重，可以有10斤左右的浮动。来观察测试者体重是否合适</h2>
+    <input type="text" id="input3" placeholder="请输入身高">
+    <input type="text" id="input4" placeholder="请输入体重">
+    <button id="btn3">判断</button>
+
+    <h2>输入月份，显示当月的天数(31/30/28)</h2>
+    <h3>要求：利用case穿透简化代码</h3>
+    <input type="text" id="input5" placeholder="请输入月份">
+    <button id="btn4">判断</button>
+
+    <h2>根据输入的【天数：一年当中的第123天】判断落在几月（假设都是平年）</h2>
+    <input type="text" id="input6" placeholder="请输入一年中的第几天数">
+    <button id="btn5">判断</button>
+    <button id="btn5X">高尚版</button>
+
+    <h2>根据输入的年月日，判断是这一年的第几天</h2>
+    <h3>提示：要考虑闰年(闰年：整四不整百 或者 整四百)</h3>
+    <input type="text" id="input7" placeholder="请输入年">
+    <input type="text" id="input8" placeholder="请输入月">
+    <input type="text" id="input9" placeholder="请输入日">
+    <button id="btn6">判断</button>
+    <script>
+        // - 判断一个整数，属于哪个范围：大于0；小于0；等于0
+        btn.onclick = function () {
+            var int = input.value * 1;
+
+            switch (true) {
+                case int > 0:
+                    alert('大于0');
+                    break;
+
+                case int < 0:
+                    alert('小于0');
+                    break;
+
+                default:
+                    alert('等于0');
+                    break;
+            }
+        }
+        // - 判断一个整数是偶数还是奇数，并输出判断结果
+        btn2.onclick = function () {
+            var int = input2.value * 1;
+
+            int % 2 == 0 ? alert('偶数') : alert('奇数');
+        }
+        // - 开发一款软件，根据公式（身高-108）*2=标准体重，可以有10斤左右的浮动。来观察测试者体重是否合适
+        btn3.onclick = function () {
+            var height = input3.value * 1;
+            var weight = input4.value * 1;
+            var standard = (height - 108) * 2;
+
+            if (weight >= standard - 10 && weight <= standard + 10) {
+                alert('体重合适');
+            } else {
+                alert('体重不合适');
+            }
+        }
+        // - 输入月份，显示当月的天数(31/30/28)
+        // 要求：利用case穿透简化代码
+        btn4.onclick = function () {
+            var month = input5.value * 1;
+
+            switch (month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    alert(`当月天数为31`);
+                    break;
+
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    alert(`当月天数为30`);
+                    break;
+
+                case 2:
+                    alert('非闰年当月天数为28');
+                    break;
+
+                default:
+                    alert('请输入合法的月份');
+                    break;
+            }
+        }
+        // - 根据输入的【天数：一年当中的第123天】判断落在几月（假设都是平年）
+        btn5.onclick = function () {
+            var value = input6.value * 1;
+
+            if (value <= 0) {
+                alert('请输入合法的天数');
+            } else if (value <= 31) {
+                alert('落在一月');
+            } else if (value <= 59) {
+                alert('落在二月');
+            } else if (value <= 90) {
+                alert('落在三月');
+            } else if (value <= 120) {
+                alert('落在四月');
+            } else if (value <= 151) {
+                alert('落在五月');
+            } else if (value <= 181) {
+                alert('落在六月');
+            } else if (value <= 212) {
+                alert('落在七月');
+            } else if (value <= 243) {
+                alert('落在八月');
+            } else if (value <= 273) {
+                alert('落在九月');
+            } else if (value <= 304) {
+                alert('落在十月');
+            } else if (value <= 334) {
+                alert('落在十一月');
+            } else if (value <= 365) {
+                alert('落在十二月');
+            } else {
+                alert('请输入合法的天数');
+            }
+        }
+
+        // 老师高尚版
+        btn5X.onclick = function () {
+            var value = input6.value * 1;
+            var month = null;
+            var temp = 0;
+
+            switch (true) {
+                // 无论进不进入case，temp依然累加。为前面月份的天数。
+                // 条件为大于前面月份天数的累加，且小于当前月份天数的累加
+                // (temp += 31)累加返回真值，!取反。配合||使用，从而不影响我们的主要条件。
+                // 满足第一条件即可。||后面永远为假。
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 1;
+                    break;
+                case value > temp && value <= temp + 28 || !(temp += 28):
+                    month = 2;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 3;
+                    break;
+                case value > temp && value <= temp + 30 || !(temp += 30):
+                    month = 4;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 5;
+                    break;
+                case value > temp && value <= temp + 30 || !(temp += 30):
+                    month = 6;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 7;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 8;
+                    break;
+                case value > temp && value <= temp + 30 || !(temp += 30):
+                    month = 9;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 10;
+                    break;
+                case value > temp && value <= temp + 30 || !(temp += 30):
+                    month = 11;
+                    break;
+                case value > temp && value <= temp + 31 || !(temp += 31):
+                    month = 12;
+                    break;
+
+                default:
+                    month = '智商过低';
+                    break;
+            }
+            alert(`平年中的第${value}天落在第${month}月`);
+        }
+        // - 根据输入的年月日，判断是这一年的第几天
+        // 提示：要考虑闰年(闰年：整四不整百 或者 整四百)
+        btn6.onclick = function () {
+            var year = input7.value * 1;
+            var month = input8.value * 1;
+            var day = input9.value * 1;
+            var fabruary = 28;
+
+            var result = 0;
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) fabruary = 29;
+            switch (month) {
+                case 12:
+                    result += 30;
+                case 11:
+                    result += 31;
+                case 10:
+                    result += 30;
+                case 9:
+                    result += 31;
+                case 8:
+                    result += 31;
+                case 7:
+                    result += 30;
+                case 6:
+                    result += 31;
+                case 5:
+                    result += 30;
+                case 4:
+                    result += 31;
+                case 3:
+                    result += fabruary;
+                case 2:
+                    result += 31;
+                case 1:
+                    result += day;
+                    break;
+                default:
+                    alert('请输入合法的月份');
+                    break;
+            }
+            alert(`是这一年的第${result}天`);
+        }
+    </script>
+</body>
+
+</html>

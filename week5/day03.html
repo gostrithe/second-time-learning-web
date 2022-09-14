@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        循环结构：
+            do_while循环：
+                -- 废话不多说，先执行一次循环体。
+                    -- 再看循环条件
+                        -- 至少循环一次。
+
+            while循环：
+
+            for循环:
+                for (isRaining=Math.random()>0.1; isRaining===true; isRaining=Math.random()>0.1) {
+                for (起始条件; 循环条件; 增长条件) {循环体}
+            
+            break
+                -- 暴力终止循环
+
+            continue
+                -- 继续下一次循环，跳过continue后面的循环语句
+                    -- 流程来到增长条件。增长条件为一次循环的最后流程。
+     -->
+    <!-- 循环嵌套 -->
+    <!-- 九九乘法表 -->
+    <style>
+        span {
+            display: inline-block;
+            width: 100px;
+            padding: 8px;
+            /* background-image: linear-gradient(to right, pink, skyblue 95%, gray); */
+            background-image: radial-gradient(skyblue, rgb(44, 43, 43));
+            color: #eee;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // document.write('hello world');
+        for (var i = 1; i <= 9; i++) {
+            for (var j = 1; j <= i; j++) {
+                document.write(`<span>${j}×${i}=${j * i}</span>`);
+            }
+            document.write('<br>')
+        }
+    </script>
+</body>
+
+</html>

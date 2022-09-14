@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input" placeholder="请输入你的成绩">
+    <button id="btn">评价</button>
+    <script>
+        /* 
+            数据类型转换：
+
+                强转：
+                    String()
+                        -- 强转为字符串，字面量是什么就字符串就是什么
+
+                    Number()
+                        -- 强转为数值
+
+                        "123" -> 123
+                        false -> 0
+                        null -> 0
+
+                        undefined -> NaN -- not a number,不是一个正常的数值，
+                        "777jack" -> NaN    但NaN的类型还是数值number
+                        注意,只要字符串字面量存在一个不正常的数值，结果为NaN
+
+                    Boolean()
+                        -- 强转布尔
+                        
+                        0 NaN "" null undefined 这五个东西是伪的(falsy),转换后为false
+                        其余的都为真的(truthy),转换后为true
+
+                
+                **********
+                parseInt()
+                    -- 解析为整数。取整。parse解析 integer整数
+
+                    也可以对字符串进行解析。字符串隐式转为数值number
+                    parseInt("123.45") // 123 解析取整，直接丢到小数点后面
+                    parseInt("undefined") // NaN
+                    parseInt("123.45jack") // 123 解析到第一个不为数字。并取整
+
+                    第二个参数表示，第一个参数的各种进制，解析后返回十进制取整数值
+
+                    console.log(parseInt("01111011",2)); //解析二进制字符串
+                    console.log(parseInt("173",8));     //解析八进制字符串
+                    console.log(parseInt("123",10));    //解析十进制字符串
+                    console.log(parseInt("7B",16));    //解析十六进制字符串
+                    结果均为十进制的数值123
+
+                parseFloat()
+                    -- 解析为浮点数，保留小数部分
+
+                toString()
+                    -- 打点调用该方法，返回字面量字符串。和String()强转字符串效果一样
+                    
+                    **************
+                    number.toString(16) -- 将数字转为16进制数
+
+                    注意，null和undefined无法调用任何API，会报错。
+                    单词时刻
+                        uncaught type error: cannot read properties of null (reading toString)
+                        为捕获   类型  错误           读取  属性                                         
+
+
+                *******
+                隐式类型转换：
+                    字符串：
+                        +加号以外其他数学运算，隐式转换为number
+                            -- 通常使用 "123" * 1 的技巧
+                        
+                    数值：
+                        +字符串，会被字符串拼接
+                        调用toFixed()方法保留小数后几位，数值number隐式转为字符串string
+                        123.4567.toFixed(2) // '123.46'保留两位小数，为字符串。
+                                                -- 会进行四舍五入
+
+
+
+
+            if 分支语句：
+
+                if双分支的{语法糖}
+                    -- 三目运算符、三联表达式
+                    
+                    返回值 = 条件表达式 ? 成立分支 : 不成立分支 
+                    注意点，三目运算符是有返回值的。里面不能再写return。
+                        -- 可以接收这个值，或者直接return这个返回值，return写在外面。
+
+                if多分支：
+                    -- 退而求此次
+
+            
+            switch语法：
+                switch(表达式){
+                    case 取值A:
+                        A分支
+                        break;
+                    case 取值B:
+                        B分支
+                        break;
+                    ...
+
+                    default:
+                        以上case都不满足，默认分支。
+                        break
+                }
+
+            
+            *********
+            switch(true) 的骚操作：
+                -- 只要switch()里面的值等于case的值，就可以进入分支
+
+                只要case的表达式为true，则进入分支执行。
+
+            %%%%%%%%%
+            switch的case穿透：
+                -- 满足某个case分支，且进入分支后，分支中没有break结束。
+                    -- 则case会往下穿透，直到遇见break或者穿透所有分支
+                        -- 进入某楼层跳楼经过窗边顺手拿衣服，break为阳台，阻止继续跳楼。
+
+                不写break不一定是坏事，巧用case穿透。
+                
+        */
+        btn.onclick = function () {
+            var score = input.value;
+            // var level = null;
+            var level = '';
+
+            switch (true) {
+                case score >= 90:
+                    level += "优秀";
+                    // break;   case穿透
+                case score >= 80:
+                    level += "良好";
+                    // break;   case穿透
+                case score >= 60:
+                    level += "及格";
+                    // break;   case穿透
+
+                default:
+                    level += "hotChicken";
+                    break;
+            }
+
+            alert(level);
+        }
+
+    </script>
+</body>
+
+</html>

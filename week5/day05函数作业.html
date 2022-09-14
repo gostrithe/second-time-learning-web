@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="ipt" placeholder="请输入数字">
+    <button id="btn">计算阶乘</button>
+    <hr>
+    <script>
+        /* 1. 编写一个函数，计算两个数字的和差积商 */
+        function calculate(a, b, operator) {
+            switch (operator) {
+                case '+':
+                    return a + b;
+                case '-':
+                    return a - b;
+                case '*':
+                    return a * b;
+                case '/':
+                    return a / b;
+
+                default:
+                    return '暂时不支持其他运算符'
+            }
+        }
+        console.log(calculate(7, 7, '+'));
+
+        /* 2. 编写函数，求圆的面积 */
+        function areaOfCircle(radius) {
+            return (Math.PI * Math.pow(radius, 2)).toFixed(2) * 1;
+        }
+        console.log(areaOfCircle(10));
+
+        /* 3. 编写函数，判断一个字符串的内容是不是纯数字 */
+        function isNumber(n) {
+            if (n === '') {
+                // 注意空字符转数字为0，这里是隐式转换。
+                return false;
+            }
+            // isNaN(n) ? return false : return true 不能这样写，会报错。
+            // 注意三目运算符是有返回值的，里面不能写return了
+            // 下面为正确用法
+            // 接受返回值，或者直接return返回值
+            // return isNaN(n) ? false : true;
+
+            // 终极高尚版本
+            return !isNaN(n);  // 因为isNaN()本身就返回布尔值
+        }
+        console.log(isNumber('7'));
+        console.log(isNumber(''));
+        // 注意点，''空字符串转数字会为0。
+
+        /* 4. 编写一个函数，计算三个数字的大小，按从小到大的顺序输出 */
+        function sort3(a, b, c) {
+            var max = Math.max(a, b, c);
+            var min = Math.min(a, b, c);
+            for (var item of arguments) {
+                if (item !== max && item !== min) var middle = item;
+            }
+            console.log(`从小到大的顺序为`, min, middle, max);
+        }
+        sort3(0, 3, -4);
+
+        /* 5. 编写一个函数，在页面上输出一个N行M列的表格，表格内容填充0~100的随机数字 */
+        // 得到[a, b]闭区间的整数，公式
+        // parseInt(Math.random() * (b - a + 1)) + a
+        function randomNumTable(n, m) {
+            for (var i = 1; i <= n; i++) {
+                for (var j = 1; j <= m; j++) {
+                    document.write(`<span id = 'spans'>${parseInt(Math.random() * 101)}</span>`);
+                }
+                document.write('<br>');
+            }
+        }
+        randomNumTable(7, 7);
+        // document.write表格
+        function writeTable(n, m) {
+            document.write('<table border = "0" style = "width: 700px; border-collapse: collapse; margin: 10px">');
+            for (var i = 0; i < n; i++) {
+                document.write('<tr>');
+                for (var j = 0; j < m; j++) {
+                    document.write(`<td>${j + 1}×${i + 1}=${(j + 1) * (i + 1)}</td>`);
+                }
+                document.write('</tr>');
+            }
+            document.write('</table>');
+        }
+        writeTable(9, 9)
+
+        /* 6. 编写一个函数，生成4位数字的验证码 */
+        function randomCode() {
+            return parseInt(Math.random() * (9999 - 1000 + 1)) + 1000;
+        }
+        console.log('验证码：', randomCode());
+        console.log('方法二，每个数字都随机');
+        function randomCodeX(n = 4) {
+            var result = '';
+            for (var i = 0; i < n; i++) {
+                result += parseInt(Math.random() * 10);
+            }
+            return result;
+        }
+        console.log('验证码：', randomCodeX());
+
+        /* 7. 求m - n之间数字的和 */
+        function addSum(m, n) {
+            var sum = 0;
+            for (var i = m; i <= n; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+        console.log(addSum(1, 100));
+
+        /* ----------
+        8. 编写函数digit(num, k)，函数功能是：求整数num从右边开始的第k位数字的值，如果num位数不足k位则返回0。 */
+        function digit(num, k) {
+            var sumStrArr = (num + '').split('');
+            var count = 0;
+            if (k > sumStrArr.length) return 0;
+            for (var i = sumStrArr.length - 1; i >= 0; i--) {
+                count++;
+                if (count === k) return sumStrArr[i] * 1;
+            }
+        }
+        console.log(digit(987654321, 7));
+        // 傻逼吧你，字符串也有数组的特征，你转个屁数组，还炸裂split。
+        function digitX(num, k) {
+            var sumStr = num + '';
+            var count = 0;
+            if (k > sumStr.length) return 0;
+            for (var i = sumStr.length - 1; i >= 0; i--) {
+                count++;
+                if (count === k) return sumStr[i] * 1;
+            }
+        }
+        console.log(digitX(987654321, 7));
+        // 下面是老师的写法和思路
+        function digitXX(num, k) {
+            if (k > (num + '').length) return 0;
+            // 每循环一次，拿出最后一位数，更新num，继续拿出最后一位数，循环k次，则是从右往左拿出第k位数。
+            var ge = null;
+            for (var i = 0; i < k; i++) {
+                ge = num % 10;
+                num = parseInt(num / 10);
+            }
+            return ge;
+        }
+        console.log(digitXX(987654321, 7));
+
+
+        /* 9. 编写函数计算一个数字的长度
+        //[0 1 2 3] 1 01 11 21 31          3 03 13 23 33 */
+        function numLength(n) {
+            var sumStrArr = String(n).split('');
+            return sumStrArr.length;
+        }
+        console.log(numLength(666666));
+        // 傻逼吧你，字符串也有数组的特征，你转个屁数组，还炸裂split。
+        function numLengthX(n) {
+            return (n + "").length;
+        }
+        console.log(numLengthX(7777777));
+
+        /* 10. 编写一个函数，计算任意两个数字之间所能组成的奇数个数，数字必须是个位数。比如：计算0~3之间能组成的奇数是： 01、03、11、13、21、23、31、33 */
+        function oddGroup(a, b) {
+            if (!(a >= 0 && a < 10) && (b >= 0 && b < 10)) return;
+            var max = Math.max(a, b);
+            var min = Math.min(a, b);
+            var resultArr = [];
+
+            for (var i = min; i <= max; i++) {
+                if (i % 2 === 1) {
+                    // console.log(i);
+                    for (var j = min; j <= max; j++) {
+                        // console.log(j + '' + i);
+                        resultArr.push(j + '' + i);
+                    }
+                }
+            }
+            console.log(`(${min}, ${max})两个数字之间所能组成的奇数个数为${resultArr.length}`);
+            return resultArr;
+        }
+        console.log(oddGroup(0, 3));
+
+        /* 11. 某个公司采用公用电话传递数据，数据是四位的整数，在传递过程中是加密的，加密规则如下：每位数字都加上5, 然后用除以10的余数代替该数字，再将第一位和第四位交换，第二位和第三位交换，请编写一个函数，传入原文，输出密文 */
+        function encryption(number) {
+            var numberStrArr = (number + "").split('');
+            for (var i = 0; i < 4; i++) {
+                numberStrArr[i] = numberStrArr[i] * 1 + 5;
+                numberStrArr[i] = numberStrArr[i] % 10;
+            }
+            var temp;
+            temp = numberStrArr[0];
+            numberStrArr[0] = numberStrArr[3];
+            numberStrArr[3] = temp;
+            temp = numberStrArr[1];
+            numberStrArr[1] = numberStrArr[2];
+            numberStrArr[2] = temp;
+            var result = '';
+            for (var item of numberStrArr) {
+                result += item;
+            }
+            return result * 1;
+        }
+        console.log(encryption(2222));
+
+        /* 12. 编写一个函数，输入n为偶数时，调用函数求1 / 2 + 1 / 4 +...+1 / n, 当输入n为奇数时，调用函数求1 / 1 + 1 / 3 +...+1 / n */
+        function calOddEven(n) {
+            var sum = 0;
+            // var start = null;
+            // n % 2 === 0 ? start = 2 : start = 1;
+            // 上面写法有点蠢了吧，兄弟，三目表达式有返回值的！！！！！
+            var start = n % 2 === 0 ? 2 : 1;
+            for (var i = start; i <= n; i += 2) {
+                sum += 1 / i;
+            }
+            return sum;
+        }
+        console.log(calOddEven(4));
+
+        /* 13. 使用函数完成任意数字阶乘的计算 */
+        function factorial(n) {
+            var factorial = 1;
+            for (var i = 1; i <= n; i++) {
+                factorial *= i
+            }
+            return factorial;
+        }
+        console.log(factorial(7));
+
+        /* 14. 要求：页面输入任意数字，点击按钮后计算该数字的阶乘 */
+        function factorialX() {
+            btn.onclick = function () {
+                var value = ipt.value;
+                var result = factorial(value);
+                console.log(1);
+                alert(result);
+            }
+        }
+        factorialX();
+
+    </script>
+    <style>
+        span {
+            display: inline-block;
+            width: 50px;
+            /* background-color: red; */
+            margin: 1px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+    </style>
+</body>
+
+</html>

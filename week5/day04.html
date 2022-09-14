@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        函数。
+            -- 封装一个功能 = 定义一个函数
+
+            argument参数
+                -- 类数组，接收用户传入的全部实参。
+
+            **********
+            不定长参数
+                -- 只能出现在形参列表末尾
+                   将剩余实参打包，形成一个数组
+                -- 如  ...cAfter
+
+            返回值
+                -- return 
+                    -- 默认return undefined;
+
+
+        
+        ***********
+        函数作用域。
+            -- 声明在函数作用域内部的变量 外界无法访问。
+                -- 局部变量
+
+        全局作用域。
+
+        不同作用域下，可以存在同名变量，就近原则。
+
+
+
+        声明式函数
+            function add(a, b) {}
+        赋值式函数
+            var substract = function (a, b) {}    
+                                -- 赋值一个匿名函数。
+
+
+        **********
+        预解析。
+            -- 在脚本执行之前，先把代码通读一遍
+
+            -- 目的是为所有变量（包括函数）预先开辟内存空间。
+
+            对于【声明式函数】 开辟空间+填充代码 => 执行之初可以立即调用函数
+            对于【普通变量】 开启空间+填充undefined => 使用赋值式函数，提前调用时候，会报错，undefined不是一个函数。
+                                        -- 存在变量的声明提升，初始赋值为undefined
+     -->
+    <script>
+        function melonEaters(a, b, ...cAfter) {
+            console.log(cAfter);
+            console.log(typeof(cAfter));
+            console.log(arguments);
+            console.log(typeof arguments);
+        }
+        melonEaters(1,2,3,4,5);
+    </script>
+</body>
+
+</html>
