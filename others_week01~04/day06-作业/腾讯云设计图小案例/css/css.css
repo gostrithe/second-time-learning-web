@@ -1,0 +1,228 @@
+body {
+    width: 1680px;
+    border: 1px solid #000;
+}
+
+.center-wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    height: 40px;
+    background-color: #2b303b;
+    
+}
+
+header h1 {
+    float: left;
+    width: 78px;
+    height: 18px;
+    margin-top: 10px;
+    background-image: url(../images/logo.png);
+    
+    text-indent: -9999px;
+}
+
+header ul {
+    float: right;
+    height: 40px;
+}
+
+header ul li {
+    float: left;
+    line-height: 40px;
+}
+
+header ul li a {
+    color: #fff;
+}
+
+header ul li::after {
+    content: '|';
+    color: #fff;
+    margin: 0 8px;
+}
+
+header ul li:last-child::after {
+    content: '';
+}
+
+header ul li a:hover {
+    color: red;
+}
+
+.banner {
+    height: 480px;
+}
+
+.banner .center-wrap {
+    position: relative;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.banner nav {
+    width: 250px;
+    height: 480px;
+    background-color: #1b2a3f;
+    position: absolute;
+    top: -480px;
+    left: 0;
+}
+
+.banner nav ul {
+    padding: 30px 0;
+}
+
+.banner nav ul li {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+}
+
+.banner nav ul li a {
+    display: block;
+    color: #fff;
+}
+
+.banner nav ul li a span {
+    float: right;
+}
+
+.banner nav ul li:hover {
+    background-color: rgb(74, 74, 237);
+}
+
+.banner nav ul li:hover a {
+    color: rgb(233, 106, 33);
+}
+
+.content {
+    padding-top: 40px;
+    margin-bottom: 135px;
+}
+
+.content h2 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.content .goodStudy {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.content .bigbox {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    height: 460px;
+    padding: 40px 50px 0;
+    box-sizing: border-box;
+}
+
+.content .bigbox .info {
+    float: left;
+    width: 450px;
+}
+
+.content .bigbox .info h3 {
+    font-size: 25px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ccc;
+    width: 110px;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.content .bigbox .info p {
+    line-height: 30px;
+    font-size: 12px;
+    margin-bottom: 28px;
+    color: #666666;
+}
+
+.content .bigbox .info .startBtn {
+    width: 160px;
+    height: 46px;
+    display: block;
+    line-height: 46px;
+    text-align: center;
+    color: #000;
+    border: 2px solid #ffa500;
+}
+
+.content .bigbox .info .startBtn:hover {
+    background-color: #ffa500;
+    color: #fff;
+}
+
+.content .bigbox .picbox {
+    float: right;
+}
+
+.content .bigbox .picbox img {
+    width: 580px;
+    height: 350px;
+}
+
+footer {
+    height: 368px;
+    background-color: #2e3033;
+    padding-top: 32px;
+}
+
+footer dl {
+    float: left;
+    width: 200px;
+}
+
+footer dl dt {
+    color: #eeeeee;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+footer dl dd a {
+    color: #ccc;
+    font-size: 12px;
+    line-height: 22px;
+}
+
+footer dl dd a:hover {
+    color: red;
+}
+
+footer .copyrights {
+    float: right;
+    width: 190px;
+    height: 130px;
+}
+
+footer .copyrights p {
+    font-size: 12px;
+    color: #ccc;
+    line-height: 20px;
+}
+
+footer .copyrights .buy {
+    width: 190px;
+    height: 35px;
+    background-color: #00a4ff;
+    color: #fff;
+    display: block;
+    line-height: 35px;
+    text-align: center;
+    margin-top: 22px;
+}
+
+footer .copyrights .buy:hover {
+    font-weight: bold;
+}
