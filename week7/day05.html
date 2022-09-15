@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 文档碎片（缓冲区域） 减少页面渲染次数。减少无效回流
+        var fragment = document.createDocumentFragment();
+
+        for (var i = 0; i < 10; i++) {
+            var p = document.createElement('p');
+            p.innerText = i;
+
+            fragment.appendChild(p);
+        }
+        document.body.appendChild(fragment);
+                            //  fragment并不是真正的元素
+    </script>
+</body>
+</html>

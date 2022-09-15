@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        BOM:
+            浏览器的尺寸：
+                // 显示页面内容的宽高（包括滚动条）
+                window.innerWidth  
+                window.innerHeight
+
+                // 显示窗口的整体宽高（包含标签、地址栏、菜单栏、侧边栏、控制台...）
+                window.outerWidth
+                window.outerHeight
+            
+            浏览器信息:
+                -- navigator对象
+                window.navigator.userAgent
+
+                高手链接(真正浏览器)
+                // https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+            
+            地址栏信息：
+                -- location对象
+                window.location.href  // 链接，可修改
+                window.location.assign('http://www.baidu.com')  // assign()方法修改更专业
+
+                window.location.reload()  // 刷新当前页面
+
+            浏览器的历史纪录：
+                -- history对象
+                window.history.forward()  // 前进
+                window.history.back()  // 后退
+
+                window.go(2)  // 前进2步
+                window.go(-2)  // 后退2步
+
+
+            浏览器事件，BOM事件：
+                -- window对象监听的事件
+
+                window.onload = function(){}  // 当页面资源（HTML+CSS+JS+字体文件...）全部加载完成后
+                
+                window.onresize = function(){}  // 当用户缩放浏览器时，包括窗口变化，包括页面放大缩小
+
+                window.onscrool = function(){}  // 当用户滚动页面时
+                    window.scroolY  页面y轴滚动的距离（上面看不见的距离） 
+                    window.scroolX  页面x轴滚动的距离 （左边看不见的距离）
+
+                    ************
+                    上面两个值是只读的。该值不会小于0
+                    对应的有DOM的api，可以修改
+                        -- documentElement对象(HTML标签元素)
+                        document.documentElement.scroolTop
+                        document.documentElement.scroolLeft
+
+
+            浏览器弹出层：
+                window.alert()  // 警告框，确认后才能执行下方代码或渲染
+                window.confirm()  // 确认框，返回值为布尔值
+                window.prompt()  // 输入框， 返回值为字符串，用户输入的内容
+
+            打开/关闭窗口：
+                window.open(https://www.baidu.com)  // 在新的窗口打开百度
+                window.close()  // 关闭当前窗口
+
+
+
+        DOM-api总结：
+            document.creatElement('div')  // 创建HTML元素，创建孤儿节点，里面传标签名字符串
+            div.cloneNode(true)  // 深度克隆div节点，孤儿节点，true表示深度克隆
+
+            父元素.appendChild(子元素)  // 孤儿节点上树，插入到父元素末尾
+            父元素.insertBefore(孤儿节点, 原有节点)  // 将孤儿节点插入到父元素原有节点之前。
+
+            div.setAttribute('属性名', '属性值')  // 给div标签设置属性，可以是自定义属性
+            div.removeAttribute('属性名')  // 删除div某属性
+            div.getAttribute('属性名')  // 获取div某属性的值，包括自定义属性
+                注意点。
+                div.属性    只能拿到W3Cshool属性，不能拿自定义属性
+
+
+            div.classList.add('类名')  // 给div的类名列表中添加类名，可以多个类目参数
+            div.classList.remove('类名')  // 删除div某类名
+            div.classList.toggle('类名')  // toggle切换，无则加之，有则删之
+
+            div.innerText  // 纯文本内容
+            div.innerHtml  // html内容
+
+            父元素.removeChild(子元素)  // 父删子
+            div.remove()  // div自删
+
+            父元素.replaceChild(新元素, 旧元素)  // 用新元素替换父元素中的旧元素
+
+            div.className  // div的所有类名，即class属性，注意要写成className
+
+            document.getElementBy('')系列获取HTML元素，也可以由父元素调用，更加精准查找
+            document.querySelector('CSS选择器')系列获取HTML元素，也可以由父元素调用，更加精准查找
+                -- elements和all得到多个元素，返回的是一个伪数组
+
+            子元素.parentNode  // 父母节点
+            父元素.children  // 子节点们
+            div.previousElementSibling  // 上一个兄弟姐妹元素
+            div.nextElementSibling  // 下一个兄弟姐妹元素
+
+
+            ***************
+            styleObj = window.getComputedStyle(div)  // 获取div元素的所有样式，包括默认样式
+                -- 有第二个参数，默认为null
+                window.getComputedStyle(div, 'before')  // 获取伪元素before的样式
+
+            注意点。
+            div.style.样式    只能拿到行内样式
+
+
+        DOM拓展：
+            特殊节点：
+                document.documentElement  --  html标签
+                document.head  --  head标签
+                document.title  --  title标签
+                document.body  --  body标签
+
+            节点关系：
+                父元素.childNodes  --  所有子节点（包含空白，文本）
+                父元素.firstChild  --  第一个子节点（不一定是元素节点）
+                父元素.lastChild  --  最后一个子节点（不一定是元素节点）
+                div.previousSibling  --  上一个兄弟节点（不一定是元素节点）
+                div.nextSibling  --  下一个兄弟节点（不一定是元素节点）
+
+                父元素.firstElementChild  --  第一个元素子节点
+                父元素.lastElementChild  --  最后一个元素子节点
+
+            创建一个文本节点
+                document.creatTextNode('纯文本')
+
+            内容盒子宽高：
+                div.clientWidth
+                div.clientHeight
+            边框盒子宽高：
+                div.offsetWidth
+                div.offsetHeight
+
+
+            // 获取元素的偏移量
+            // 区分有定位和没有定位
+            // 没有定位的时候，获取元素边框外侧到页面内侧的距离
+            // 有定位的时候，获取元素边框外侧到定位父级边框内侧的距离
+                    -- （其实就是我们写的 left 和 top 值）
+                div.offsetTop
+                div.offsetLeft
+
+
+            通过获取元素的边界矩形（rectangle）来准确获取元素的尺寸和位置
+                var rect = div.getBoundingClientRect()
+                // 外框高，边框盒子宽高
+                console.log("div的外宽度",rect.width);
+                console.log("div的外高度",rect.height);
+                // 相对与屏幕页面可视区域的原点，左上角，的偏移量
+                console.log("div相对于页面的左偏移",rect.x);
+                console.log("div相对于页面的顶偏移",rect.y);
+     -->
+</body>
+
+</html>

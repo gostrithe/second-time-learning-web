@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: skyblue;
+            height: 2000px;
+        }
+
+        ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            list-style: none;
+        }
+
+        li {
+            width: 150px;
+            height: 40px;
+            background-color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid #000;
+        }
+
+        /* li:hover {
+            background-color: rgb(209, 206, 206);
+        } */
+        li.active {
+            background-color: rgb(209, 206, 206);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://www.bilibili.com/">点我去小破b站</a>
+    <ul id="contextmenu">
+        <li>唱</li>
+        <li>跳</li>
+        <li>rap</li>
+        <li>篮球</li>
+    </ul>
+
+    <!-- <script id="scr">
+        // var body = document.querySelector('body');
+        // var script = document.getElementById('scr');
+        var contextmenu = document.getElementById('contextmenu');
+        var lis = document.querySelectorAll('ul>li');
+
+
+        var handler = function (event) {
+            document.addEventListener('click', handler2, true);
+
+            event.preventDefault();
+            console.log('点了', event.pageX, event.pageY);
+
+            contextmenu.style.top = event.pageY + 'px';
+            contextmenu.style.left = event.pageX + 'px';
+            console.log(contextmenu.style.top, contextmenu.style.left);
+            contextmenu.style.display = 'block';
+
+            contextmenu.addEventListener('click', handler3, true)
+        }
+
+        var handler2 = function (e) {
+            console.log('点了', e.target.nodeName);
+            if (e.target.nodeName !== 'LI') {
+                contextmenu.style.display = 'none';
+            }
+            document.removeEventListener('click', handler2)
+        }
+
+        var handler3 = function (e) {
+            if (e.target.nodeName === 'LI') {
+                console.log(e.target.innerText);
+                contextmenu.style.display = 'none';
+            }
+            // window.event.stopPropagation(), true
+            document.removeEventListener('click', handler3);
+        }
+
+        document.addEventListener('contextmenu', handler);
+
+
+        var aTag = document.querySelector('a');
+        aTag.onclick = function (e) {
+            e.preventDefault();
+            var condition = confirm('确定要去吗');
+            condition && window.open('https://www.bilibili.com/');
+        }
+    </script> -->
+
+
+    <script>
+        var contextmenu = document.getElementById('contextmenu');
+        var lis = contextmenu.querySelectorAll('li');
+
+        document.addEventListener(
+            'contextmenu',
+            function (e) {
+                e.preventDefault();
+
+                contextmenu.style.left = e.pageX + 'px';
+                contextmenu.style.top = e.pageY + 'px';
+                contextmenu.style.display = 'block';
+            }
+        );
+
+        contextmenu.addEventListener(
+            'click',
+            function (e) {
+                this.style.display = 'none';
+
+                if (e.target.nodeName === 'LI') {
+                    console.log(e.target.innerText);
+                }
+            }
+        )
+
+        // lis.forEach(
+        //     function (li, index) {
+        //         li.onmouseenter = function (e) {
+        //             this.classList.add('active');
+        //         };
+        //         li.onmouseleave = function (e) {
+        //             this.classList.remove('active');
+        //         }
+        //     }
+        // )
+
+        contextmenu.addEventListener(
+            'mouseover',
+            function (e) {
+                console.log(e);
+                lis.forEach(function (li) {
+                    li.classList.remove('active');
+                });
+                e.target.classList.add('active');
+            }
+        )
+
+        contextmenu.addEventListener(
+            'mouseout',
+            function (e) {
+                console.log(e);
+                e.target.classList.remove('active');
+            }
+        )
+    </script>
+</body>
+
+
+
+</html>

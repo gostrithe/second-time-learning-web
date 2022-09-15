@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        堆栈原理：
+            基本数据类型，在栈中存的是基本类型值。
+            而引用数据类型，数据存储在堆中，栈中存的是引用数据类型在堆中的地址。
+
+            变量赋值时
+                值传递：
+                    变量盒子在栈中存了基本数据的值。
+                地址传递：
+                    变量盒子在栈中存了引用数据的地址。
+            
+            所以不同变量在栈中存了同一地址，指向同一堆中引用数据，会相互影响。
+
+            所以当我们需要完全拷贝同一份引用数据时，需要掌握深度克隆（深度拷贝）。
+                                                        -- 一般用函数递归实现
+
+
+        函数中的this：
+            只有当函数被调用时才知道this是什么！
+            谁调用，this就指向谁。
+
+            注意隐藏boss，window对象，浏览器调用。
+            事件绑定，浏览器从中作怪，btn.onclick() this指向事件源
+
+
+
+        递归函数，函数递归：
+            -- 函数数自己调用自己
+
+            递归函数必须要有【递归终止条件】，否则会陷入死循环/最大调用栈尺寸溢出
+            递归的时间和空间开销都大于普通循环实现
+
+
+
+        深度克隆/深度拷贝：
+            简单版，不完整版
+            利用json解析：
+                如下
+
+            用JSON方式拷贝出来的副本，会丢失值为function以及undefined的信息
+            
+            
+            利用递归实现：
+                如下
+     -->
+    <script>
+        function deepCopyByJson(obj) {
+            var jsonStr = JSON.stringify(obj);  // 将对象转为json字符串
+            var objCopy = JSON.parse(jsonStr);  // json解析，转为克隆对象
+            return objCopy;
+        }
+
+        // 新手理解版
+        function deepClone(obj) {
+            if (obj === null) {  // 基本类型 null的特殊处理
+                return obj;
+            }
+
+            if (typeof (obj) !== 'object' && typeof (obj) !== 'function') {  // 基本类型
+                return obj;
+            }
+
+            if (typeof (obj) === 'function') {  // 函数
+                return obj;
+            }
+
+            if (Array.isArray(obj)) {  // 数组
+                var resultArr = [];
+                for (var i = 0; i < obj.length; i++) {
+                    result[i] = deepClone(obj[i]);
+                }
+                return result;
+            }
+
+            if (typeof (obj) === 'object') {  // 对象
+                var resultObj = {};
+                for (var key in obj) {
+                    resultObj[key] = deepClone(obj[key]);
+                }
+                return resultObj;
+            }
+        }
+    </script>
+</body>
+
+</html>

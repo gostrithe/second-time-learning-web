@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 高手深拷贝 */
+        function deepClone(obj) {
+            // 基本数据类型(注意null的特殊)和函数
+            if (obj === null || typeof (obj) !== 'object') {
+                // 类型不是object就是function和其他（null以外）基本数据类型
+                return obj;
+            } else {
+                var result = Array.isArray(obj) ? [] : {};
+                // 如果是数组，则搞一个空数组[] 否则搞个空对象{}
+                for (var key in obj) {
+                    // 如果是数组，则这里的key为序号index
+                    // 如果是对象，则这里的key为属性名，就是对象的key
+                    result[key] = deepClone(obj[key]);
+                }
+                return result;
+            }
+        }
+        console.log(deepClone({
+            a: 1, gg: { b: 2, c: 3 }, hello: function () {
+                alert('hello world!!')
+            }, n: null
+        }));
+
+
+
+        /* 小打小闹，数组批处理api练手 */
+        /* 使用批处理函数实现如下功能 */
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        // 遍历数组 
+        // 将所有元素映射为对应的平方数，打印映射出的新数组 
+        var newArr = arr.map(function (item) {
+            return Math.pow(item, 2);
+        })
+        console.log(newArr);
+        // 过滤出3的倍数，打印过滤后的结果数组
+        var newArr = newArr.filter(function (item) {
+            return item % 3 === 0;
+        })
+        console.log(newArr);
+        // 判断arr中是否所有元素都是3的倍数
+        console.log(arr.every(function (item) {
+            return item % 3 === 0;
+        }));
+        // 判断arr中是否有元素都是3的倍数
+        console.log(arr.some(function (item) {
+            return item % 3 === 0;
+        }));
+
+        // -----------------------------------
+        // 从数组中找出第一个3的倍数
+        /* // 补充： arr.find(function (item, index, _arr) {
+                        return true;  true则为通过条件的第一个item
+                    }) 
+                find()和filter()差不多，filter返回一个由通过条件item组成的新数组
+                只是，find()只返回第一个通过条件的item数组元素。    
+        */
+        var arr2 = arr.find(function (item) {
+            return item % 3 === 0;
+        })
+        console.log('原数组', arr, 'find()的返回值', arr2);
+
+
+
+        // #########################################
+        /* 高手代码之，手撸handler处理器，实现find方法 */
+        var arrTest = [1, 2, 30, 4, 5, 6, 7, 8, 9];
+
+        // 给测试数组arrTest添加了一个方法(api)，不会影响到原数组的index和length
+        /* 就像 {
+                0: 1,
+                1: 2,
+                2: 30,
+                ....
+                myFind: fun()
+                }
+         */
+        arrTest.myFind = function (handler) {
+            // 循环检测每一项，是否符合用户传入函数handler的要求
+            for (var item of arrTest) {
+                if (handler(item)) {  // 将每一项传入handler处理器中检测
+                    // 如果某项进去，且通过了要求，handler处理器返回了true
+                    // 则这里的if条件成立
+                    
+                    return item;  // 返回第一个符合检验的元素
+                }
+            }
+            return null;  // 如果所有元素都符合要求，返回null
+        }
+
+        // 用户调用这个api时候，需要传入一个函数，该函数用于检验每项元素
+        var testResult = arrTest.myFind(function (item) {
+            return item % 3 === 0;  // 这里传入函数，返回布尔值
+        })
+        
+        console.log(testResult);  // 30
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+
+        #head {
+            width: 100%;
+            height: 100px;
+            background-color: skyblue;
+            transition: all 1s linear 0s;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #backToTop {
+            position: fixed;
+            right: 50px;
+            bottom: 50px;
+            width: 70px;
+            height: 70px;
+            background-color: red;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="head">7777777</div>
+    <div id="backToTop">返回顶部</div>
+
+    <script>
+        var btn = document.querySelector('#backToTop');
+        var head = document.getElementById('head');
+        var timer;
+
+        btn.onclick = function () {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                window.scrollY > 0 && (document.documentElement.scrollTop -= 20);
+                window.scrollY === 0 && clearInterval(timer);
+            }, 20)
+        }
+
+        document.onscroll = function () {
+            if (window.scrollY > 300) {
+                // head.style.height = '0px';
+                // 法二，更优
+                head.style.top = '-100px';
+                btn.style.display = 'block';
+            } else {
+                // head.style.height = '100px';
+                head.style.top = '0px';
+                btn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

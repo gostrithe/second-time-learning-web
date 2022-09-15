@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        ----------------------------------
+        |将伪数组转为真数组                |
+        |Array.from(伪数组)               |
+        |   getElements系列没有数组批处理  |
+        |   querySelectorAll系列有        |
+        ----------------------------------
+
+        
+        事件绑定：
+            注册式
+                设置事件处理器 能且只能设置一个事件处理器
+            btn.onclick = function(){}
+                移除
+                btn.onclick = null
+
+
+            绑定式
+                可以绑定多个事件处理器
+            btn.addEventListener('click', function(){})
+                移除事件监听器,一般将处理器提取出来
+                btn.removeEventListener('click', handler)
+
+
+
+        事件传播propagation
+            事件的默认传播方向是【冒泡】bubble
+            自下而上，由里到外
+            沿着e.path依次传播
+            [div.inner, div.center, div.out, body, html, document, Window]
+
+            将事件传播方向修改为【捕获】capture 
+            自上而下，由外到内
+            用到addEventListener(true)的第三个参数，传入布尔值，表示是否使用捕获useCapture
+
+
+            阻断事件传播：
+                event.stopPropagation()
+
+                // 阻断传播（不要被字面意思“取消冒泡”误导）
+                // 该API已废弃（但如果维护运行在老旧IE上的项目时依然有可能见到）
+                // e.cancelBubble = true
+
+
+        **************
+        事件委托：
+            -- 将事件委托给父元素
+            -- 利用事件冒泡的原理，点击子元素，冒泡到父元素。
+                -- 不能冒泡的事件不能使用事件委托，如mouseenter，mouseleave
+                                                -- 用mouseover，mouseout替代
+
+            好处：
+            1.只用绑定一个事件监听器，节约内存
+            2.无需考虑子元素动态增减问题带来的监听器动态增减问题，方便管理
+
+            实现：
+            事件触发后，判断末梢元素即可
+            if (e.target.nodeName === 'LI')
+
+            拓展：
+            React性能很高的原因之一，就是把所有的事件全都委托给document一个人
+
+    -->
+</body>
+</html>

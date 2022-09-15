@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1,
+        #box2,
+        #box3 {
+            width: 100px;
+            height: 100px;
+            background-color: blueviolet;
+
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1" style="background-color: red; top: 0px"></div>
+    <div id="box2" style="background-color: green; top: 100px"></div>
+    <div id="box3" style="background-color: yellow; top: 200px"></div>
+
+    <script src="./animate.js"></script>
+    <script src="./transition.js"></script>
+
+    <script>
+        // 测试用，给每个div都绑定了点击事件
+        // [box1, box2, box3].forEach(function (item) {
+        //     // 这里使用了id简写，item就是元素
+        //     item.onclick = function () {
+        //         // 点击后，执行封装好的轮子
+        //         // animate(item);
+
+        //         /* animate2(
+        //             item,
+        //             {
+        //                 left: '300px',
+        //                 top: '400px'
+        //             },
+        //             1000
+        //         ); */
+
+        //         animateX(
+        //             item,
+        //             {
+        //                 left: '300px',
+        //                 top: '400px',
+        //                 opacity: 0.5
+        //             },
+        //             1000,
+        //             function () {
+        //                 console.log('动画已经完成');
+        //             }
+        //         )
+
+        //     }
+        // })
+
+        [box1, box2, box3].forEach(function (item) {
+            item.onclick = function () {
+                transitionAll(
+                    item,
+                    {
+                        left: '300px',
+                        top: '400px',
+                        opacity: 0.5
+                    },
+                    1000,
+                    function () {
+                        alert('动画已经完成');
+                    }
+                );
+            };
+        })
+    </script>
+</body>
+
+</html>

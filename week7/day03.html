@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        事件源： box 事件注册在box身上
+        事件类型：click事件
+        事件处理函数：function(){...} 又叫事件处理器(event handler)
+        事件对象：描述事件信息的一个对象 在事件发生时 由浏览器作为实参传递给【事件处理函数】
+            -- window.event
+        点击事件发生时 浏览器会回调【事件处理函数】   
+
+        
+        window.event事件对象的一些东西：
+            event.type  --  事件类型
+            event.timeStamp  --  页面加载完毕后，事件发生的时间
+
+            **************
+            event.currentTarget  --  事件源，事件调用的元素
+            event.target  --  事件末梢元素，精确到最内层
+
+
+            event.button  --  鼠标的按键 0=左键 1=中键 2=右键
+
+
+            事件位置 有不同的参照系
+            event.screenX
+            event.screenY  --  screenX以屏幕为参照物
+            event.pageX
+            event.pageY  --  pageX以页面为参照物
+            event.offsetX
+            event.offsetY  --  offsetX以事件源/事件末梢为参照物
+
+        
+        常见事件：
+            鼠标事件
+            + click
+            + contextmenu  鼠标右键单击事件，默认是右击菜单
+            + dblclick 双击鼠标
+
+            + mousedown 鼠标按下事件
+            + mouseup 鼠标抬起事件
+            + mousemove 鼠标移动事件
+
+            + mouseover 鼠标进入事件
+            + mouseout  鼠标移除事件
+            
+            + monseenter  鼠标移入事件（功能与mouseover一致 但没有事件冒泡 不能用于事件委托）
+            + mouseleave  鼠标移除事件
+
+        键盘事件
+            -- 键盘事件必须注册在具有输入功能的元素身上 或者document身上
+            + keydown  按键按下，一张按着则重复触发
+            + keyup  按键一抬起就触发，只有一次
+            + keypress  按键按过一下
+
+        浏览器事件
+            + onload
+            + onscroll
+            + onresize
+
+        表单事件
+            + focus    获取焦点
+            + blur     失去焦点
+            + input    用户输入
+            + change   文本改变（当失去焦点时）
+            + submit 
+            以下行为都会触发表单的提交事件：
+            点击表单的提交按钮<intput type="submit">
+            点击表单内的唯一按钮
+            输入完成后点击回车
+
+            form表单的提交submit行为，跳转action对应目标页是默认行为，也可以阻止
+        
+
+
+        **************
+        e.key  --  按了哪个符号，区分大小写
+        e.code  --  按了哪个键，管你按了大写还是小写，只要你按了这个键
+        
+        e.keyCode  --  已经废弃，按了哪个字符码
+        组合按键：
+           event.altKey   
+           event.ctrlKey
+           event.shiftKey 
+           返回值为布尔值，true表示，事件发生时候该按键是否已经按下
+           
+           利用这一属性可以判断组合键
+     -->
+    <script>
+        // 组合键一般绑定keydown事件，利用一直按着的效果
+        document.onkeydown = function (e) {
+            if (e.code === 'keyA' && e.ctrlKey) {
+                console.log('按了A所在那个键时，已经按住了ctrl');
+                console.log('触发组合键');
+            }
+        }
+    </script>
+</body>
+
+</html>
