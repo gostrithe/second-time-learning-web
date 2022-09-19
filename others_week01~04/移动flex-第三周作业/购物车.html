@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./basic.css">
+    <style>
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 45px;
+            background-color: skyblue;
+        }
+        header .arrow {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 30px;
+        }
+
+        section {
+            flex: 1;
+            overflow: auto;
+        }
+        section .store {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            padding: 0 10px;
+            background-color: yellowgreen;
+            border-top: 10px solid gray;
+            line-height: 40px;
+        }
+        section .right span:first-child {
+            margin-right: 20px;
+        }
+        .box {
+            display: flex;
+            padding: 0 10px;
+            background-color: red;
+        }
+        .box>input {
+            position: relative;
+            top: -25px;
+        }
+        .box .picbox {
+            width: 100px;
+            height: 100px;
+            margin-left: 10px;
+        }
+        .box .picbox img {
+            width: 100%;
+            height: 100%;
+        }
+        .box .info {
+            display: flex;
+            flex: 1;
+            flex-flow: column wrap;
+            justify-content: space-evenly;
+            height: 150px;
+            margin-left: 10px;
+        } 
+        .box .info p:nth-child(2) {
+            position: relative;
+            padding-right: 20px;
+            background-color: #999;
+        }
+        .box .info p:nth-child(2) span {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        .box .info .price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+            background-color: pink;
+        }
+        .box .info .price span:last-child::before {
+            content: '-';
+            margin-right: 15px;
+        }
+        .box .info .price span:last-child::after {
+            content: '+';
+            margin-left: 15px;
+        }
+        
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 46px;
+            padding-left: 10px;
+            background-color: red;
+        }
+        footer label {
+            font-size: 20px;
+        }
+        footer label input {
+            margin-right: 10px;
+        }
+        footer .right {
+            display: flex;
+        }
+        footer .right a {
+            width: 105px;
+            height: 46px;
+            color: #fff;
+            background-color: orange;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 46px;
+            text-decoration: none;
+        }
+        footer .right p {
+            line-height: 46px;
+        }
+        footer .right p span {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span>购物车</span>
+        <div class="arrow">&lt;</div>
+    </header>
+    <section>
+        <div class="store">
+            <div class="left">
+                <input type="checkbox">
+                木之林旗舰店<span>&gt;</span>
+            </div>
+            <div class="right">
+                <span>领劵</span>
+                <span>编辑</span>
+            </div>
+        </div>
+        <div class="box">
+            <input type="checkbox">
+            <div class="picbox">
+                <img src="./作业/购物车.PNG" alt="">
+            </div>
+            <div class="info">
+                <p>充式暖宝充电式暖手宝充电式暖手宝充电式暖手宝</p>
+                <p>两年保质 只换不修两年保质 只换不修两年保质 <span>↓</span></p>
+                <div class="price">
+                    <span>￥139</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="store">
+            <div class="left">
+                <input type="checkbox">
+                木之林旗舰店<span>&gt;</span>
+            </div>
+            <div class="right">
+                <span>领劵</span>
+                <span>编辑</span>
+            </div>
+        </div>
+        <div class="box">
+            <input type="checkbox">
+            <div class="picbox">
+                <img src="./作业/购物车.PNG" alt="">
+            </div>
+            <div class="info">
+                <p>充式暖宝充电式暖手宝充电式暖手宝充电式暖手宝</p>
+                <p>两年保质 只换不修两年保质 只换不修两年保质 <span>↓</span></p>
+                <div class="price">
+                    <span>￥139</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <input type="checkbox">
+            <div class="picbox">
+                <img src="./作业/购物车.PNG" alt="">
+            </div>
+            <div class="info">
+                <p>充式暖宝充电式暖手宝充电式暖手宝充电式暖手宝</p>
+                <p>两年保质 只换不修两年保质 只换不修两年保质 <span>↓</span></p>
+                <div class="price">
+                    <span>￥139</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="store">
+            <div class="left">
+                <input type="checkbox">
+                木之林旗舰店<span>&gt;</span>
+            </div>
+            <div class="right">
+                <span>领劵</span>
+                <span>编辑</span>
+            </div>
+        </div>
+        <div class="box">
+            <input type="checkbox">
+            <div class="picbox">
+                <img src="./作业/购物车.PNG" alt="">
+            </div>
+            <div class="info">
+                <p>充式暖宝充电式暖手宝充电式暖手宝充电式暖手宝</p>
+                <p>两年保质 只换不修两年保质 只换不修两年保质 <span>↓</span></p>
+                <div class="price">
+                    <span>￥139</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <label>
+            <input type="checkbox">全选
+        </label>
+        <div class="right">
+            <p>合计：<span>￥0.00</span></p>
+            <a href="#">结算(0)</a>
+        </div>
+    </footer>
+</body>
+</html>

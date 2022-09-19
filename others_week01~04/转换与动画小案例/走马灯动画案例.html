@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @keyframes run {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-1400px);
+            }
+        }
+
+        .box {
+            width: 200px;
+            height: 70px;
+            margin: 50px auto;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 1600px;
+            height: 70px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            /* transform: translateX(-100%); */
+            animation: run 7s linear 0s infinite;
+        }
+
+        li {
+            float: left;
+            width: 200px;
+            height: 70px;
+            border-right: 1px solid red;
+            box-sizing: border-box;
+            background-color: rgb(18, 178, 222);
+            font-size: 40px;
+            line-height: 70px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+
+            <!-- 克隆一张弥补留白 -->
+            <li>1</li>
+        </ul>
+    </div>
+</body>
+</html>

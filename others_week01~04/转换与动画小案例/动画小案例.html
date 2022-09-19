@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 10px solid #000;
+            background-image: url();
+            border-radius: 50%;
+        }
+        .second {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 80px;
+            background-color: red;
+            transform: rotate(0);
+            transform-origin: 0 0;
+            animation: run 60s steps(60) infinite;
+        }
+        .min {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -2.5px;
+            width: 5px;
+            height: 60px;
+            background-color: blue;
+            transform: rotate(0);
+            transform-origin: 2px 0;
+            animation: run 3600s linear infinite;
+        }
+        .hour {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -5px;
+            width: 10px;
+            height: 45px;
+            background-color: #333;
+            transform: rotate(0);
+            transform-origin: 5px 0;
+            animation: run 216000s linear infinite;
+        }
+        @keyframes run {
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .clock:hover .second {
+            animation-play-state: paused;
+        }
+
+        .box {
+            width: 140px;
+            height: 140px;
+            border: 1px solid #000;
+            background-image: url(../bg.png);
+            background-position: 0 0;
+            animation: move 1.5s steps(12) infinite alternate;
+        }
+        @keyframes move {
+            from {
+                background-position: 0 0;
+                transform: translate(0);
+            }
+            to {
+                background-position: -1680px 0;
+                transform: translate(200%);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="clock">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="second"></div>
+    </div>
+    <div class="box">
+
+    </div>
+</body>
+</html>

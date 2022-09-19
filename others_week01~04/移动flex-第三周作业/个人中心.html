@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./common.css">
+    <style>
+        section.content {
+            flex: 1;
+        }
+
+        .head {
+            border-top: 5px solid #f2f2f2;
+            height: 93px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .head .user {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            height: 65px;
+            box-sizing: border-box;
+        }
+
+        .head ul {
+            display: flex;
+            height: 28px;
+            background-color: white;
+            list-style: none;
+        }
+
+        .head ul li {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .head ul li a {
+            display: block;
+            color: #b4b4b4;
+            line-height: 28px;
+            height: 28px;
+            text-decoration: none;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .head ul li a.current {
+            color: #0cc440;
+            border-bottom: 3px solid #0cc440;
+        }
+
+        .head ul li:hover a {
+            color: #0cc440;
+            border-bottom: 3px solid #0cc440;
+        }
+
+        .content {
+            flex: 1;
+            overflow: auto;
+            border-bottom: 5px solid #f2f2f2;
+        }
+
+        .content ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style: none;
+        }
+
+        .content ul li {
+            width: 49%;
+            margin-bottom: 7px;
+        }
+
+        .content ul li img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        footer {
+            position: relative;
+            display: flex;
+            height: 45px;
+        }
+
+        footer div {
+            flex: 1;
+            text-align: center;
+        }
+
+        footer div img {
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        footer div:nth-child(3) img {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 53px;
+            height: 53px;
+        }
+    </style>
+</head>
+<body>
+    <h1>个人中心</h1>
+
+    <section class="head">
+        <div class="user">
+            <div class="picbox">
+                <img src="../play.png" alt="">
+            </div>
+            <div class="info">
+                <h2>我叫小萌</h2>
+                <p>我是小萌我怕谁！哈哈哈哈！</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="#" class="current">照片（1）</a>
+            </li>
+            <li>
+                <a href="#">关注（3）</a>
+            </li>
+            <li>
+                <a href="#">粉丝（8）</a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="content">
+        <ul>
+            <li>
+                <img src="./06user.jpg" alt="">
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <a href="./热点首页.html">        
+            <img src="./首页1.jpg" alt="">
+        </a>
+        <a href="./发现.html">
+            <img src="./发现.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./相机.png" alt="">
+        </a>
+        <a href="#">
+            <img src="./我的2.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./退出.jpg" alt="">
+        </a>
+    </footer>
+</body>
+</html>

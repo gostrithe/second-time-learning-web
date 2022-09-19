@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./common.css">
+    <style>
+        .stickyNav {
+            display: flex;
+            position: sticky;
+            top: 0;
+            /* align-items: center; */
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.5);
+            list-style: none;
+        }
+
+
+        .stickyNav li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stickyNav a.current {
+            color: #0cc440;
+            border-bottom: 3px solid #0cc440;
+        }
+
+        .stickyNav li a {
+            display: block;
+            height: 35px;
+            box-sizing: border-box;
+            color: #333;
+            line-height: 35px;
+            text-decoration: none;
+        }
+
+        .stickyNav li:hover a {
+            color: #0cc440;
+            border-bottom: 3px solid #0cc440;
+        }
+
+        section {
+            flex: 1;
+            overflow: auto;
+        }
+
+        section ul.picList {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style: none;
+        }
+
+        section ul.picList li {
+            width: 49%;
+            border: 1px solid #e5e5e5;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        section ul.picList li img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        section .info {
+            padding: 10px 15px;
+            border-top: 1px solid #e5e5e5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="./热点首页.html" class="current">热点</a>
+        <a href="./关注.html">关注</a>
+    </header>
+
+    <section>
+        <ul class="stickyNav">
+            <li><a href="#" class="current">足球现场</a></li>
+            <li><a href="#">足球生活</a></li>
+            <li><a href="#">足球美女</a></li>
+        </ul>
+
+        <ul class="picList">
+            <li>
+                <div class="">
+                    <img src="./03index_1.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_2.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_2.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_1.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_2.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_2.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                    小丸子啊小丸子！
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_2.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+            <li>
+                <div class="">
+                    <img src="./03index_1.jpg" alt="">
+                </div>
+                <p class="info">
+                    小丸子啊小丸子！
+                </p>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <a href="#">        
+            <img src="./首页.jpg" alt="">
+        </a>
+        <a href="./发现.html">
+            <img src="./发现.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./相机.png" alt="">
+        </a>
+        <a href="./个人中心.html">
+            <img src="./我的1.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./退出.jpg" alt="">
+        </a>
+    </footer>
+</body>
+
+</html>

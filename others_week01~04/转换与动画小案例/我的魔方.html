@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @keyframes rotate {
+            from {
+                transform: rotateX(0) rotateY(0);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(720deg);
+            }
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #ccc;
+        }
+        
+        .center {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 200px auto;
+            /* background-color: rgba(12, 173, 205, .2); */
+            transform-style: preserve-3d;
+            transform: rotateX(30deg) rotateY(30deg);
+            animation: rotate 10s linear 0s infinite;
+        }
+
+        .center:hover {
+            animation-play-state: paused;
+        }
+
+        .center-surface {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
+            background-color: rgba(0, 0, 0, 1);
+        }
+
+        .center-surface:nth-child(1) {
+            transform: translateZ(150px);
+        }
+        .center-surface:nth-child(2) {
+            transform: translateZ(-150px);
+        }
+        .center-surface:nth-child(3) {
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .center-surface:nth-child(4) {
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+        .center-surface:nth-child(5) {
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        .center-surface:nth-child(6) {
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .center-surface:nth-child(7) {
+            transform: translateY(-100px) translateZ(50px);
+        }
+        .center-surface:nth-child(8) {
+            transform: translateY(-100px) translateZ(-50px);
+        }
+        .center-surface:nth-child(9) {
+            transform: translateY(100px) translateZ(50px);
+        }
+        .center-surface:nth-child(10) {
+            transform: translateY(100px) translateZ(-50px);
+        }
+        .center-surface:nth-child(11) {
+            transform: translateX(100px) translateZ(50px);
+        }
+        .center-surface:nth-child(12) {
+            transform: translateX(100px) translateZ(-50px);
+        }
+        .center-surface:nth-child(13) {
+            transform: translateX(-100px) translateZ(50px);
+        }
+        .center-surface:nth-child(14) {
+            transform: translateX(-100px) translateZ(-50px);
+        }
+        .center-surface:nth-child(15) {
+            transform: translateZ(100px) translateY(-50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(16) {
+            transform: translateZ(100px) translateY(50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(17) {
+            transform: translateZ(-100px) translateY(-50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(18) {
+            transform: translateZ(-100px) translateY(50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(19) {
+            transform: translateZ(100px) translateX(-50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(20) {
+            transform: translateZ(100px) translateX(50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(21) {
+            transform: translateZ(-100px) translateX(-50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(22) {
+            transform: translateZ(-100px) translateX(-50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(23) {
+            transform: translateX(100px) translateY(50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(24) {
+            transform: translateX(-100px) translateY(50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(25) {
+            transform: translateX(100px) translateY(-50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(26) {
+            transform: translateX(-100px) translateY(-50px) rotateX(90deg);
+        }
+        .center-surface:nth-child(27) {
+            transform: translateY(100px) translateX(50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(28) {
+            transform: translateY(-100px) translateX(50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(29) {
+            transform: translateY(100px) translateX(-50px) rotateY(90deg);
+        }
+        .center-surface:nth-child(30) {
+            transform: translateY(-100px) translateX(-50px) rotateY(90deg);
+        }
+
+
+        .out-surface {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+        }
+        div.out-surface:nth-last-child(6) {
+            background-color: rgba(255, 255, 255, .8);
+            transform: translateZ(150px);
+        }
+        div.out-surface:nth-last-child(5) {
+            background-color: rgba(255, 255, 0, 0.8);
+            transform: translateZ(-150px);
+        }
+        div.out-surface:nth-last-child(4) {
+            background-color: rgba(0, 0, 255, 0.8);
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        div.out-surface:nth-last-child(3) {
+            background-color: rgba(0, 255, 0, 0.8);
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+        div.out-surface:nth-last-child(2) {
+            background-color: rgba(255, 0, 0, 0.8);
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        div.out-surface:nth-last-child(1) {
+            background-color: rgba(255, 153, 0, 0.8);
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+
+        table {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            box-sizing: border-box;
+        }
+        tr,
+        td {
+            border: 1px solid #000;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="center-surface"></div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="out-surface">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./common.css">
+    <style>
+        .solo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 35px;
+            padding: 0 6px;
+            border-bottom: 1px solid #cdcdcd;
+            box-sizing: border-box;
+            /* background-color: red; */
+        }
+
+        .solo input[placeholder="请输入昵称"] {
+            height: 25px;
+            width: 80%;
+            border: 1px solid #aaaaaa;
+            margin: 0;
+            padding-left: 8px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .solo .search {
+            width: 17%;
+            height: 25px;
+            background-color: #0bc442;
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        section {
+            flex: 1;
+            overflow: hidden;
+            border-top: 5px solid #f2f2f2;
+            border-bottom: 5px solid #f2f2f2;
+        }
+        section li {
+            display: flex;
+            align-items: center;
+            height: 75px;
+            padding: 0 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        section li .guanzhu {
+            position: absolute;
+            right: 4px;
+            top: 10px;
+            width: 40px;
+            height: 20px;
+            background-color: #0ac540;
+            color: white;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        ul li:nth-child(2) .guanzhu {
+            background-color: #e5e5e5;
+        } 
+
+    </style>
+</head>
+<body>
+    <h1>发现</h1>
+    <div class="solo">
+        <input type="text" placeholder="请输入昵称">
+        <a href="#" class="search">搜索</a>
+    </div>
+
+    <section>
+        <ul>
+            <li>
+                <div class="picbox">
+                    <img src="../play.png" alt="">
+                </div>
+                <div class="info">
+                    <h2>我叫小萌</h2>
+                    <p>我是小萌我怕谁！哈哈哈哈！</p>
+                    <a href="#" class="guanzhu">关注</a>
+                </div>
+            </li>
+            <li>
+                <div class="picbox">
+                    <img src="../play.png" alt="">
+                </div>
+                <div class="info">
+                    <h2>我叫小萌</h2>
+                    <p>我是小萌我怕谁！哈哈哈哈！</p>
+                    <a href="#" class="guanzhu">关注</a>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <a href="./热点首页.html">        
+            <img src="./首页1.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./发现2.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./相机.png" alt="">
+        </a>
+        <a href="./个人中心.html">
+            <img src="./我的1.jpg" alt="">
+        </a>
+        <a href="#">
+            <img src="./退出.jpg" alt="">
+        </a>
+    </footer>
+</body>
+</html>
