@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3581119 */
+  src: url('iconfont.woff2?t=1660150138539') format('woff2'),
+       url('iconfont.woff?t=1660150138539') format('woff'),
+       url('iconfont.ttf?t=1660150138539') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xinlangweibo:before {
+  content: "\e600";
+}
+
+.icon-41:before {
+  content: "\e62b";
+}
+
+.icon-weixin:before {
+  content: "\e601";
+}
+
+.icon-arrow-up:before {
+  content: "\e647";
+}
+
+.icon-gouwudai:before {
+  content: "\e73e";
+}
+
+.icon-xiangyoujiantou:before {
+  content: "\e65f";
+}
+
+.icon-youjiantou:before {
+  content: "\e619";
+}
+
+.icon-QQ:before {
+  content: "\e612";
+}
+
+.icon-fangdajing:before {
+  content: "\e60c";
+}
+
+.icon-24gl-headset:before {
+  content: "\ea0a";
+}
+
+.icon-zuojiantou:before {
+  content: "\e635";
+}
+
+.icon-all:before {
+  content: "\e6ef";
+}
+
+.icon-logistic-logo:before {
+  content: "\e75c";
+}
+
+.icon-weibo:before {
+  content: "\e611";
+}
+
+.icon-account:before {
+  content: "\e7b2";
+}
+
+.icon-toutiaoyangshi:before {
+  content: "\e622";
+}
+
+.icon-zhihu-square-fill:before {
+  content: "\ea8b";
+}
+
+.icon-fangdajing1:before {
+  content: "\e660";
+}
+
+.icon-linkedin-fill:before {
+  content: "\e7c5";
+}
+

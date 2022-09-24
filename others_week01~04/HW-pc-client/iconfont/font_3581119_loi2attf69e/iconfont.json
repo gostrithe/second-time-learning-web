@@ -1,0 +1,142 @@
+{
+  "id": "3581119",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1360",
+      "name": "新浪微博",
+      "font_class": "xinlangweibo",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "49851",
+      "name": "放大镜",
+      "font_class": "41",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "77156",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "430545",
+      "name": "上箭头",
+      "font_class": "arrow-up",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "577342",
+      "name": "购物袋",
+      "font_class": "gouwudai",
+      "unicode": "e73e",
+      "unicode_decimal": 59198
+    },
+    {
+      "icon_id": "630094",
+      "name": "向右箭头",
+      "font_class": "xiangyoujiantou",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "778500",
+      "name": "右箭头",
+      "font_class": "youjiantou",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "3893823",
+      "name": "QQ",
+      "font_class": "QQ",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "6486534",
+      "name": "放大镜",
+      "font_class": "fangdajing",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "7592559",
+      "name": "24gl-headset",
+      "font_class": "24gl-headset",
+      "unicode": "ea0a",
+      "unicode_decimal": 59914
+    },
+    {
+      "icon_id": "9021537",
+      "name": "左箭头",
+      "font_class": "zuojiantou",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "11474219",
+      "name": "all",
+      "font_class": "all",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
+      "icon_id": "11488098",
+      "name": "logistic-logo",
+      "font_class": "logistic-logo",
+      "unicode": "e75c",
+      "unicode_decimal": 59228
+    },
+    {
+      "icon_id": "11776582",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "12011692",
+      "name": "account",
+      "font_class": "account",
+      "unicode": "e7b2",
+      "unicode_decimal": 59314
+    },
+    {
+      "icon_id": "15989503",
+      "name": "头条样式",
+      "font_class": "toutiaoyangshi",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "19445922",
+      "name": "知乎",
+      "font_class": "zhihu-square-fill",
+      "unicode": "ea8b",
+      "unicode_decimal": 60043
+    },
+    {
+      "icon_id": "26847616",
+      "name": "放大镜",
+      "font_class": "fangdajing1",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "29524168",
+      "name": "linkedin-fill",
+      "font_class": "linkedin-fill",
+      "unicode": "e7c5",
+      "unicode_decimal": 59333
+    }
+  ]
+}
