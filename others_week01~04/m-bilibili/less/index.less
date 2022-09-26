@@ -1,0 +1,193 @@
+// out: ../css/
+@import './base.less';
+@import './normalize.less';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-size: (14 / 3.75vw);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: (44 / 3.75vw);
+    padding: 0 (12 / 3.75vw) 0 (18 / 3.75vw);
+    // background-color: gray;
+
+    .Navbar_logo {
+        font-size: (28 / 3.75vw);
+        color: #fb7299;
+    }
+
+    .right {
+        display: flex;
+        justify-content: space-between;
+        width: (160 / 3.75vw);
+
+
+        .ic_search_tab {
+            color: #ccc;
+            font-size: (21 / 3.75vw);
+        }
+
+        .login {
+            width: (24 / 3.75vw);
+            height: (24 / 3.75vw);
+            background-color: #fb7299;
+            font-size: (12 / 3.75vw);
+            color: white;
+            text-align: center;
+            line-height: (24 / 3.75vw);
+            border-radius: 50%;
+        }
+
+        a {
+            width: (72 / 3.75vw);
+            height: (24 / 3.75vw);
+            background-color: #fb7299;
+            color: white;
+            font-size: (14 / 3.75vw);
+            text-align: center;
+            line-height: (24 / 3.75vw);
+            border-radius: (5 / 3.75vw);
+        }
+    }
+}
+
+nav {
+    position: relative;
+    width: 100%;
+    height: (40 / 3.75vw);
+
+    .aList {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding-right: (40 / 3.75vw);
+        box-sizing: border-box;
+        overflow: auto;
+
+        li {
+            flex-shrink: 0;
+            padding: 0 (16 / 3.75vw);
+            line-height: (40 / 3.75vw);
+        }
+
+        a {
+            display: block;
+            height: (40 / 3.75vw);
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        li:first-child a {
+            color: #fb7299;
+            border-bottom: 2px solid #fb7299;
+        }
+    }
+
+    .general_pulldown_s {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: (40 / 3.75vw);
+        height: (40 / 3.75vw);
+        background-color: #fff;
+        color: #aaa;
+        font-size: (20 / 3.75vw);
+        text-align: center;
+        line-height: (40 / 3.75vw);
+    }
+}
+
+section {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    padding: 0 (5 / 3.75vw);
+
+    a {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: (151 / 3.75vw);
+        padding: (8 / 3.75vw) (5 / 3.75vw);
+        box-sizing: border-box;
+        background-color: skyblue;
+
+        .picbox {
+            position: relative;
+            height: (97 / 3.75vw);
+            background-color: red;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            p {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                position: absolute;
+                bottom: 0;
+                padding: 0 (5 / 3.75vw);
+                box-sizing: border-box;
+                color: #fff;
+                
+                span::before {
+                    margin-right: (5 / 3.75vw);
+                }
+            }
+        }
+        
+        .info {
+            flex: 1;
+            font-size: (14 / 3.75vw);
+            background-color: yellow;
+            line-height: (20 / 3.75vw);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+    }
+}
+
+.fixed {
+    display: flex;
+    position: fixed;
+    bottom: (40 / 3.75vw);
+    padding: 0 (10 / 3.75vw);
+    width: 100vw;
+    box-sizing: border-box;
+
+    a {
+        width: 100%;
+        height: (37 / 3.75vw);
+        background-color: #fb7299;
+        color: #fff;
+        text-align: center;
+        line-height: (37 / 3.75vw);
+        border-radius: (37 / 2 / 3.75vw);
+
+        &::before {
+            margin-right: (10 / 3.75vw);
+        }
+    }
+}
