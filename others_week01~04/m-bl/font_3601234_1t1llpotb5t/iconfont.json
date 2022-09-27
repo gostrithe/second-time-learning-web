@@ -1,0 +1,44 @@
+{
+  "id": "3601234",
+  "name": "bili",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "677569",
+      "name": "放大镜",
+      "font_class": "fangdajing",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "2306764",
+      "name": "BILIBILI_LOGO",
+      "font_class": "bilibili",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "2506183",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "5037717",
+      "name": "下箭头",
+      "font_class": "xiajiantou",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "26504020",
+      "name": "视频播放量",
+      "font_class": "shipinbofangliang",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    }
+  ]
+}
