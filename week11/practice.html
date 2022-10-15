@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+    @小米智能家居
+    ·全局共有5件小米智能家居：小米控制台、小米门禁、小米电灯、小米电视、小米空调；
+    ·从外反锁门     => 全屋进入【外出模式】      =>所有电器自动断电
+    ·电灯关闭10分钟 => 全屋自动进入【睡眠模式】   =>电视关闭+空调进入微风状态+门禁内反锁；
+    --------------------
+    #思路提示#
+    ·单例模式：小米控制台作为智能家居系统的控制中枢，全局保持唯一单例（避免资源浪费，避免政出多门）；
+    ·观察者模式：控制台对锁门事件、关灯事件的监听
+    ·组合模式：每一种模式都由一群设备进行协同工作，把他们组合起来！
+    ·总结：控制（单例）；事件（观察者）； 模式（组合）
+    ====================
+     -->
+
+    <button id="btnOpen">开门</button>
+    <button id="btnWFS">外反锁</button>
+    <button id="btnLightOff">关灯</button>
+
+    <script>
+      class NameOwner {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+    </script>
+
+    <!-- 基础设施 -->
+    <script>
+      class Compose extends NameOwner {
+        constructor(name) {
+          super(name);
+          this.components = [];
+        }
+        addComponent(...c) {
+          this.components.push(...c);
+        }
+        removeComponent(c) {
+          for (let i = 0; i < this.components.length; i++) {
+            if (this.components[i] === c) {
+              this.components.splice(i, 1);
+              break;
+            }
+          }
+        }
+        switchMode(mode) {
+          this.components.forEach((c) => c.onModeChange(mode));
+        }
+      }
+
+      /* 组件父类 */
+      class Component extends NameOwner {
+        onModeChange(mode) {
+          console.log(this.name, "onModeChange", mode);
+        }
+      }
+
+      /* 被观察者 */
+      class Observable {
+        constructor(name) {
+          this.name = name;
+          this.observers = [];
+        }
+        register(...obs) {
+          this.observers.push(...obs);
+        }
+        unregister(ob) {
+          for (let i = 0; i < this.observers.length; i++) {
+            if (this.observers[i] === ob) {
+              this.observers.splice(i, 1);
+              break;
+            }
+          }
+        }
+        emit(event) {
+          this.observers.forEach((ob) => ob.onEvent(event));
+        }
+      }
+
+      /* 观察者 */
+      class Observer {
+        constructor(name) {
+          this.name = name;
+        }
+        onEvent(event) {
+          console.log(this.name, "onEvent", event);
+        }
+      }
+    </script>
+
+    <!-- 可被监听的组件 -->
+    <script>
+      class ObservableComponent extends Observable {
+        onModeChange(mode) {
+          console.log(this.name, "onModeChange", mode);
+        }
+      }
+      class MiDevice extends ObservableComponent {
+        static POWER_STATE_ON = "开机";
+        static POWER_STATE_OFF = "关机";
+
+        constructor(name) {
+          super(name);
+          this.power = MiDevice.POWER_STATE_OFF;
+        }
+        powerOn() {
+          this.power = MiDevice.POWER_STATE_ON;
+          console.log(this.name, "开机");
+        }
+        powerOff() {
+          this.power = MiDevice.POWER_STATE_OFF;
+          console.log(this.name, "关机");
+        }
+
+        sleep(){
+          console.log(this.name,"进入睡眠模式");
+        }
+
+        onModeChange(mode){
+          super.onModeChange(mode)
+
+          switch (mode) {
+            case MiControl.MODE_SLEEP:
+              this.sleep()
+              break;
+          
+            default:
+              break;
+          }
+        }
+      }
+    </script>
+
+    <!-- 业务类 -->
+    <script>
+      class MiControl extends Compose {
+        static MODE_ABSENT = "外出模式";
+        static MODE_SLEEP = "睡眠模式";
+
+        onEvent(event) {
+          console.log(this.name, "onEvent", event);
+          const { from, data } = event;
+
+          switch (true) {
+            case from === MiDoor && data === MiDoor.MODE_LOCKED_FROM_OUTSIDE:
+              this.switchMode(MiControl.MODE_ABSENT);
+              break;
+
+            case from === MiLight && data === MiDevice.POWER_STATE_OFF:
+              setTimeout(() => {
+                this.switchMode(MiControl.MODE_SLEEP);
+              }, 3000);
+              break;
+
+            default:
+              break;
+          }
+        }
+      }
+
+    
+      class MiDoor extends MiDevice {
+        static MODE_OPEN = "开放";
+        static MODE_CLOSED = "关闭";
+        static MODE_LOCKED_FROM_INSIDE = "内反锁";
+        static MODE_LOCKED_FROM_OUTSIDE = "外反锁";
+
+        constructor(name) {
+          super(name);
+          this.mode = MiDoor.MODE_OPEN;
+        }
+
+        operate(mode) {
+          this.mode = mode;
+          console.log(this.name, "模式已切换", this.mode);
+
+          this.emit({
+            from: MiDoor,
+            data: this.mode,
+          });
+        }
+
+        sleep(){
+          super.sleep()
+          this.operate(MiDoor.MODE_LOCKED_FROM_INSIDE)
+        }
+      }
+
+      class MiLight extends MiDevice {
+        powerOff() {
+          super.powerOff();
+
+          // 发布关机事件(以被观察者的身份发布事件)
+          this.emit({
+            from: MiLight,
+            data: MiDevice.POWER_STATE_OFF,
+          });
+
+        }
+      }
+
+      class MiTV extends MiDevice {}
+    </script>
+
+    <!-- 业务逻辑层 -->
+    <script>
+      const controller = new MiControl("中控台");
+
+      const door = new MiDoor("门门");
+      const light = new MiLight("灯灯");
+      const tv = new MiTV("电视");
+      const devices = [door, light, tv];
+
+      controller.addComponent(...devices);
+
+      devices.forEach((d) => d.register(controller));
+
+      btnOpen.onclick = (e) => door.operate(MiDoor.MODE_OPEN);
+      btnWFS.onclick = (e) => door.operate(MiDoor.MODE_LOCKED_FROM_OUTSIDE);
+      btnLightOff.onclick = (e) => light.powerOff();
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <script>
+    /* 实现一个自带缓存功能的函数 */
+    function add(a, b) {
+      return a + b;
+    }
+
+    function multiply(a, b) {
+      return a * b;
+    }
+
+    function memory(fn) {  // 传参一个将要调用的函数
+      const cache = {};  // 闭包里面搞个对象用来存缓存
+
+      return function mfn(...args) {  // 返回一个强化版本函数，这里为带有计算结果缓存的函数
+        console.log("args=", args);  // args = [2, 3] 
+
+        if (cache[args] === undefined) { // 缓存里面没有
+          console.log("首次执行运算");
+          const result = fn.apply(null, args);  // 计算结果
+
+          cache[args] = result;  // 将计算结果在闭包里缓存 {[2, 3]: 计算结果} ，由于对象的原因，数组会自动转为字符串 => {2,3: 6}              
+        } else {  // 有缓存则什么都不做
+          console.log("非首次执行直接调用缓存结果");
+        }
+
+        console.log("cache=", cache);
+        return cache[args];  // 返回缓存中对应键的 计算结果
+      };
+
+    }
+
+    const mfn = memory(add);  // 形成闭包
+    console.log(mfn(2, 3));
+    console.log(mfn(2, 3));
+  </script> -->
+
+  
+    <!-- 失败了
+
+    <script>
+    function add(a, b) {
+      return a + b;
+    }
+
+    function memory(fn) {
+      const cache = new Map();
+
+      return function memoryFn(...args) {
+        // console.log(cache.get(args));
+        let arr = [...args]
+
+        console.log(cache);
+        console.log(cache.get(arr));
+        if (!cache.get(arr)) {
+          console.log('第一次没缓存，进行计算');
+          cache.set(args, fn(...arr));
+
+          // const result = fn(...args);
+          // cache.set(args, result);
+          // setTimeout(() => {
+          //   cache.set(args, result);
+          // }, 0);
+        }
+
+        // console.log(cache);
+        return cache.get(arr);
+      };
+    }
+
+    const arr = [7,7]
+    const memoryFn = memory(add);
+    memoryFn(...arr);
+    memoryFn(...arr);
+
+    // setTimeout(() => {
+    //   memoryFn(7, 7);
+    // }, 1000);
+
+    // const cache = new Map();
+    // args = [1,2,3];
+    // console.log(cache.get(args));
+    // cache.set(args, 777);
+    // console.log(cache.get(args));
+
+    // // cache.set(args, 777);
+    // console.log(cache.get(args));
+  </script> -->
+</body>
+
+</html>

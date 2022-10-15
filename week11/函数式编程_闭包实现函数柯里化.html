@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const add = (a, b) => a * b
+        // function curry(fn) {
+        //     // let fn = add
+        //     return function cadd(a) {
+        //         // let a = 7;
+        //         return function (b) {
+        //             // let b = 7;
+        //             return fn(a, b);
+        //         }
+        //     }
+        // }
+
+        const curry = fn => a => b => fn.apply(null, [a, b])
+        
+        const cadd = curry(add);
+        console.log(cadd(7)(6));
+    </script>
+</body>
+</html>

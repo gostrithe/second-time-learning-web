@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const fun = (a, b, c, d) => a * b * c * d
+
+        function curry(fn) {
+            // let fn = fun
+            return function curriedFun(...args) {
+                // let args = [1, 2] ....
+                if (args.length === fn.length) {
+                    console.log(fn.apply(null, args));
+
+                    return fn.apply(null, args)
+                }
+
+                return function (...anothorArgs) {
+                    // let anothorArgs = [3] ....
+                    // args = [...args, ...anothorArgs] // args = [1, 2, 3]
+                    // args = args.concat(anothorArgs)
+
+                    return curriedFun(...args, ...anothorArgs)
+                }
+            }
+        }
+
+        const curriedFun = curry(fun);
+
+        curriedFun(1, 2, 3, 4)
+
+        curriedFun(1)(2)(3)(4)
+
+        curriedFun(1, 2)(3)(4)
+        curriedFun(1)(2)(3, 4)
+        curriedFun(1, 2)(3, 4)
+        curriedFun(1)(2, 3)(4)
+
+        curriedFun(1, 2, 3)(4)
+        curriedFun(1)(2, 3, 4)
+    </script>
+</body>
+
+</html>

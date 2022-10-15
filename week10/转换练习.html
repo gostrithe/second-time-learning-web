@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function mockPromise(a, b) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    Math.random() > 0.1 ? resolve(a * b) : reject('服务器奔了！');
+                }, 1000);
+            });
+        }
+
+        function pfn() {
+            console.log(mockPromise(1, 2));
+            return mockPromise(1, 2)
+                .then(
+                    result => {
+                        console.log(result);  // 2
+                        return mockPromise(result, 3);  // return 6
+                    }
+                )
+                .then(
+                    result => {
+                        console.log(result);  // 6
+                        return mockPromise(result, 4);  // return 24
+                    }
+                )
+                .then(
+                    result => {
+                        console.log(result);  // 24
+                        return mockPromise(result, 5);
+                        // return 120
+                        // return new Promise((resolve, reject) => {
+                        //     resolve(120)
+                        // })
+                    }
+                )
+                .then(
+                    result => {
+                        console.log(result)
+                        return result
+                    }
+                )
+                .catch(
+                    err => console.log(err)
+                )
+                .finally(
+                    () => console.log('gameover')
+                );
+
+        }
+        // pfn()
+        pfn().then(res => console.log(res))
+
+        async function afn() {
+            let res;
+
+            try {
+                res = await mockPromise(1, 2);
+                console.log(res);
+                res = await mockPromise(res, 3);
+                console.log(res);
+                res = await mockPromise(res, 4);
+                console.log(res);
+                res = await mockPromise(res, 5);
+                console.log(res);
+                // return res
+                
+            } catch (error) {
+                console.log(error);
+            }
+
+            console.log('its over');
+            return res
+        }
+
+        // afn()
+        // afn().then(res => console.log(res))
+    </script>
+</body>
+
+</html>

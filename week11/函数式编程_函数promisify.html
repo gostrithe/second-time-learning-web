@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const add = (a, b) => {
+            if (Math.random() > 0.8) {
+                throw new Error("程序运行出错了");
+            }
+            return a + b;
+        };
+
+        const multiply = (a, b) => {
+            if (Math.random() > 0.8) {
+                throw new Error("程序运行出错了");
+            }
+            return a * b;
+        };
+
+        function promisify(fn) {
+            return function promiseFn(...args) {
+                return new Promise((resolve, reject) => {
+                    try {
+                        let result = fn.apply(null, args);
+                        resolve(result);
+                    } catch (error) {
+                        reject(error);
+                    }
+                });
+            };
+        }
+
+        // function padd(...args) {
+        //     return new Promise((resolve, reject) => {
+        //         try {
+        //             let result = add.apply(null, args);
+        //             resolve(result);
+        //         } catch (error) {
+        //             reject(error);
+        //         }
+        //     });
+        // }
+        // function pmul(...args) {
+        //     return new Promise((resolve, reject) => {
+        //         try {
+        //             let result = multiply.apply(null, args);
+        //             resolve(result);
+        //         } catch (error) {
+        //             reject(error);
+        //         }
+        //     });
+        // }
+
+        const padd = promisify(add);
+        const pmul = promisify(multiply);
+
+        /* 清晰地流水化执行业务逻辑 */
+        padd(12, 34)
+            .then((data) => console.log("data=", data))
+            .then((data) => pmul(12, 34))
+            .then((data) => console.log("data=", data))
+            .catch((err) => console.error("err=", err))
+            .finally(() => console.log("game over"));
+
+        console.log("同步代码执行完毕");
+    </script>
+</body>
+
+</html>

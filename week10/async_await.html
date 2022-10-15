@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script src="./ajax copy.js"></script>
+    <script>
+        const url = 'http://localhost:8000/calc/multiply';
+
+        async function demo() {
+            let data = await ajaxPromise({ url, data: { a: 1, b: 2 } });
+            console.log(data);
+        }
+        demo();
+
+        async function fn() {
+            ajaxPromise({ url, data: { a: 1, b: 7 } });
+        }
+    </script>
+</body>
+
+</html>

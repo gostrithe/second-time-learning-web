@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 观察者模式 */
+        // 一对多，多个观察者同时监听某一对象
+        // 当对象发生变化时，所有观察者响应自动更新自己
+
+
+
+        // 业务逻辑：搞一个彩票机实例，搞三个玩家实例，
+        // 这三个玩家虎视眈眈观察着彩票机，一旦彩票机更新进入发售状态，观察者响应自动做出买彩票操作。
+
+        // 被观察者
+        class Observable {
+            constructor() {
+                this.observerArr = []; // 用来存放观察者们
+            }
+
+            // 允许谁在观察我，把观察者放入数组observerArr
+            register(...observers) {
+                this.observerArr.push(...observers);
+            }
+
+            // 发布事件，通知观察者来响应
+            // 传入一个事件，数组中所有观察者响应事件，观察者调用自己的onEvent()方法，接收该事件作为入参
+            publishEvent(event) {
+                this.observerArr.forEach(observer => {
+                    observer.onEvent(event);
+                });
+            }
+        }
+
+        // 观察者
+        class Observer {
+
+            onEvent(event) {
+                console.log('观察者接收事件入参，响应了', event);
+            }
+        }
+
+        class Lottery extends Observable {
+            constructor() {
+                super();
+                this.resultNumber = null;
+            }
+
+            // 注册会员关注我才能下注
+            register(...players) {
+                super.register(...players);
+
+                players.forEach(player => console.log(player.name, '注册成功'));
+            }
+
+            // 彩票一经发售，通知所有选手。
+            sell() {
+                this.publishEvent({
+                    date: Date.now(),
+                    notify: '彩票开始发售了，快来送钱'
+                });
+            }
+
+            check() {
+                this.resultNumber = Tool.getSingleton().getLotteryResult();
+                console.log('开奖结果为', this.resultNumber);
+
+                this.observerArr.forEach(player => {
+                    if (player.bid === this.resultNumber) {
+                        console.log(`恭喜选手${player.name}，赢得百万奖金`);
+                    } else {
+                        console.log('感谢送钱！！');
+                    }
+                });
+            }
+        }
+
+        class Player extends Observer {
+            constructor(name, buyWhat) {
+                super();
+                this.bid = null;
+                this.name = name;
+                this.buyWhat = buyWhat || Tool.getSingleton().getLotteryResult();
+            }
+
+            onEvent(event) {
+                super.onEvent(event);
+
+                console.log(`选手${this.name}收到收到，我这就下注`);
+                this.bid = this.buyWhat;
+                console.log('下注了', this.bid);
+            }
+        }
+
+
+        class Tool {
+            static singleton = null;
+            static getSingleton() {
+                if (!this.singleton) {
+                    this.singleton = new Tool();
+                }
+                return this.singleton;
+            }
+
+            getLotteryResult(result) {
+                return result ? result : parseInt(Math.random() * 10);
+            }
+        }
+
+        const lotteryMachine = new Lottery();
+
+        const gaojin = new Player("赌神高进", 3);
+        const xiaodao = new Player("赌侠刀仔");
+        const axing = new Player("上海滩赌圣阿星");
+
+        // 注册玩家
+        lotteryMachine.register(gaojin, xiaodao, axing);
+
+        lotteryMachine.sell();
+        lotteryMachine.check()
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ajaxPromise() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(parseInt(Math.random() * 8));
+                }, 2000);
+            });
+        }
+
+        const add = (a, b, c) => a + b + c;
+
+        function curry(fn) {
+            return function curryFn(...args) {
+                if (args.length === fn.length) {
+                    return fn.apply(null, args);
+                }
+                return function (...nextArgs) {
+                    return curryFn(...args, ...nextArgs);
+                };
+            };
+        }
+
+        const curryFn = curry(add);
+
+        let tempFnBox = curryFn;
+        async function afn() {
+            let requestNumber = await ajaxPromise();
+            console.log(requestNumber);
+            tempFnBox = tempFnBox(requestNumber);
+
+            // 参数还不够，curryFn返回一个函数闭包，附带它周围的函数
+            // 将每次获取的参数拿到一起，再次调用curryFn()
+            // let args = [requestNumber]
+            // function (...nextArgs) {
+            //     return curryFn(...args, ...nextArgs);
+            // };
+
+            // 返回一个函数的话，反过来说明参数不够，还要继续请求获取参数
+            console.log(tempFnBox);
+            console.log(typeof (tempFnBox) === 'function');
+            typeof (tempFnBox) === 'function' && afn();
+
+            // 最终参数会够，curryFn返回结果
+            // curryFn本身加上周围的环境 let fn = add; 也是闭包
+            // return fn.apply(null, args);
+            // let finalResult = tempFnBox;
+            // return finalResult;
+        }
+
+        afn()
+        // afn().then(finalResult => console.log(finalResult))
+    </script>
+</body>
+
+</html>

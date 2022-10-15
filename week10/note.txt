@@ -1,0 +1,25 @@
+@安装NodeJS
+tools/H5开发套装/node-16
+
+@运行目标服务器（充当要访问的远程服务器）
+- 目标服务器源码my_static_server位于learn_js根目录
+√ 打开一个终端
+√ cd my_static_server
+√ node ./app.js
+- 该服务端运行于 http://localhost:8000
+
+@跨域实验
+- 参考test_ajax_cors.html
+
+@JSONP实验
+- 参考test_jsonp.html
+
+@Nginx代理跨域实验
+- 傻瓜式无中文路径安装phpstudygfb.exe
+- phpStudy设置-允许目录列表
+- 参考test_nginx_proxy.html
+- ajax轮子参考ajax.js
+- 将test_nginx_proxy.html+ajax.js其部署到phpStudy的WWW目录
+- 配置文件参考nginx.conf
+- 运行/重启Nginx
+- 在浏览器访问 localhost:80/test_nginx_proxy.html

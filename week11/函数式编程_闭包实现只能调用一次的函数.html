@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function closure(fn) {
+            let used = false;
+
+            return function onceFn(...args) {
+                if (!used) {
+                    const result = fn.apply(null, args);
+                    used = true;
+
+                    return result;
+                }
+            };
+        }
+
+        function add(a, b) {
+            return a + b;
+        }
+
+        const onceFn = closure(add);
+        console.log(onceFn(1, 2));
+        console.log(onceFn(1, 7));
+    </script>
+</body>
+
+</html>

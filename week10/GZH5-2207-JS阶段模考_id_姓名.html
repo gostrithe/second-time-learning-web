@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 动画框架 -->
+  <div class="wrapper">
+      <div id="box"></div>
+    </div>
+    <hr>
+
+  <!-- 总分：100分 -->
+  <script>
+    /* 请罗列5组请求头+响应头，并简述其含义 */
+    function fn1() {
+      /* 
+        请求头    响应头
+        
+      */
+    }
+    // fn1();
+
+    /* 使用批处理函数实现如下功能 */
+    function fn2() {
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      // 遍历数组
+      arr.forEach(item => console.log(item));
+      // 将所有元素映射为对应的平方数，打印映射出的新数组
+      console.log(arr.map(item => item * item));
+      // 过滤出3的倍数，打印过滤后的结果数组
+      console.log(arr.filter(item => item % 3 === 0));
+      // 判断arr中是否所有元素都是3的倍数
+      console.log(arr.every(item => item % 3 === 0));
+      // 判断arr中是否有元素都是3的倍数
+      console.log(arr.some(item => item % 3 === 0));
+      // 从数组中找出第一个3的倍数
+      console.log(arr.find(item => item % 3 === 0));
+      // 求arr中所有元素的和，使用reduce实现
+      console.log(arr.reduce((previousValue, currentValue) => currentValue + previousValue));
+      // 在100的基础上，加入arr中所有元素的和，使用reduce实现
+      // initialValue = 100;
+      console.log(arr.reduce((previousValue, currentValue) => previousValue + currentValue, 100));
+    }
+    fn2();
+
+    /* 如果没有arr.map 你怎么办 */
+    function fn3() {
+      const arr = [1, 2, 3];
+
+      Array.prototype.myMap = function (fn) {
+        const resultArr = [];
+        for (let i = 0; i < this.length; i++) {
+          resultArr[i] = fn(this[i], i);
+        }
+        return resultArr;
+      };
+
+      const newArr = arr.myMap((item, index) => item * index);
+
+      console.log(arr, newArr);
+    }
+    fn3();
+
+    /* 冒泡排序数组 */
+    function fn4() {
+      const arr = [3, 6, 4, 5, 9, 2, 1, 8, 7, 0];
+
+      function bubble(arr, isSmallToBig = true) {
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = 0; j < arr.length - (i + 1); j++) {
+            if (isSmallToBig ? arr[j] > arr[j + 1] : arr[j] < arr[j + 1]) {
+              [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+          }
+        }
+
+        return arr;
+      }
+
+      console.log(bubble(arr));
+      console.log(bubble(arr, false));
+    }
+    fn4();
+
+    /* 手撸深拷贝 */
+    function fn5() {
+      function deepCopy(obj) {
+        if (obj === null || typeof (obj) !== 'object') {
+          return obj;
+        } else {
+          const result = Array.isArray(obj) ? [] : {};
+          for (const key in obj) {
+            result[key] = deepCopy(obj[key]);
+          }
+          return result;
+        }
+      }
+
+      /* 不要改动测试代码 */
+      function test() {
+        // 待拷贝对象
+        const obj1 = {
+          name: "黑哥",
+          age: 18,
+          friends: [
+            { name: "白鸽", age: 19 },
+            {
+              name: "宏哥",
+              age: 20,
+              say() {
+                console.log("hello");
+              },
+            },
+          ],
+        };
+
+        /* 得到obj1的深拷贝副本 */
+        const obj2 = deepCopy(obj1);
+
+        /* 修改副本 */
+        obj2.name = "black";
+        obj2.friends[0].age = 29;
+        obj2.friends[1].say = () => console.log("hi!");
+
+        /* 观察本体是否受到影响 */
+        console.log(obj1.name, obj2.name); //黑哥 black
+        console.log(obj1.friends[0].age, obj2.friends[0].age); //19 29
+        obj1.friends[1].say(); //hello
+        obj2.friends[1].say(); //hi
+      }
+      test();
+    }
+    fn5();
+
+    /* Promise链式回调 */
+    function fn6() {
+      /* 云端乘法函数，请不要修改其代码 */
+      function multiply(a, b, callback) {
+        setTimeout(() => callback(a * b), 2000);
+      }
+
+      function mulPromise(a, b) {
+        return new Promise((resolve, reject) =>
+          multiply.apply(null, [a, b, (ret) => resolve(ret)])
+        );
+      }
+
+      // 基于multiply函数，使用Promise链式回调求得5的阶乘；
+      mulPromise(1, 2)
+        .then(
+          ret => mulPromise(ret, 3)
+        )
+        .then(
+          ret => mulPromise(ret, 4)
+        )
+        .then(
+          ret => mulPromise(ret, 5)
+        )
+        .then(
+          ret => console.log('fn6答案在这，兄弟', ret)
+        );
+    }
+    fn6();
+
+    /* async-await */
+    function fn7() {
+      /* 云端乘法函数，请不要修改其代码 */
+      function multiply(a, b, callback) {
+        setTimeout(() => {
+          // 注意这里有机会出错！！！！！
+          Math.random() > 0.5 ? callback(a * b) : callback(-1);
+        }, 500);
+      }
+
+      function mulPromise(a, b) {
+        return new Promise((resolve, reject) => {
+          multiply.apply(null, [
+            a,
+            b,
+            (ret) => {
+              ret === -1 ? reject("云端计算失败") : resolve(ret);
+            },
+          ]);
+        });
+      }
+
+      // 基于multiply函数，使用async-await求得5的阶乘，如果云端出错妥善处理之
+
+      async function afn() {
+        let res;
+        try {
+          res = await mulPromise(1, 2);
+          console.log(res);
+          res = await mulPromise(res, 3);
+          console.log(res);
+          res = await mulPromise(res, 4);
+          console.log(res);
+          res = await mulPromise(res, 5);
+          console.log(res);
+
+        } catch (error) {
+          console.log(error);
+          console.log('再次发起请求');
+          afn();
+          return;
+        }
+
+        console.log('its over');
+        return res;
+      }
+      afn();
+    }
+    fn7();
+
+    /* 带有超时功能的Promise */
+    function fn8() {
+      async function execWithTimeout(fn, ms) {
+        //实现之
+        const faultPromise = new Promise((resolve, reject) => {
+          setTimeout(() => reject('已超时'), ms);
+        });
+        return Promise.race([fn(), faultPromise]);
+      }
+
+      /* 测试代码 */
+      async function fn1() {
+        return rq("https://www.taobao.com");
+      }
+
+      function rq(url) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(`${url}的页面`), 200)
+        );
+      }
+
+      execWithTimeout(fn1, 300)
+        .then((data) => console.log("data=", data))
+        .catch((err) => console.log("err=", err));
+    }
+    fn8();
+
+    /* 一次性获取多个指定页面 */
+    function fn9() {
+      async function getContentByUrl(url) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve(`${url}的页面内容`);
+          }, 1000);
+        });
+      }
+
+      async function fetchData(urls) {
+        urls = urls.filter(url => url.startsWith('https://www.'));
+        const resultArr = [];
+        for (const url of urls) {
+          resultArr.push(await getContentByUrl(url));
+        }
+        return resultArr;
+      }
+
+      const urls = [
+        "https://www.taobao.com",
+        "https://www.baidu.com",
+        "https://web.taobao.com",
+      ];
+
+      // ["https://www.taobao.com的页面内容","https://www.baidu.com 的页面内容"]
+      fetchData(urls).then((result) => console.log(result));
+    }
+    fn9();
+
+    /* 手封数据结构MyMap */
+    function fn10() {
+      class MyMap {
+        //实现之
+        // too hard
+      }
+
+      /* 测试脚本 不要修改 */
+      // ~(function () {
+      //   const mmap = new MyMap();
+
+      //   /* 增加Key-value */
+      //   mmap.set("a", "foo");
+      //   mmap.set("b", "bar");
+      //   mmap.set("c", "baz");
+      //   mmap.set("d", "boo");
+
+      //   /* 根据Key查询value */
+      //   console.log(mmap.get("a"));
+      //   console.log(mmap.get("b"));
+
+      //   // 查询尺寸
+      //   console.log(mmap.size);
+
+      //   // 获取全部keys
+      //   console.log(mmap.keys());
+
+      //   // 获取全部values
+      //   console.log(mmap.values());
+
+      //   // 获取全部entries
+      //   console.log(mmap.entries());
+
+      //   /* 遍历mmap中的全部entry */
+      //   for (let entry of mmap.entries()) {
+      //     console.log(entry);
+      //   }
+
+      //   // 查询key是否存在
+      //   console.log("has a?", mmap.has("a"));
+      //   console.log("has toString?", mmap.has("toString"));
+      //   console.log("has c?", mmap.has("c"));
+
+      //   // 删除Key-value
+      //   mmap.delete("b");
+      //   console.log(mmap);
+
+      //   // 修改
+      //   mmap.set("a", "张真人");
+      //   console.log(mmap.get("a"));
+
+      //   /* for-Each */
+      //   mmap.forEach((value, key) => {
+      //     console.log(`{key:${key},value:${value}}`);
+      //   });
+
+      //   mmap.set("tesla", { boss: "mask", age: 48 });
+      //   mmap.set("microsoft", { name: "bill", age: 80 });
+      //   mmap.set("meta", { name: "zuckberg", age: 38 });
+      //   mmap.set("alibaba", { name: "jack", age: 55 });
+
+      //   /* 过滤掉年龄大于50的家伙 */
+      //   const newMap = mmap.filter((value, key) => value.age < 50);
+      //   console.log(newMap);
+      // })();
+    }
+    // fn10();
+
+    /* 手封ajax + ajaxPromise */
+    function fn11() {
+      function myAjax(conf) {
+        const defaultConf = {
+          methor: 'GET',
+          onSuccess: responseText => console.log(responseText),
+          onFail: err => console.log(err),
+
+          ...conf
+        };
+
+        let { method, url, data, dataType, onSuccess, onFail } = defaultConf;
+
+        if (!url) {
+          throw new Error('没传url，玩der');
+        }
+
+        let requestBody = null;
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.onload = () => onSuccess(xhr.responseText);
+        xhr.onerror = (err) => onFail(err);
+
+        if (method === 'GET' && data) {
+          url += `?${getSearchParams(data)}`;
+        }
+
+        xhr.open(method, url);
+
+        switch (true) {
+          case dataType === 'form':
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            requestBody = getSearchParams(data);
+            break;
+
+          case dataType === 'json':
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            requestBody = JSON.stringify(data);
+            break;
+
+          default:
+            break;
+        }
+
+        xhr.send(requestBody);
+      }
+
+      function getSearchParams(data) {
+        let str = '';
+        for (const key in data) {
+          str += `${key}=${data[key]}&`;
+        }
+        str = str.slice(0, -1);
+        return str;
+      }
+
+      function myAjaxPromise(conf) {
+        return new Promise((resolve, reject) => {
+          myAjax({
+            ...conf,
+
+            onSuccess: responseText => {
+              conf.onSuccess && conf.onSuccess();
+              resolve(responseText);
+            },
+
+            onFail: err => {
+              conf.onFail && conf.onFail();
+              reject(err);
+            }
+          });
+        });
+      }
+
+    }
+    fn11();
+
+    /* 手封动画框架 */
+    function fn12() {
+      function animate(element, target, duration = 1000, onFinish) {
+        //实现之
+        const totalFrames = (duration / 1000) * 25;
+        let frameCount = 0;
+
+        const startStylesObj = getComputedStyle(element);
+
+        let targetStyles, speed, unit;
+        for (const key in target) {
+          targetStyles = target[key];
+          speed = (parseFloat(targetStyles) - parseFloat(startStylesObj[key])) / totalFrames;
+          unit = typeof (targetStyles) === 'number' ? '' : 'px';
+
+          target[key] = [parseFloat(targetStyles), speed, unit];
+        }
+
+        let timer = setInterval(() => {
+          for (const key in target) {
+            [, speed, unit] = target[key];
+            element.style[key] = (parseFloat(getComputedStyle(element)[key]) + speed) + unit;
+          }
+          frameCount++;
+
+          if (frameCount === totalFrames) {
+            clearInterval(timer);
+
+            for (const key in target) {
+              [targetValue, , unit] = target[key];
+              element.style[key] = targetValue + unit;
+            }
+
+            onFinish && onFinish();
+          }
+        }, 40);
+      }
+
+      /* 测试代码 */
+      box.onclick = function () {
+        animate(
+          this,
+          { left: "300px", top: "400px", opacity: 0.5 },
+          3000,
+          () => {
+            console.log("动画结束");
+          }
+        );
+      };
+    }
+    fn12();
+
+    /* 手封能自动轮播和停止的Tab切换 */
+    function fn13() {
+      class TabBox { 
+        
+      }
+    }
+    // fn13(); 
+    /* 
+    非月考题
+    手封侧边栏/电梯组件：实现楼层配置 + 双向联动
+    最后一格是回到顶部 
+    滚动页面时，对应楼层高亮
+    点击楼层，页面自动滚动到该楼层，使之顶格显示
+    */
+    function fn14X() {
+      class Elevator { }
+      new Elevator([
+        { name: "楼层1", domSelector: "#floor1" },
+        { name: "楼层2", domSelector: "#floor2" },
+        { name: "楼层3", domSelector: "#floor3" },
+        { name: "楼层4", domSelector: "#floor4" },
+      ]);
+    }
+      // fn14X();
+  </script>
+
+  <h2>画图题（直接显示在当前页面）</h2>
+  <!-- /* 手绘原型链示意图 */ -->
+  <h3>原型链示意图</h3>
+  <!-- <img src="./default.jpeg" alt=""> -->
+  <br>
+
+  <!-- /* 手绘HTTP缓存原理示意图 */ -->
+  <h3>HTTP缓存原理示意图</h3>
+  <!-- <img src="./default.jpeg" alt=""> -->
+  <br>
+
+  <!-- /* 手绘事件循环示意图 */ -->
+  <h3>事件循环示意图</h3>
+  <!-- <img src="./default.jpeg" alt=""> -->
+  <br>
+
+  <!-- /* 浏览器的渲染过程示意图 */ -->
+  <h3>浏览器的渲染过程示意图</h3>
+  <!-- <img src="./default.jpeg" alt=""> -->
+
+  <br>
+  <br>
+  <br>
+
+  <!-- /* 简答题 */ -->
+  <h2>简答题</h2>
+
+  <!-- /* URL回车后发生什么 */ -->
+  <h3>URL回车后发生什么</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* 简述TCP原理 */ -->
+  <h3>简述TCP原理</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* GET请求与POST请求有何异同 */ -->
+  <h3>GET请求与POST请求有何异同</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* 简述JS事件传播机制 */ -->
+  <h3>简述JS事件传播机制</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* 你是如何理解事件委托的 */ -->
+  <h3>你是如何理解事件委托的</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* ES6有哪些新特性 */ -->
+  <h3>ES6有哪些新特性</h3>
+  <p>这里是答案</p>
+  <hr>
+
+  <!-- /* 函数中的this都有哪些可能的情形 */ -->
+  <h3>函数中的this都有哪些可能的情形</h3>
+  <p>这里是答案</p>
+  <hr>
+
+</body>
+
+</html>

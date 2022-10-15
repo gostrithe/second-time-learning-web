@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 管道函数与组合函数： 把多个纯函数串联起来，返回一个新工厂，传入数据，按照特定顺序执行每道工序 */
+        // 区别：管道函数的顺序为传入纯函数从左到右
+        //       组合函数的顺序为从右到左，是一种工程逆序
+
+        const add100 = (a) => a + 1;
+        const pow = (a) => a * a;
+        const getLen = (a) => (a + '').length;
+
+        /*         function pipe(...fnArr) {
+                    // 闭包内存了存函数参数数组
+                    // let fnArr = [add100, pow, getLen]
+                    return function pipeFn(value) {
+                        let initialArg = value;
+                        // getLen(pow(add100(7)))  => 初始时候currentFn(initialArg) => currentFn(previousFn)
+                        let result = fnArr.reduce((previousFn, currentFn, index) => {
+                            console.log('========', index, '------');
+                            console.log(currentFn(previousFn));
+                            
+                            return currentFn(previousFn);
+                        }, initialArg);
+        
+                        console.log(result);
+                        return result;
+                        // reduce会遍历数组，返回最后结果，每次循环返回的结果作为下一次的previousFn，就是说遍历的为currentFn
+                        // 准确点就是迭代吧，每次next，currentFn变为下一个元素，上一次的返回值作为当前的previousFn
+                    };
+                } */
+
+        const pipe = (...fnArr) => (value) => fnArr.reduce((pv, cv) => cv(pv), value);
+        // 组合函数只需要反转参数数组即可
+        const compose = (...fnArr) => (value) => fnArr.reverse().reduce((pv, cv) => cv(pv), value);
+
+        console.log(pipe(add100, pow, getLen)(6));
+        console.log(compose(add100, pow, getLen)(77));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+</head>
+
+<body>
+    <input id="input" type="text" placeholder="debounce"><button id="btn" value="throttle">throttle</button>
+    <script>
+        /* 防抖与节流 */
+        // 区别：防抖是，默认你之前的操作都是手抖，完全不管你，等到你最后一次操作，停歇下来了，再执行。
+        //      节流是，限制函数执行的次数，比如执行之后，两秒内不能在执行，每两秒只能执行一次。
+
+        const handler = (e) => console.log(e.target.value);
+
+        // input.oninput = _.debounce(handler, 1000);  // 防抖停歇1秒，执行最后一次
+        // btn.onclick = _.throttle(handler, 2000);  // 节流没两秒内只能点击一次
+
+        function myDebounce(fn, delay) {
+            let timer = null;
+            return function (...args) {
+                if (timer) {
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    fn.apply(null, args);
+                    timer = null;
+                }, delay);
+            };
+        }
+
+        function myThrottle(fn, delay) {
+            let timer = null;
+            return function (...args) {
+                if (!timer) {
+                    fn.apply(null, args);
+                    timer = setTimeout(() => {
+                        timer = null;
+                    }, delay);
+                }
+            };
+        }
+        // my way before
+        function myThrottle2(fn, delay) {
+            let lock = true;
+            return function (...args) {
+                if (!lock) return;
+
+                fn.apply(null, args);
+
+                lock = false;
+                setTimeout(() => {
+                    lock = true;
+                }, delay);
+            };
+        }
+
+        input.oninput = myDebounce(handler, 1000);
+        btn.onclick = myThrottle(handler, 2000); 
+        // btn.onclick = myThrottle2(handler, 2000); 
+    </script>
+</body>
+
+</html>

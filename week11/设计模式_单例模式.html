@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 单例模式 */
+        /* 用模式确保MathTool类最多只会被造一个实例 */
+        class Tool {
+            static instance = null;
+
+            static getInstance() {  // 静态方法，Tool.getInstance , 这里this会指向Tool类本身
+                if (!this.instance) {  // 一开始没有实例，要用的时候创建一个，在静态中存起来
+                    this.instance = new Tool();
+                }
+                return this.instance;  // 返回静态中存的那个实例，然后后面就可以调用实例方法了
+            }
+
+            log () {
+                console.log('拿到了类静态中的唯一实例，然后实例调用了log实例方法');
+            }
+        }
+
+        Tool.getInstance().log()
+    </script>
+</body>
+
+</html>

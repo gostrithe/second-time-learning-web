@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组合模式</title>
+  </head>
+
+  <body>
+    <button id="btn1">常规赛</button>
+    <button id="btn2">季后赛</button>
+    <button id="btn3">总决赛</button>
+
+    <!-- 带有单例模式的数学工具 -->
+    <script>
+      class MathTool {
+        static singleton = null;
+        static getSingleton() {
+          !this.singleton && (this.singleton = new MathTool());
+          return this.singleton;
+        }
+
+        /* 生成区间随机数 */
+        getRandom(a, b) {
+          return a + parseInt((b - a + 1) * Math.random());
+        }
+      }
+    </script>
+
+    <!-- 定义组合模式的基础设施(父类/超类/基类) -->
+    <script>
+      /* 定义组合基类 */
+      class Compose {
+        constructor(name) {
+          this.name = name;
+
+          // 组合的组件列表
+          this.components = [];
+        }
+
+        /* 添加组件 */
+        addComponent(component) {
+          this.components.push(component);
+        }
+
+        /* 移除组件 */
+        removeComponent(component) {
+          // this.components = this.components.filter(
+          //   c => c!==component
+          // )
+          for (let i = 0; i < this.components; i++) {
+            if (this.components[i] === component) {
+              this.components.splice(i, 1);
+              break;
+            }
+          }
+        }
+
+        /* 组合下达命令/切换模式，所有的组件自动响应 */
+        switchMode(mode) {
+          // 所有组件都自动切换到相同模式
+          this.components.forEach((c) => c.switchMode(mode));
+        }
+      }
+
+      /* 定义组件基类 */
+      class Component {
+        constructor(name) {
+          this.name = name;
+        }
+        switchMode(mode) {
+          console.log(this.name, "switchMode", mode);
+        }
+      }
+    </script>
+
+    <!-- 定义业务类 -->
+    <script>
+      /* NBA联盟是组合的具体实现类 */
+      class NBA extends Compose {
+        static MODE_REGULAR = "常规赛模式";
+        static MODE_PLAYOFF = "季后赛模式";
+        static MODE_FINAL = "总决赛模式";
+
+        switchMode(mode) {
+          super.switchMode(mode);
+
+          switch (mode) {
+            /* 常规赛淘汰掉一半球队 */
+            case NBA.MODE_REGULAR:
+              // 按得分给所有球队做升序排列
+              this.components = this.components
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 4);
+              break;
+
+            /* 季后赛淘汰到只剩两只球队 */
+            case NBA.MODE_PLAYOFF:
+              this.components = this.components
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 2);
+              break;
+          }
+        }
+      }
+
+      /* 球队是组件的具体业务类 */
+      class Team extends Component {
+        constructor(name) {
+          super(name);
+          this.score = 0;
+        }
+
+        /* 打球方法 */
+        play() {
+          this.score = MathTool.getSingleton().getRandom(30, 200);
+        }
+
+        /* 父类的switchMode方法不能满足球队的具体业务需求 */
+        switchMode(mode) {
+          super.switchMode(mode);
+
+          // console.log("子类自己的扩展");
+          switch (mode) {
+            case NBA.MODE_REGULAR:
+              console.log(this.name, "认真打");
+              break;
+            case NBA.MODE_PLAYOFF:
+              console.log(this.name, "玩命打");
+              break;
+            case NBA.MODE_FINAL:
+              console.log(this.name, "往死里打");
+              break;
+          }
+
+          this.play();
+          console.log(this.name, this.score);
+        }
+      }
+    </script>
+
+    <!-- 定义业务逻辑 -->
+    <script>
+      /* 造出联盟实例 */
+      const nba = new NBA("NBA");
+
+      /* 造出几支球队实例 */
+      const team1 = new Team("落汤鸡唬人队");
+      const team2 = new Team("波士顿凯子队");
+      const team3 = new Team("休斯顿明之队");
+      const team4 = new Team("旧金山小学生队");
+      const team5 = new Team("底特律破产队");
+      const team6 = new Team("纽约尼克斯队");
+      const team7 = new Team("华盛顿巫师队");
+      const team8 = new Team("芝加哥帮主队");
+
+      /* 联盟添加球队 */
+      nba.addComponent(team1);
+      nba.addComponent(team2);
+      nba.addComponent(team3);
+      nba.addComponent(team4);
+      nba.addComponent(team5);
+      nba.addComponent(team6);
+      nba.addComponent(team7);
+      nba.addComponent(team8);
+
+      /* 点击进入常规赛模式 */
+      btn1.onclick = (e) => nba.switchMode(NBA.MODE_REGULAR);
+      btn2.onclick = (e) => nba.switchMode(NBA.MODE_PLAYOFF);
+      btn3.onclick = (e) => nba.switchMode(NBA.MODE_FINAL);
+    </script>
+  </body>
+</html>

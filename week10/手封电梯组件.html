@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div.box {
+            height: 1000px;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            box-shadow: 5px 5px rgba(104, 103, 103, 0.5);
+        }
+
+
+
+        .elevatorBox {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .elevatorBox>ul>li {
+            list-style: none;
+            background-color: white;
+            width: 150px;
+            border: 1px solid #000;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .elevatorBox>ul>li:hover {
+            background-color: black;
+            color: white;
+        }
+        .elevatorBox>ul>li.current {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="floor1" style="height: 700px; background-color: aqua;">楼层1</div>
+    <div class="box" id="floor2" style="height: 500px; background-color: yellowgreen;">楼层2</div>
+    <div class="box" id="floor3" style="height: 1000px; background-color: skyblue;">楼层3</div>
+    <div class="box" id="floor4" style="height: 850px; background-color: pink;">楼层4</div>
+
+    <!-- <div class="elevatorBox">
+        <ul>
+            <li>楼层1</li>
+            <li>楼层2</li>
+            <li>楼层3</li>
+            <li>楼层4</li>
+        </ul>
+    </div> -->
+
+    <script src="./elevator.js"></script>
+</body>
+</html>

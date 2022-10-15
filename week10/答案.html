@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- reset -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        padding: 10px;
+      }
+
+      hr {
+        margin: 10px 0;
+      }
+    </style>
+
+    <!-- mytab -->
+    <style>
+      .mytab {
+        margin: 0;
+        padding: 0;
+        color: white;
+      }
+
+      ul,
+      ol,
+      li {
+        list-style-type: none;
+      }
+
+      .mytab {
+        width: 400px;
+        height: 300px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mytab > ul {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        border-bottom: 1px solid black;
+      }
+
+      .mytab > ul > li {
+        flex-grow: 1;
+        height: 100%;
+        background-color: orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+
+      .mytab > ul > li.active {
+        background-color: darkorange;
+      }
+
+      .mytab > ol {
+        width: 100%;
+        flex-grow: 1;
+        position: relative;
+      }
+
+      .mytab > ol > li {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+      }
+
+      .mytab > ol > li.active {
+        display: flex;
+        background-color: skyblue;
+      }
+
+      .mytab button {
+        height: 30px;
+        margin: 5px;
+      }
+    </style>
+
+    <!-- enclosure -->
+    <style>
+      .enclosure input {
+        width: 300px;
+      }
+      .enclosure button {
+        width: 100px;
+        height: 30px;
+        margin: 0;
+        margin-top: 5px;
+      }
+    </style>
+
+    <!-- animate -->
+    <style>
+      .animate {
+        width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        position: relative;
+        background-color: #eee;
+      }
+      .animate .abox {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        position: absolute;
+      }
+    </style>
+
+    <!-- ajax -->
+    <style>
+      .ajax button {
+        height: 30px;
+        padding: 5px;
+        margin: 0;
+      }
+    </style>
+
+    <!-- dom_event -->
+    <style>
+      .dom_event {
+        border: 1px solid black;
+        width: 400px;
+        height: 300px;
+        background-color: #eee;
+      }
+      ul.mymenu {
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+      }
+      .mymenu li {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: gray;
+        border-bottom: 1px solid white;
+        font-size: 12px;
+      }
+      .mymenu li:nth-last-child() {
+        border-bottom: none;
+      }
+
+      .mymenu li:hover {
+        background-color: lightgray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>使用闭包管理全班学生成绩</h3>
+    <div class="enclosure">
+      <input type="text" id="ipName" placeholder="姓名" /><br />
+      <input type="text" id="ipSubject" placeholder="科目" /><br />
+      <input type="text" id="ipScore" placeholder="成绩" /><br />
+      <button id="btnSetScore">设置</button>
+      <button id="btnGetScore">查询</button>
+      <button id="btnPrintScore">成绩单</button>
+      <p id="pRet">查询结果</p>
+    </div>
+    <hr />
+
+    <h3>MyTab</h3>
+    <div class="mytab_wrapper">
+      <!-- 参考布局 做题时可以从这里拷贝 -->
+      <!-- <div class="mytab">
+        <ul>
+          <li class="active">1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+        <ol>
+          <li class="active">1</li>
+          <li>2</li>
+          <li>3</li>
+        </ol>
+        <button id="btnLoop">轮播/停止</button>
+      </div> -->
+    </div>
+    <hr />
+
+    <h3>手封动画框架</h3>
+    <div class="animate">
+      <div class="abox"></div>
+    </div>
+    <hr />
+
+    <h3>AJAX封装</h3>
+    <div class="ajax">
+      <button id="btnGet">发送GET请求</button>
+      <button id="btnForm">发送表单数据</button>
+      <button id="btnJson">发送JSON数据</button>
+      <p id="ajaxResult">这里是请求结果</p>
+    </div>
+    <hr />
+
+    <h3>DOM事件综合</h3>
+    <div class="dom_event">
+      <!-- <ul class="mymenu">
+        <li>JS</li>
+        <li>Vue</li>
+        <li>React</li>
+        <li>MiniProgram</li>
+      </ul> -->
+    </div>
+    <hr />
+
+    <!-- 阅卷人姓名：00 总分：0+0+0+0+0 0+0+0+0+0 0+0+0+0+0 -->
+    <script>
+      /* 请罗列5组请求头+响应头，并简述其含义 */
+      function fn1() {
+        /* 
+        Accept:客户端想要的数据类型
+        Content-Type:响应体的数据类型
+
+        Accept-Encoding:客户端想要的压缩编码
+        Content-Encoding:响应体的压缩编码
+
+        Accept-Language:客户端想要的语言
+        Content-Language:响应体的语言
+
+        // Content-Type:请求体的数据类型
+        // Content-Type:响应体的数据类型
+
+        // Content-Length:请求体的数据字节长度
+        // Content-Length:响应体的数据字节长度
+
+        Cookie:客户端的一些信息
+        Set-Cookie:服务端给客户端写的Cookie
+
+        If-None-Match:携带上次数据的指纹
+        E-tag:数据指纹
+
+        If-Modified-Since:携带上次数据的最后更新时间
+        Last-Modified:数据的最后更新时间
+
+        Origin:客户端自报家门IP/域名
+        Access-Control-Allow-Origin:服务端允许谁跨域访问它
+
+        User-Agent:客户端浏览器的信息
+        Server:服务器的信息
+
+        */
+      }
+      // fn1();
+
+      /* 使用批处理函数实现如下功能 */
+      function fn2() {
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        // 遍历数组
+        arr.forEach((item) => console.log(item));
+
+        // 将所有元素映射为对应的平方数，打印映射出的新数组
+        arr.map((item) => item * item); //1, 2, 3, 4, 5, 6, 7, 8, 9
+
+        // 过滤出3的倍数，打印过滤后的结果数组
+        // const newArr = arr.filter(item=>!item%3)
+        const newArr = arr.filter((item) => item % 3 === 0);
+        console.log(newArr); //[1...81]
+
+        // 判断arr中是否所有元素都是3的倍数
+        arr.every((item) => item % 3 === 0); //false
+
+        // 判断arr中是否有元素都是3的倍数
+        arr.some((item) => item % 3 === 0); //true
+
+        // 从数组中找出第一个3的倍数
+        arr.find((item) => item % 3 === 0); //3
+
+        // 求arr中所有元素的和，使用reduce实现
+        console.log(arr.reduce((pv, cv) => pv + cv)); //45
+
+        // 在100的基础上，加入arr中所有元素的和，使用reduce实现
+        console.log(arr.reduce((pv, cv) => pv + cv, 100)); //145
+      }
+      // fn2()
+
+      /* 如果没有arr.map 你怎么办 */
+      function fn3() {
+        const arr = [1, 2, 3, 4];
+
+        Array.prototype.mymap = function (fn) {
+          const newArr = [];
+
+          /* 对每个元素都执行一下fn */
+          for (let i = 0; i < this.length; i++) {
+            newArr.push(fn(this[i], i));
+          }
+
+          return newArr;
+        };
+
+        const narr = arr.mymap((item, index) => Math.pow(item, index));
+
+        // 输出结果应为[1,2,9,64]
+        console.log(narr);
+      }
+      // fn3();
+
+      /* 升序/降序冒泡排序数组 */
+      function fn4() {
+        /* useAsc=true时使用升序排序 否则降序排序 */
+        function bubbleSort(arr, useAsc = true) {
+          //实现之
+          let temp;
+
+          for (let j = 1; j <= arr.length - 1; j++) {
+            for (let i = 0; i < arr.length - j; i++) {
+              if (
+                (useAsc && arr[i] > arr[i + 1]) ||
+                (!useAsc && arr[i] < arr[i + 1])
+              ) {
+                temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+              }
+            }
+          }
+
+          return arr;
+        }
+
+        const arr = [3, 1, 4, 5, 9, 2, 6, 8, 7, 0];
+
+        // 结果为[0,1,2,3,4,5,6,7,8,9]
+        console.log(bubbleSort(arr));
+
+        // 结果为[9,8,7,6,5,4,3,2,1,0]
+        console.log(bubbleSort(arr, false));
+      }
+      // fn4();
+
+      /* 手撸深拷贝 */
+      function fn5() {
+        function deepCopy(obj) {
+          /* 基本数据类型 */
+          if (typeof obj !== "object" && typeof obj !== "function") {
+            return obj;
+          }
+
+          /* 函数类型 */
+          if (typeof obj === "function") {
+            return obj;
+          }
+
+          /* 数组类型 */
+          if (Array.isArray(obj)) {
+            const arrCopy = [];
+
+            // 对数组的每个元素进行递归拷贝
+            for (let i = 0; i < obj.length; i++) {
+              arrCopy[i] = deepCopy(obj[i]);
+            }
+
+            return arrCopy;
+          }
+
+          /* 对象类型 */
+          if (typeof obj === "object") {
+            const objCopy = {};
+            for (let key in obj) {
+              objCopy[key] = deepCopy(obj[key]);
+            }
+            return objCopy;
+          }
+        }
+
+        /* 不要改动测试代码 */
+        function test() {
+          // 待拷贝对象
+          const obj1 = {
+            name: "黑哥",
+            age: 18,
+            friends: [
+              { name: "白鸽", age: 19 },
+              {
+                name: "宏哥",
+                age: 20,
+                say() {
+                  console.log("hello");
+                },
+              },
+            ],
+          };
+
+          /* 得到obj1的深拷贝副本 */
+          const obj2 = deepCopy(obj1);
+
+          /* 修改副本 */
+          obj2.name = "black";
+          obj2.friends[0].age = 29;
+          obj2.friends[1].say = () => console.log("hi!");
+
+          /* 观察本体是否受到影响 */
+          console.log(obj1.name, obj2.name); //黑哥 black
+          console.log(obj1.friends[0].age, obj2.friends[0].age); //19 29
+          obj1.friends[1].say(); //hello
+          obj2.friends[1].say(); //hi
+        }
+        test();
+      }
+      // fn5();
+
+      /* Promise链式回调 */
+      function fn6() {
+        /* 云端乘法函数，请不要修改其代码 */
+        function multiply(a, b, callback) {
+          setTimeout(() => callback(a * b), 200);
+        }
+
+        function mulPromise(a, b) {
+          return new Promise((resolve, reject) =>
+            multiply.apply(null, [a, b, (ret) => resolve(ret)])
+          );
+        }
+
+        // 基于multiply函数，使用Promise链式回调求得5的阶乘；
+        mulPromise(1, 2)
+          .then((value) => mulPromise(value, 3))
+          .then((value) => mulPromise(value, 4))
+          .then((value) => mulPromise(value, 5))
+          .then((ret) => console.log("ret=", ret));
+      }
+      // fn6();
+
+      /* async-await */
+      function fn7() {
+        /* 云端乘法函数，请不要修改其代码 */
+        function multiply(a, b, callback) {
+          setTimeout(() => {
+            // 注意这里有机会出错！！！！！
+            Math.random() > 0.1 ? callback(a * b) : callback(-1);
+          }, 50);
+        }
+
+        function mulPromise(a, b) {
+          return new Promise((resolve, reject) => {
+            multiply.apply(null, [
+              a,
+              b,
+              (ret) => {
+                ret === -1 ? reject("云端计算失败") : resolve(ret);
+              },
+            ]);
+          });
+        }
+
+        // 基于multiply函数，使用async-await求得5的阶乘，如果云端出错妥善处理之
+        ~(async function () {
+          try {
+            let ret = await mulPromise(1, 2);
+            ret = await mulPromise(ret, 3);
+            ret = await mulPromise(ret, 4);
+            ret = await mulPromise(ret, 5);
+            console.log("ret=", ret);
+          } catch (err) {
+            console.log("aoh,err=", err);
+          }
+        })();
+      }
+      // fn7();
+
+      /* 带有超时功能的Promise */
+      function fn8() {
+        async function execWithTimeout(fn, ms) {
+          return Promise.race([
+            new Promise((resolve, reject) =>
+              setTimeout(() => {
+                reject("timeout");
+              }, ms)
+            ),
+            fn(),
+          ]);
+        }
+
+        /* 测试代码 */
+        async function fn1() {
+          return rq("https://www.taobao.com");
+        }
+
+        function rq(url) {
+          return new Promise((resolve) =>
+            setTimeout(() => resolve(`${url}的页面`), 1000)
+          );
+        }
+
+        execWithTimeout(fn1, 3000)
+          .then((data) => console.log("data=", data))
+          .catch((err) => console.log("err=", err));
+      }
+      // fn8()
+
+      /* 一次性获取多个指定页面 */
+      function fn9() {
+        async function getContentByUrl(url) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(`${url}的页面内容`);
+            }, 1000);
+          });
+        }
+
+        async function fetchData(urls) {
+          return Promise.all(
+            urls
+              .filter((url) => url.startsWith("https://www."))
+              .map((url) => getContentByUrl(url))
+          );
+        }
+
+        const urls = [
+          "https://www.taobao.com",
+          "https://www.baidu.com",
+          "https://web.taobao.com",
+        ];
+
+        // ["https://www.taobao.com的页面内容","https://www.baidu.com 的页面内容"]
+        fetchData(urls).then((result) => console.log(result));
+      }
+      // fn9();
+
+      /* 手封数据结构MyMap */
+      function fn10() {
+        class MyMap {
+          constructor() {
+            this.dataObj = {};
+            this.updateSize();
+          }
+
+          updateSize() {
+            this.size = Object.keys(this.dataObj).length;
+          }
+
+          //实现之
+          set(key, value) {
+            this.dataObj[key] = value;
+            this.updateSize();
+          }
+
+          get(key) {
+            return this.dataObj[key];
+          }
+
+          has(key) {
+            return this.dataObj.hasOwnProperty(key);
+          }
+
+          delete(key) {
+            delete this.dataObj[key];
+            this.updateSize();
+          }
+
+          keys() {
+            return Object.keys(this.dataObj);
+          }
+
+          values() {
+            return this.keys().map((key) => this.get(key));
+          }
+
+          entries() {
+            return this.keys().map((key) => ({ key, value: this.get(key) }));
+          }
+
+          forEach(fn) {
+            for (let key in this.dataObj) {
+              fn(this.get(key), key);
+            }
+          }
+
+          filter(fn) {
+            const newMap = new MyMap();
+
+            for (let key in this.dataObj) {
+              let value = this.get(key);
+              let ok = fn(value, key);
+              ok && newMap.set(key, value);
+            }
+
+            return newMap;
+          }
+        }
+
+        /* 测试脚本 不要修改 */
+        ~(function () {
+          const mmap = new MyMap();
+
+          /* 增加Key-value */
+          mmap.set("a", "foo");
+          mmap.set("b", "bar");
+          mmap.set("c", "baz");
+          mmap.set("d", "boo");
+
+          /* 根据Key查询value */
+          console.log(mmap.get("a")); //foo
+          console.log(mmap.get("b")); //bar
+
+          // 查询尺寸
+          console.log(mmap.size); //4
+
+          // 获取全部keys
+          console.log(mmap.keys()); //[a b c d]
+
+          // 获取全部values
+          console.log(mmap.values()); //[foo bar baz boo]
+
+          // 获取全部entries
+          console.log(mmap.entries()); //[{key,value},{key,value},{key,value},{key,value},]
+
+          /* 遍历mmap中的全部entry */
+          for (let entry of mmap.entries()) {
+            console.log(entry);
+          }
+
+          // 查询key是否存在
+          console.log("has a?", mmap.has("a")); //t
+          console.log("has toString?", mmap.has("toString")); //f
+          console.log("has c?", mmap.has("c")); //t
+
+          // 删除Key-value
+          mmap.delete("b");
+          console.log(mmap); //size为3没有b的一个对象
+
+          // 修改
+          mmap.set("a", "张真人");
+          console.log(mmap.get("a")); //张真人
+
+          /* for-Each */
+          mmap.forEach((value, key) => {
+            console.log(`{key:${key},value:${value}}`);
+          });
+
+          mmap.set("tesla", { boss: "mask", age: 48 });
+          mmap.set("microsoft", { name: "bill", age: 80 });
+          mmap.set("meta", { name: "zuckberg", age: 38 });
+          mmap.set("alibaba", { name: "jack", age: 55 });
+
+          /* 过滤掉年龄大于50的家伙 */
+          const newMap = mmap.filter((value, key) => value.age < 50);
+          console.log(newMap);
+        })();
+      }
+      // fn10();
+
+      /* 手封ajax + ajaxPromise */
+      function fn11() {
+        function getSearchParams(obj) {
+          let str = "";
+          for (let key in obj) {
+            str += `&${key}=${obj[key]}`;
+          }
+          str = str.slice(1);
+          return str;
+        }
+
+        function ajax(conf) {
+          let { url, method, data, dataType, onSuccess, onFail } = conf;
+
+          if (!url) {
+            throw new Error("fuck off and fetch me the url");
+          }
+
+          method = method || "GET";
+          onSuccess =
+            onSuccess || ((ret) => console.log("onSuccess:ret=", ret));
+          onFail = onFail || ((err) => console.log("onFail:err=", err));
+
+          let body = null;
+
+          /* 必要时在url上拼接查询参数 */
+          if (data && !dataType) {
+            url += "?" + getSearchParams(data);
+          }
+
+          const xhr = new XMLHttpRequest();
+          xhr.onload = function () {
+            onSuccess(xhr.responseText);
+          };
+          xhr.onerror = function (err) {
+            onFail(err);
+          };
+
+          xhr.open(method, url);
+
+          /* 必要时设置请求头与请求体 */
+          switch (dataType) {
+            case "form":
+              xhr.setRequestHeader(
+                "Content-Type",
+                "application/x-www-form-urlencoded"
+              );
+              body = getSearchParams(data);
+              break;
+
+            case "json":
+              xhr.setRequestHeader("Content-Type", "application/json");
+              body = JSON.stringify(data);
+              break;
+          }
+
+          xhr.send(body);
+        }
+
+        function ajaxPromise(conf) {
+          return new Promise((resolve, reject) => {
+            ajax({
+              ...conf,
+              onSuccess: (ret) => {
+                conf.onSuccess && conf.onSuccess();
+                resolve(ret);
+              },
+              onFail: (err) => {
+                conf.onFail && conf.onFail(err);
+                reject(err);
+              },
+            });
+          });
+        }
+
+        /* 测试代码 */
+        btnGet.onclick = (e) => {
+          ajaxPromise({
+            url: "http://www.httpbin.org/get",
+            data: { username: "admin", password: "123456" },
+          })
+            .then((res) => (ajaxResult.innerText = res))
+            .catch((err) => (ajaxResult.innerText = err));
+        };
+
+        btnForm.onclick = (e) => {
+          ajaxPromise({
+            url: "http://www.httpbin.org/post",
+            method: "POST",
+            data: { username: "admin", password: "123456" },
+            dataType: "form",
+          })
+            .then((res) => (ajaxResult.innerText = res))
+            .catch((err) => (ajaxResult.innerText = err));
+        };
+
+        btnJson.onclick = (e) => {
+          ajaxPromise({
+            url: "http://www.httpbin.org/post",
+            method: "POST",
+            data: { username: "admin", password: "123456" },
+            dataType: "json",
+          })
+            .then((res) => (ajaxResult.innerText = res))
+            .catch((err) => (ajaxResult.innerText = err));
+        };
+      }
+      // fn11();
+
+      /* 手封动画框架 */
+      function fn12() {
+        function animate(element, target, duration = 1000, onFinish) {
+          let startTime = Date.now();
+
+          /* 计算动画速度与单位 */
+          // const reg = /(100.5)(px)/
+          const reg = /(\d*\.?\d*)([a-z]*)/;
+          let styles = getComputedStyle(element);
+          for (let key in target) {
+            let value = target[key];
+
+            let speed =
+              (parseFloat(value) - parseFloat(styles[key])) /
+              Math.floor(duration / 40);
+            let num = reg.exec(value)[1];
+            let unit = reg.exec(value)[2];
+            console.log(key, value, speed, num, unit);
+
+            target[key] = {
+              value,
+              num,
+              unit,
+              speed,
+            };
+          }
+
+          let timer = setInterval(() => {
+            let formerStyles = getComputedStyle(element);
+
+            // 每帧在上一帧的基础上变化一丢丢
+            for (let key in target) {
+              let { value, num, unit, speed } = target[key];
+              element.style[key] = parseFloat(formerStyles[key]) + speed + unit;
+            }
+
+            /* 判断是否应该停止定时器 */
+            if (Date.now() - startTime >= duration) {
+              timer && clearInterval(timer);
+
+              /* 暴力校正位置 */
+              for (let key in target) {
+                element.style[key] = target[key].value;
+              }
+
+              // 执行回调
+              onFinish && onFinish();
+            }
+          }, 40);
+        }
+
+        /* 测试代码 */
+        const box = document.querySelector(".animate .abox");
+        box.onclick = function () {
+          animate(
+            this,
+            { left: "300px", top: "400px", opacity: 0.5 },
+            3000,
+            () => {
+              console.log("动画结束");
+            }
+          );
+        };
+      }
+      // fn12();
+
+      /* 手封能自动轮播和停止的Tab切换 参考题干DOM（标签和内容须支持灵活配置） */
+      function fn13() {
+        class TabBox {
+          constructor(domRoot, conf) {
+            let { dataArr, interval } = conf;
+            this.interval = interval || 1000;
+
+            this.domRoot = document.querySelector(domRoot);
+            this.dataArr = dataArr;
+            this.index = 0;
+            this.loopTimer = null;
+
+            this.render();
+
+            this.initListeners();
+          }
+
+          render() {
+            this.domRoot.innerHTML = `
+            <div class="mytab">
+              ${this.getHtml()}
+              <button id="btnLoop">轮播/停止</button>
+            </div>
+            `;
+          }
+
+          getHtml() {
+            let tabLis = "";
+            let contentLis = "";
+
+            this.dataArr.forEach(({ tab, content }, index) => {
+              tabLis += `<li index=${index} class="${
+                index == this.index ? "active tab" : "tab"
+              }">${tab}</li>`;
+              contentLis += `<li class="${
+                index == this.index ? "active" : ""
+              }">${content}</li>`;
+            });
+
+            return `
+            <ul>${tabLis}</ul>
+            <ol>${contentLis}</ol>
+            `;
+          }
+
+          initListeners() {
+            this.domRoot.onclick = (e) => {
+              const eTarget = e.target;
+
+              if (eTarget.classList.contains("tab")) {
+                // this.index = eTarget.getAttribute("index")
+                // console.log("you click",this.index);
+                // this.render()
+
+                this.stopLoop();
+                this.switchTab(eTarget.getAttribute("index") * 1);
+              }
+
+              if (eTarget.id === "btnLoop") {
+                this.switchLoop();
+              }
+            };
+          }
+
+          switchTab(index) {
+            // 校正一下index
+            if (index < 0) {
+              index = this.dataArr.length - 1;
+            } else if (index >= this.dataArr.length) {
+              index = 0;
+            }
+
+            this.index = index;
+
+            console.log("switchTab", this.index);
+            this.render();
+          }
+
+          startLoop() {
+            if (!this.loopTimer) {
+              this.loopTimer = setInterval(() => {
+                this.switchTab(this.index + 1);
+              }, this.interval);
+            }
+          }
+
+          stopLoop() {
+            if (this.loopTimer) {
+              clearInterval(this.loopTimer);
+              this.loopTimer = null;
+            }
+          }
+
+          switchLoop() {
+            console.log("switchLoop");
+            if (!this.loopTimer) {
+              this.startLoop();
+            } else {
+              this.stopLoop();
+            }
+          }
+        }
+
+        /* 测试脚本 */
+        new TabBox(".mytab_wrapper", {
+          dataArr: [
+            { tab: "头条", content: "<p>头条新闻</p>" },
+            { tab: "财经", content: "<p>财经新闻</p>" },
+            { tab: "体育", content: "<p>体育新闻</p>" },
+            { tab: "娱乐", content: "<p>娱乐新闻</p>" },
+          ],
+          // interval:100,
+        });
+      }
+      // fn13();
+
+      /* 使用闭包函数 实现对全班学生成绩的设置、查询、成绩打印 （参见页面DOM结构） */
+      function fn14() {
+        function score(name) {
+          let hisScores = {};
+          return {
+            set(subject, n) {
+              hisScores[subject] = n;
+            },
+            get(subject) {
+              return hisScores[subject];
+            },
+            print() {
+              return JSON.stringify(hisScores);
+            },
+          };
+        }
+
+        const students = ["张三", "李四", "王五"];
+        const scoresObj = {};
+        students.forEach((name) => (scoresObj[name] = score(name)));
+
+        btnSetScore.onclick = (e) =>
+          scoresObj[ipName.value].set(ipSubject.value, ipScore.value * 1);
+        btnGetScore.onclick = (e) =>
+          (pRet.innerText = scoresObj[ipName.value].get(ipSubject.value));
+        btnPrintScore.onclick = (e) =>
+          (pRet.innerText = scoresObj[ipName.value].print());
+      }
+      // fn14()
+
+      /* 
+      DOM事件综合 
+      在框内点击右键出现自定义菜单：JS Vue React 小程序
+      鼠标滑过哪个菜单项 哪个菜单项就高亮
+      点击任何一个菜单项 控制台输出其文本
+      自定义DOM和样式
+      必须使用事件委托
+      */
+      function fn15() {
+        class MyMenu {
+          constructor(root, itemArr) {
+            this.root = document.querySelector(root);
+            this.root.style.position = "relative";
+
+            this.itemArr = itemArr;
+
+            /* 创建出菜单DOM结构 */
+            const ul = document.createElement("ul");
+            ul.classList.add("mymenu");
+            ul.style.position = "absolute";
+            ul.style.display = "none";
+
+            this.ul = ul;
+            this.root.appendChild(this.ul);
+
+            this.renderMenuItems();
+            this.initListeners();
+          }
+
+          renderMenuItems() {
+            this.ul.innerHTML = this.itemArr
+              .map(
+                ({ text }, index) =>
+                  `<li index=${index} class="menuitem">${text}</li>`
+              )
+              .join("");
+          }
+
+          initListeners() {
+            this.root.addEventListener("contextmenu", (e) => {
+              e.preventDefault();
+
+              /* 点击哪菜单出在哪 */
+              this.ul.style.left = e.offsetX + "px";
+              this.ul.style.top = e.offsetY + "px";
+              this.ul.style.display = "flex";
+            });
+
+            this.root.addEventListener("click", (e) => {
+              this.ul.style.display = "none";
+
+              const eTarget = e.target;
+              if (eTarget.classList.contains("menuitem")) {
+                this.itemArr[eTarget.getAttribute("index") * 1].callback();
+              }
+            });
+          }
+        }
+
+        new MyMenu(".dom_event", [
+          { text: "JS", callback: () => console.log("学习JS") },
+          { text: "Vue", callback: () => console.log("学习Vue") },
+          { text: "React", callback: () => console.log("学习React") },
+          { text: "小程序", callback: () => console.log("学习小程序") },
+        ]);
+      }
+      // fn15();
+    </script>
+  </body>
+</html>
