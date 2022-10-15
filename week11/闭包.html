@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        
-        function score(name) {
-            // 这里形成了闭包，score的内部，即内部函数set和它外边的所有变量环境，空间暂时不会释放
-            const obj = {}  
-            
-            return {  // 返回值为引用数据类型，score执行完不能马上释放空间,因此形成了一个封闭的空间
+        function closure(name) {
+            // 这里形成了闭包，closure的内部，空间暂时不会释放
+            const obj = {};
+
+            return {  // 返回值为引用数据类型，closure执行完不能马上释放空间,因此形成了一个封闭的空间
                 set(subject, score) {
-                    obj[subject] = score  // 内部函数中可以访问到外面的变量，因为作用域的原因向外寻找 lexical scoping
+                    obj[subject] = score;  // 内部函数中可以访问到外面的变量，因为作用域的原因向外寻找 lexical scoping
                 },
                 get: subject => obj[subject],
                 print: () => JSON.stringify(obj)
-            }
+            };
         }
 
-        const scoreReturn = score('jack')  // 拿到了地址，后面顺着地址继续找到函数
-        // 如果score执行完就马上释放空间，则后续将找不到内部函数了。
+        const scoreApiJack = closure('jack');  // 拿到了地址，后面顺着地址继续找到返回的那个api对象
+        // 如果closure执行完就马上释放空间，则后续将找不到内部返回的对象了。
 
-        scoreReturn()  // 看起来像是直接调用一个函数，看起来像是全局作用域中函数调用，看起来找不到obj
-                        // 实则不然
+        // 顺着地址找回到闭包里面，可以访问到闭包环境中存储的私有属性，这里是obj
+        scoreApiJack.set("语文", 123);
+        scoreApiJack.get("语文");
+        scoreApiJack.print();
+
+
+        function closure2() {
+            const privateMessage = 'HELLO, JACK!';
+
+            return function insideFn() {
+                console.log(privateMessage);
+            };
+        }
+        const insideFn = closure2(); 
+        insideFn();  // 看起来是全局调用了函数insideFn()，而全局里面没有privateMessage，理应该输出undefined
+                    // 实则不然，insideFn存在于闭包空间内，可以访问到闭包空间内环境。从而拿到'HELLO, JACK!'
     </script>
 </body>
+
 </html>
