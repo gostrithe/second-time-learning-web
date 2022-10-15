@@ -1,0 +1,17 @@
+table {
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+tbody > tr:nth-child(odd) {
+  background-color: pink;
+}
+
+tbody > tr:nth-child(even) {
+  background-color: skyblue;
+}
+
+tbody > tr:hover {
+  background-color: #ccc;
+}

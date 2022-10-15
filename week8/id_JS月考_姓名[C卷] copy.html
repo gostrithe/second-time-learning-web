@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <!-- 数据表格样式 -->
+  <style>
+    table,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    td,
+    th {
+      width: 100px;
+      text-align: center;
+    }
+
+    .even {
+      background-color: rgb(223, 223, 223);
+    }
+
+    .active {
+      background-color: yellow;
+    }
+  </style>
+
+  <!-- 动画框架样式 -->
+  <style>
+    #box1,
+    #box2,
+    #box3 {
+      width: 100px;
+      height: 100px;
+      background-color: blueviolet;
+      position: absolute;
+      left: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box1" style="background-color: red; top: 0px">1</div>
+  <div class="box" id="box2" style="background-color: green; top: 100px">
+    2
+  </div>
+  <div class="box" id="box3" style="background-color: yellow; top: 200px">
+    3
+  </div>
+
+  <script>
+
+    /* 输出100以内全部5的倍数 */
+    function fn01() { }
+    // fn01();
+
+    /* 生成随机颜色，如rgb(123,45,67) */
+    function fn02() {
+      function randomColor() {
+        //实现之
+      }
+      document.body.style.backgroundColor = randomColor();
+    }
+    // fn02();
+
+    /* 页面输出九九乘法表 */
+    function fn03() { }
+    // fn03();
+
+    /* 使用批处理函数实现如下功能 */
+    function fn04() {
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      // 遍历数组
+      // 将所有元素映射为对应的平方数，打印映射出的新数组
+      // 过滤出3的倍数，打印过滤后的结果数组
+      // 判断arr中是否所有元素都是3的倍数
+      // 判断arr中是否有元素都是3的倍数
+      // 从数组中找出第一个3的倍数
+    }
+    // fn04();
+
+    /* 封装一个函数求任意两个Date对象的时间差，以【xx天xx小时xx分xx秒】形式输出 */
+    function fn05() {
+      function getDateDiffer(d1, d2) {
+        //实现之
+        return "xx天xx小时xx分xx秒";
+      }
+      console.log(getDateDiffer(new Date(2008, 7, 8, 8), new Date()));
+    }
+    // fn05();
+
+    /* 在页面上显示10秒的倒计时，然后显示“boom!!!” */
+    function fn06() { }
+    // fn06();
+
+    /* 手写深拷贝：deepCopy(obj)返回一个obj的深拷贝副本 */
+    function fn07() {
+      function deepCopy(obj) {
+        // 实现之
+        return null;
+      }
+
+      const jack = {
+        name: "jack",
+        age: 20,
+        gender: "男",
+        clazz: "2207",
+        wife: {
+          name: "rose",
+          age: 20,
+          friends: [
+            { name: "张三", hobby: "打拳" },
+            { name: "赵四", hobby: "跳舞" },
+          ],
+        },
+      };
+
+      const jackCopy = deepCopy(jack);
+
+      /* 修改深拷贝副本不应影响本体 */
+      jackCopy.age++;
+      jackCopy.wife.age++;
+      jackCopy.wife.friends[1].hobby = "dance";
+      console.log(jack, jackCopy);
+    }
+    // fn07();
+
+    /* 将数据渲染为隔行变色的数据表格（参考试卷头部style标签内的样式） */
+    function fn08() {
+      const arr = [
+        {
+          name: "Jack",
+          age: 18,
+          gender: "男",
+        },
+        {
+          name: "Rose",
+          age: 20,
+          gender: "女",
+        },
+        {
+          name: "Top",
+          age: 22,
+          gender: "男",
+        },
+        {
+          name: "Jack",
+          age: 18,
+          gender: "男",
+        },
+        {
+          name: "Rose",
+          age: 20,
+          gender: "女",
+        },
+        {
+          name: "Top",
+          age: 22,
+          gender: "男",
+        },
+      ];
+    }
+    // fn08();
+
+    /* 实现如下继承关系 */
+    // Animal{属性:[type,food],方法:[eat]}
+    //     ->Person{属性:[name],方法:[think]}
+    //         ->Student{属性:[zhuanye],方法:[study]}
+    // 造一个学生实例并输出，令其吃饭、思考、学习
+    function fn09() { }
+    // fn09();
+
+    /* 手封动画框架 */
+    function fn10() {
+      function animate(el, target, duration = 1000, callback = null) {
+        //实现之
+        const totalFrames = 25 * (duration / 1000);
+        let framesCount = 0;
+        const startStylesObj = window.getComputedStyle(el);
+        let speed;
+        let unit;
+
+        el.style.zIndex = '999';
+        for (const key in target) {
+          speed = (parseFloat(target[key]) - parseFloat(startStylesObj[key])) / totalFrames;
+          unit = typeof (target[key]) === 'number' ? '' : 'px';
+
+          target[key] = [parseFloat(target[key]), speed, unit];
+        }
+        console.log(target);
+
+        let timer = setInterval(() => {
+          for (const key in target) {
+            el.style[key] = (parseFloat(getComputedStyle(el)[key]) + target[key][1]) + target[key][2];
+          }
+
+          framesCount++;
+
+          if (framesCount === totalFrames) {
+            clearInterval(timer);
+
+            for (const key in target) {
+              el.style[key] = target[key][0] + target[key][2];
+            }
+            el.style.zIndex = '0';
+
+            callback && callback();
+          }
+        }, 40);
+      }
+
+      document.querySelectorAll(".box").forEach((box) => {
+        box.addEventListener("click", () => {
+          animate(
+            box,
+            {
+              left: "300px",
+              top: "400px",
+              width: "250px",
+              height: "250px",
+              fontSize: "50px",
+              opacity: 0.3,
+            },
+            3000,
+            () => console.log("动画完成")
+          );
+        });
+      });
+    }
+    fn10();
+
+  </script>
+</body>
+
+</html>

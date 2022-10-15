@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 常规reset动作 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style-type: none;
+        }
+
+        #box {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 50px auto;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        #box>ul {
+            width: 100%;
+            height: 60px;
+            /* background-color: coral; */
+            display: flex;
+        }
+
+        #box>ul>li {
+            /* width: 100%; */
+            flex-grow: 1;
+            height: 100%;
+            background-color: orange;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        #box>ul>li.active {
+            background-color: darkorange;
+        }
+
+        #box>ol {
+            width: 100%;
+            /* height: 50px; */
+            flex-grow: 1;
+            background-color: burlywood;
+            position: relative;
+        }
+
+        #box>ol>li {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 50px;
+        }
+
+        #box>ol>li.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul id="ulTabs">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ol id="olContents">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+    </div>
+
+    <script>
+        const box = document.getElementById('box');
+        const ul = document.getElementById('ulTabs');
+        const ol = document.getElementById('olContents');
+        const ulLis = ul.querySelectorAll('li');
+        const olLis = ol.querySelectorAll('li');
+
+
+        box.addEventListener('click', function (e) {
+            if (e.target.nodeName === 'LI') {
+                for (let i = 0; i < ulLis.length; i++) {
+                    ulLis[i].className = '';
+                    ulLis[i].setAttribute('data-n', i);
+                }
+                e.target.classList.add('active');
+
+                for (let j = 0; j < olLis.length; j++) {
+                    olLis[j].className = '';
+                }
+                let index = e.target.getAttribute('data-n');
+                olLis[index].classList.add('active');
+            }
+        })
+
+    </script>
+</body>
+
+</html>

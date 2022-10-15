@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16_身份证号码</title>
+</head>
+
+<body>
+    <script>
+        // 1-23456-2008-08-01-123X
+        let regId = /^([1-6])-(\d{5})-((19\d{2})|(20[01]\d)|(202[012]))-((0[1-9])|(1[012]))-((0[1-9])|([12]\d)|(3[01]))-(\d{3}[\dX])$/
+        // console.log(regId.test("1-23456-2008-08-01-123X"));
+        // console.log(regId.test("7-23456-2008-08-01-123X"));
+        // console.log(regId.test("1-234757-2008-08-01-123X"));
+        // console.log(regId.test("1-23475-1840-08-01-123X"));
+        // console.log(regId.test("1-23475-2008-13-01-123X"));
+        // console.log(regId.test("1-23456-2008-08-32-123X"));
+        // console.log(regId.test("1-23456-2008-08-01-123D"));
+
+        /* 从身份证号中提取出出生年份 */
+        // console.log(
+        //     regId.exec("1-23456-2008-08-01-123X")[3]
+        // );
+
+        let retArr = regId.exec("1-23456-2008-08-01-123X")
+        console.log(
+            `您的出生日期为${retArr[3]}年${retArr[7]}月${retArr[10]}日`
+        );
+        
+
+    </script>
+</body>
+
+</html>

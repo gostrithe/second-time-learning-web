@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            display: none;
+            /* border-collapse: collapse; */
+        }
+
+        table,
+        td,
+        th {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            width: 100px;
+            text-align: center;
+        }
+
+        .even {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .active {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">表格渲染</button>
+    <hr>
+    <table>
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var arr = [
+            {
+                name: "Jack",
+                age: 18,
+                gender: "男",
+            },
+            {
+                name: "Rose",
+                age: 20,
+                gender: "女",
+            },
+            {
+                name: "Top",
+                age: 22,
+                gender: "男",
+            },
+            {
+                name: "Jack",
+                age: 18,
+                gender: "男",
+            },
+            {
+                name: "Rose",
+                age: 20,
+                gender: "女",
+            },
+            {
+                name: "Top",
+                age: 22,
+                gender: "男",
+            },
+        ];
+
+        // const fragment = document.createDocumentFragment();
+
+        const table = document.querySelector('table');
+        const thead = document.querySelector('thead');
+        const tbody = document.querySelector('tbody');
+        btn.onclick = function () {
+            arr.forEach(function (obj, index, _arr) {
+                if (index === 0) {
+                    const tr = document.createElement('tr');
+                    for (const key in obj) { 
+                        tr.innerHTML += `<th>${key}</th>`;
+                    }
+
+                    console.log(tr);
+                    thead.appendChild(tr);
+                }
+
+                let htmlStr = index % 2 === 0 ? '<tr class = "even">' : '<tr>';
+                for (const key in obj) {
+                    htmlStr += `<td>${obj[key]}</td>`;
+                }
+                htmlStr += '</tr>';
+                console.log(htmlStr);
+                tbody.innerHTML += htmlStr;
+            });
+            table.style.display = 'table';
+        };
+
+        table.addEventListener('mouseover', function (e) {
+            if (e.target.nodeName === 'TD') {
+                console.log('进来了', e.target);
+                e.target.parentNode.classList.add('active');
+            }
+        });
+
+        // const trs = document.querySelectorAll('tbody>tr');
+        table.addEventListener('mouseout', function (e) {
+            if (e.target.nodeName === 'TD') {
+                console.log('出去了', e.target);
+                e.target.parentNode.classList.remove('active');
+            }
+        })
+    </script>
+</body>
+
+</html>

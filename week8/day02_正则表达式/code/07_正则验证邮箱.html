@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="ip" type="text" placeholder="please enter your email" />
+    <span id="spRes"></span>
+    <button id="btn">校验</button>
+
+    <script>
+      btn.onclick = function (e) {
+        const value = ip.value;
+
+        // 邮箱的正则（首尾之间有且只有邮箱）
+        // (用户名)@(邮箱名).(后缀)
+        let regEmail = /^(\w{3,})@([a-z\d]{2,})\.(com|net|cn|org)$/;
+
+        // 判断用户的输入中是否包含邮箱字符串
+        let isValidEmail = regEmail.test(value);
+
+        spRes.innerText = (isValidEmail ? "合法" : "不合法");
+      };
+    </script>
+  </body>
+</html>

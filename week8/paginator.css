@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.paginator {
+  width: 800px;
+  height: 40px;
+  border: 1px solid #333;
+  margin: 30px auto;
+}
+
+.paginator .pagers .current {
+  background-color: orange;
+}

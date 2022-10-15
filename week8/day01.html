@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        ES6:
+            开启严格模式
+            "use strict";       单词slack松散的
+
+            ES5的一些不严谨、不科学的点：
+                变量提升！
+                作用域穿透，没有块级作用域！
+                可以不用var关键字声明变量，直接赋值！
+                Uncaught ReferenceError: age is not defined
+                        -- 引用错误
+                参数名可以重名！
+                Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+                        -- 语法错误    重复的     参数                       在当前上下文          
+                可以声明同一变量名的变量！
+                编译上，可以delete变量、对象、函数！
+                Uncaught SyntaxError: Delete of an unqualified identifier in strict mode.
+                                    --  删除  一个  没有资格的    标识符      在严格模式下       
+                可以使用八进制！
+                Uncaught SyntaxError: Octal literals are not allowed in strict mode.
+                                    --  八进制 字面量 在严格模式下不被允许
+                函数中的this飘忽不定，且将指向undefined转为指向window！
+
+
+            ES6使用let和const来声明变量与常量：
+                注意，es5中没有声明常量的关键字，一般用全大写疯狂提示，如var PI = 3.14;
+                
+                let
+                同一个变量名声明一次就够了，否则报错
+                Uncaught SyntaxError: Identifier 'num' has already been declared
+
+                const
+                常量为永恒不变的量，不能再次赋值，否则报错
+                Uncaught TypeError: Assignment to constant variable.
+                                  --  赋值
+
+                let和const符合良好的书写代码习惯，没有预解析什么变量声明提升
+
+                let和const存在块级作用域{}，不会跑出去。
+
+
+            箭头函数：
+                () => {}
+                形参列表 function 函数体
+
+                单参数单语句，默认return
+                a => a + 7
+                单参数可省略(),单语句可省略{}且可以省略return，默认return 
+
+                形参也可以有默认值
+                const fun = (a = 7, b = 0) => {
+                    console.log(a, b);
+                    return a + b;
+                }
+
+
+                箭头函数没有arguments实参列表！
+                支持不定长参数
+                const fn = (a, ...args) => {
+                    console.log(args)  // [1, 2, 3]
+                }
+                fn(7, 1, 2, 3)
+
+
+                ***************
+                MDN文档：箭头函数不会创建自己的this,它只会从自己的作用域链的上一层继承this
+                箭头函数中的this只与其定义位置有关!!!!!!
+                    -- 位置写好了，管你怎么调用，我在作用域链中寻找this，像寻找变量
+
+            
+            模板字符串：
+                模板书写字符串，且可以挖坑插入${有返回值的东西}
+
+            解构赋值：
+                对象：
+                let {age, name} = {name: 'jack', age: 18};
+                    相当于let age = 18; let name = 'jack';
+                    一定要对应好对象的key，顺序无所谓，但不能乱起名！否则为赋值为undefined
+                    
+                    复杂结构对象的解构
+                    let {friend: {skill}} = {name: 'john', friend: {name: 'jojo', skill() {console.log('skill')}}}
+                        -- 在一级解构的基础上，使用:继续解构{}拿到里面的skill的值
+                    
+                数组：
+                let [a, b, c] = [1, 2, 3];
+                    相当于let a = 1; let b = 2; let c = 3
+                    对应好元素的位置。
+
+                    如果某个元素不想拿，则什么都不写，逗号,隔开
+                    复杂结构，同样对应好结构以及元素即可
+                    let [, , c, [d, e]] = [1, 2, 3, [4, 5]];
+            
+            展开运算符：
+                ...arr 或 ...obj  原地打散数组的元素或对象的键值对
+
+                const data = {
+                    ...obj,
+                    numbers: [0,...arr,11,12,13],
+                };
+
+                -- 有拷贝的那味，避免引用类型地址传递的互相影响
+
+            对象中方法的简写：
+                {
+                    name: 'jack';
+                    sayHello() {    -- 注意，仍然是常规函数。
+                        console.log('fuck u');
+                    }
+                }
+
+            立即调用函数IIFE：
+                -- 调用一次，马上调用
+
+                写法:
+                (function () {})()
+                !functiuon () {}()
+                ~function () {}()
+
+                -- 没人调用，显然是浏览器调用，this指向window
+
+    -->
+</body>
+</html>

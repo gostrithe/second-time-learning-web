@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 
+  digit数字
+  space空白
+   -->
+  <script>
+    // 就是用来书写正则的特殊内容
+    // 1. \d 
+    // 表示是数字的意思
+
+    // 我要检测的字符串里面必须有一个数字
+    // digit数字
+    // let reg = /\d/
+    // // // reg.test(str)检测str中是否包含reg所描述的子串
+    // console.log(reg.test('abdsavcd'))//false
+    // console.log(reg.test('ab123vfdvcd'))//true
+
+    // 2. \D
+    // 表示非数字
+    // 表示检测的字符串里面要有一个非数字
+    // let reg = /\D/
+    // console.log(reg.test('abdsavcd'))//true
+    // console.log(reg.test('123'))//false
+
+    // space 空白
+    // 3. \s 
+    // 表示空格字符 " " \t制表符 \n换行符 \r回车符     
+    // 表示你的字符串中要有一个 空格
+    // let reg = /\s/
+    // console.log(reg.test('SDfghjkz'))//f
+    // console.log(reg.test('1     23'))//t
+    // console.log(reg.test('deg\tgfh'))//t
+
+    // 4. \S
+    // 表示非空格
+    // let reg = /\S/
+    // console.log(reg.test('1     23'))//t
+    // console.log(reg.test(' \t\r\n'))//f
+
+    // 5. \w word 单词字符
+    // 数字字母下划线 0 - 9 a - z A -Z _
+    // let reg = /\w/
+    // console.log(reg.test('@_@'))//t
+    // console.log(reg.test("凯哥吃鸡"));//f
+
+    // 6. \W
+    // 非数字字母下划线
+    // let reg = /\W/
+    // console.log(reg.test('@_@'))//t
+    // console.log(reg.test("BrotherKaiEatChicken666"));//f
+
+    // 7. 点.
+    // 表示非换行以外的任意字符 \n换行符
+    // let reg = /./
+    // console.log(reg.test("BrotherKaiEatChicken666"));//t
+    // console.log(reg.test(" "));//t
+    // console.log(reg.test("\n\n\n"));//f
+
+    /* 中文“元字符” */
+    let reg= /[\u4e00-\u9fa5]/
+    console.log(reg.test("凯哥爱吃鸡，天天都吃"));
+    console.log(reg.test("brother kai eat chicken everyday he is rich"));
+    
+
+  </script>
+</body>
+
+</html>

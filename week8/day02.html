@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 正则表达式 -->
+
+    <!-- <script>
+        // 0~666之间数字
+        const reg = /^\d|([1,9]\d)|(([1,5]\d{2})|(6[1,5]\d)|(66[0,6]))$/;
+        console.log(reg.test('666'));
+    </script> -->
+
+
+
+
+    <h1>注册页面</h1>
+
+    邮箱：<input id="ipEmail" type="text" /><span id="spInfo1">请输入正确的邮箱地址</span><br />
+    密码: <input id="ipPwd" type="text" /><span id="spInfo2">密码长度为6~20个单词字符</span><br />
+    <button id="btn">注册</button>
+
+    <!-- valid合法的 invalid非法的 -->
+    <script>
+        /*
+        ·模拟用户注册，当用户点击提交表达时进行合法性验证
+        ·验证邮箱是否合法，不合法则显示提示信息
+        ·验证密码是否合法，不合法则显示提示信息，6-12位字母数字特殊符号的组合（!@#$%^&*）
+        // ---------------------------------------------------------
+        *选做：密码强度：弱=只包含一种字符 强=同时包含三种字符且长度超过12位 中=其它情形
+        *输入的同时实时显式密码强度      
+        */
+        const reg1 = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        const reg2 = /^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/;
+
+
+        const myPwdEegExp = /^[a-z\d!@#$%^&*]{6,20}$/i;
+        btn.onclick = function (e) {
+            e.preventDefault();
+            console.log(1);
+            // reg1.test(ipEmail.value.trim()) ? (spInfo2.style.display = 'none') : (spInfo2.style.display = 'block');
+            // myPwdEegExp.test(ipPwd.value.trim()) ? (spInfo2.style.display = 'none') : (spInfo2.style.display = 'block');
+            if (myPwdEegExp.test(ipPwd.value.trim())) {
+                alert('合法')
+            } else {
+                spInfo2.innerText = '密码长度为6~20个单词字符'
+                spInfo2.style.color = 'red'
+                spInfo2.style.display = 'block'
+            }
+        };
+
+        const hotChikenPwd = /[a-z]{6,20}|\d{6,20}|[!@#$%^&*]{6,20}/;
+        const strongPwd = /[a-z]+\d+[!@#$%^&*]+/i;
+        // ipPwd.addEventListener('blur', e => {
+        //     console.log('失去焦点');
+        //     console.log(e.currentTarget.value);
+        //     hotChikenPwd.test(e.currentTarget.value) && console.log('弱');
+        //     hotChikenPwd.test(e.currentTarget.value) && e.currentTarget.value.length > 12 && console.log('弱');
+        // })
+
+        const number = /\d/;
+        const letter = /[a-z]/i;
+        const other = /[!@#$%^&*]/;
+        let text = '';
+        let color = '';
+        document.getElementById('ipPwd').oninput = e => {
+            if (ipPwd.value.length > 12 && ipPwd.value.match(number) && ipPwd.value.match(letter) && ipPwd.value.match(other)) {
+                console.log('强');
+                text = '强';
+                color = 'green';
+            } else if (ipPwd.value.match(number) && !ipPwd.value.match(letter) && !ipPwd.value.match(other) || ipPwd.value.match(letter) && !ipPwd.value.match(number) && !ipPwd.value.match(other) || ipPwd.value.match(other) && !ipPwd.value.match(number) && !ipPwd.value.match(letter)) {
+                console.log('hotChiken!');
+                text = 'hotChiken';
+                color = 'red';
+            } else {
+                console.log('中');
+                text = '中';
+                color = 'blue';
+            }
+
+            spInfo2.innerText = text;
+            spInfo2.style.color = color;
+            spInfo2.style.display = 'inline-block';
+
+            !ipPwd.value &&  (spInfo2.style.display = 'none');
+        }
+    </script>
+</body>
+
+</html>

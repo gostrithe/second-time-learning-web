@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const result = [];
+        for (let i = 0, n; i < 7; i++) {
+            console.log(result);
+            let max = i > 4 ? 12 : 35;
+            console.log(max);
+            n = parseInt(Math.random() * max) + 1;
+            if (!result.includes(n)) {
+                result[i] = n;
+                continue;
+            }
+            n = parseInt(Math.random() * max) + 1;
+            i--;
+        }
+        console.log(result);
+
+        let str = '';
+        result.forEach((item, index, arr) => {
+            (item + '').length < 2 && (item = '0' + item);
+            console.log(item);
+            str += item + ' ';
+        });
+
+        function lol(n) {
+            let num = parseInt(Math.random() * n) + 1;
+            num < 10 && (num = '0' + num);
+            
+            return num + ' ';
+        }
+        let timer = setInterval(() => {
+            document.body.innerText = `${lol(35)} ${lol(35)} ${lol(35)} ${lol(35)} ${lol(35)} ${lol(12)} ${lol(12)}`;
+        }, 40);
+
+        setTimeout(() => {
+            clearInterval(timer);
+            document.body.innerHTML = `${str}`;
+        }, 3000);
+
+
+
+    </script>
+</body>
+
+</html>

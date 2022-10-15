@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>11_正则表单验证</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>注册页面</h1>
+
+    邮箱：<input id="ipEmail" type="text" /><span id="spInfo1">请输入正确的邮箱地址</span><br />
+    密码: <input id="ipPwd" type="text" /><span id="spInfo2">密码长度为6~20个单词字符</span><br />
+    <button id="btn">注册</button>
+
+    <!-- valid合法的 invalid非法的 -->
+    <script>
+        /* 
+        ·模拟用户注册，当用户点击提交表达时进行合法性验证
+        ·验证邮箱是否合法，不合法则显示提示信息
+        ·验证密码是否合法，不合法则显示提示信息，6-12位字母数字特殊符号的组合（!@#$%^&*）
+        // ---------------------------------------------------------
+        *选做：密码强度：弱=只包含一种字符 强=同时包含三种字符且长度超过12位 中=其它情形
+        *输入的同时实时显式密码强度      
+        */
+
+    </script>
+</body>
+
+</html>

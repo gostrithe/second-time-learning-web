@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 
+  regular 规则/有规则的
+  expression 表达式
+   -->
+  <script>
+    // 什么是正则表达式 “规则表达式”
+
+    // 就是我们通过一些符号和特殊符号组成一个模式
+    // 用来检测字符串是不是符合我写的 “规则”
+
+    // 怎么写一个正则
+    
+    // 字面量
+    let reg1 = /\d{5,}@qq\.com/
+    console.log(typeof(reg1));//object
+    console.log(Object.prototype.toString.call(reg1));//[object RegExp]
+    console.log(reg1);
+    
+    // // 内置构造函数
+    let reg2 = new RegExp("\\d{5,}@qq\\.com")
+    console.log(typeof(reg2));//object
+    console.log(Object.prototype.toString.call(reg2));//[object RegExp]
+    console.log(reg2);
+
+
+    // 实际上 正则表达式 是一个引用数据类型
+
+  </script>
+</body>
+</html>

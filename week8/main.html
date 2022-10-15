@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分页器需求参考</title>
+
+    <link rel="stylesheet" href="./paginator.css" />
+    <link rel="stylesheet" href="./mytable.css" />
+
+  </head>
+
+  <body>
+    <!-- 分页器 -->
+    <div class="paginator"></div>
+
+    <!-- 数据表格 -->
+    <div class="mytable"></div>
+
+    <script src="./Paginator_Table_Student.js"></script>
+    <!-- 准备数据 -->
+    <!-- <script>
+      const students = [];
+      for (let i = 1; i <= 1234; i++) {
+        students.push(
+          new Student(
+            getLengthedNumStr(i, 4),
+            getRandomName(),
+            getRandom(18, 40),
+            getRandomItem(["男", "女", "基", "同"]),
+            getRandom(2101, 2113),
+            getRandom(5000, 30000)
+          )
+        );
+      }
+      // console.log("students", students);
+    </script>
+
+    <script>
+      // 创建一个动态表格对象
+      const mt = new MyTable(
+        // 注入数据
+        students,
+
+        // 渲染到指定的DOM根节点
+        document.querySelector(".mytable"),
+
+        // 一些配置项
+        {
+          pageSize: 20, //一页渲染10条数据
+          page: 5, //默认显式第5页
+        }
+      );
+
+      // let page = 5
+      // setInterval(() => {
+      //     mt.turnToPage(++page)
+      // }, 1000);
+
+      /* 创建一个分页器 */
+      const pg = new Paginator(
+        // 渲染的根元素
+        document.querySelector(".paginator"),
+
+        // 分页回调函数
+        // 用户点击5时 mt.turnToPage(5)
+        // n => alert(`用户想去第${n}页`),
+        (n) => mt.turnToPage(n),
+
+        // 分页器配置
+        {
+          totalPages: Math.ceil(students.length / mt.conf.pageSize), //124
+          currentPage: 5, //一开始高亮第5页
+        }
+      );
+    </script> -->
+  </body>
+</html>

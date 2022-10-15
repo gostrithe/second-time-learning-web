@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+  <script>
+    // 1. \ 转义的意思 \\代表的是“\”
+
+    // 2. | 或的意思
+
+    // 3. ()
+    //   表示把一堆东西当成一个整体
+
+    /* 【1个以上的单词字符】.sina.com */
+    // 开头到结尾中间，有且只有新浪或QQ邮箱
+    // let reg = /^(用户名)@(邮箱名).(后缀)$/
+    // let reg = /^(\w+)@(sina|qq)\.(com|net)$/
+    // console.log(reg.test("12345@qq.com"))
+    // console.log(reg.test("12345hello@qq.com"))
+    // console.log(reg.test("12345hello@sina.com"))
+    // console.log(reg.test("12345hello@foxmial.com"))
+    // console.log(reg.test("12345hello@sina.net"))
+
+    // 4. []
+    // 写在括号内部的东西任选一个就行
+    // 一个 [] 内部表示一个字符
+    // a b c d 中过的任意一个都可以
+    // var reg = /^[abcd]$/
+    // console.log(reg.test("c"));
+    // console.log(reg.test("f"));
+    // console.log(reg.test("ccc"));
+
+    /* 头尾之间只有一个字符 该字符只要不是abcd其中之一即可 */
+    // var reg = /^[^abcd]$/
+    // console.log(reg.test("c"));//f
+    // console.log(reg.test("f"));//t
+
+    /* 头尾之间只有一个字符 该字符在码表中位于a到z区间 即所有小写字符 */
+    var reg = /^[a-z]$/
+    console.log(reg.test("c"));//t
+    console.log(reg.test("f"));//t
+    console.log(reg.test("F"));//f
+
+
+  </script>
+</body>
+</html>

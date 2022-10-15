@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+  <script>
+    // 1. ^
+    // 表示开头
+
+    // 2. $
+    // 表示结尾
+
+    // 下面这个表示必须以数字开头
+    // var reg = /^\d/
+    // console.log(reg.test('1abc123'));//t
+    // console.log(reg.test('x1abc123'));//f
+
+
+    // 下面这个表示必须以数字结尾
+    // var reg = /\d$/
+    // console.log(reg.test('1abc123'));//t
+    // console.log(reg.test('x1abc123x'));//f
+
+
+    // 表示字符串从开头到结尾只能有一个数字
+    // var reg = /^\d$/
+    // console.log(reg.test('8'));//t
+    // console.log(reg.test('1abc123'));//f
+    // console.log(reg.test('x1abc123x'));//f
+
+
+    // 表示字符串从开头到结尾之恶能由数字组成并且只能出现 0 ~ 1 次
+    // var reg = /^\d?$/ //字符串收尾之间（字符串本身）有且仅有0或1个数字
+    // console.log(reg.test('8'));//t
+    // console.log(reg.test(''));//t
+    // console.log(reg.test('x1abc123x'));//f
+
+
+    /* 开头和结尾中间有且只有4个数字 */
+    // var reg = /^\d{4}$/ //字符串收尾之间（字符串本身）有且仅有4个数字
+    // console.log(reg.test('8888'));//t
+    // console.log(reg.test('12345678'));//f
+    // console.log(reg.test(' 1234 '));//f
+
+
+    /* 在开头和结尾的中间是4个以上的连续数字 */
+    // var reg = /^\d{4,}$/ //字符串收尾之间（字符串本身）有且仅有4个以上的数字
+    // console.log(reg.test('8888'));//t
+    // console.log(reg.test('12345678'));//t
+    // console.log(reg.test(' 1234 '));//f
+
+
+
+    /* 在开头和结尾的中间是4-6个连续数字 */
+    var reg = /^\d{4,6}$/ //字符串收尾之间（字符串本身）有且仅有4-6个数字
+    console.log(reg.test('1234'));//t
+    console.log(reg.test('12345'));//t
+    console.log(reg.test('123456'));//t
+    console.log(reg.test('12345678'));//f
+
+
+  </script>
+</body>
+</html>

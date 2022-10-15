@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <!-- 数据表格样式 -->
+  <style>
+    table,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    td,
+    th {
+      width: 100px;
+      text-align: center;
+    }
+
+    .even {
+      background-color: rgb(223, 223, 223);
+    }
+
+    .active {
+      background-color: yellow;
+    }
+  </style>
+
+  <!-- 动画框架样式 -->
+  <style>
+    #box1,
+    #box2,
+    #box3 {
+      width: 100px;
+      height: 100px;
+      background-color: blueviolet;
+      position: absolute;
+      left: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box1" style="background-color: red; top: 0px">1</div>
+  <div class="box" id="box2" style="background-color: green; top: 100px">
+    2
+  </div>
+  <div class="box" id="box3" style="background-color: yellow; top: 200px">
+    3
+  </div>
+
+  <script>
+
+    /* 输出100以内全部5的倍数 */
+    function fn01() {
+      let pantaNumberArray = [];
+      for (let i = 1; i < 101; i++) {
+        i % 5 === 0 && pantaNumberArray.push(i);
+      }
+      console.log('100以内全部5的倍数的数组', pantaNumberArray);
+    }
+    fn01();
+
+    function fn01_X() {
+      let pantaNumberArray = [];
+      for (let i = 5; i < 101; i += 5) {
+        pantaNumberArray.push(i);
+      }
+      console.log('100以内全部5的倍数的数组', pantaNumberArray);
+    }
+    fn01_X();
+
+    /* 生成随机颜色，如rgb(123,45,67) */
+    function fn02() {
+      function randomColor() {
+        return `rgb(${parseInt(Math.random() * 256)}, ${parseInt(Math.random() * 256)}, ${parseInt(Math.random() * 256)})`;
+      }
+      document.body.style.backgroundColor = randomColor();
+    }
+    fn02();
+
+    /* 页面输出九九乘法表 */
+    function fn03() {
+      for (let i = 1; i <= 9; i++) {
+        document.write('-----------------');
+        for (let j = 1; j <= i; j++) {
+          document.write(`${j} × ${i} = ${((j * i) + '').length === 1 ? (j * i) + '&nbsp;&nbsp;' : j * i} &nbsp;&nbsp;&nbsp;&nbsp;`);
+        }
+        document.write('<br>');
+      }
+    }
+    fn03();
+
+    /* 使用批处理函数实现如下功能 */
+    function fn04() {
+      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      // 遍历数组
+      arr.forEach(item => console.log(item));
+      // 将所有元素映射为对应的平方数，打印映射出的新数组
+      let newArr = arr.map(item => item * item);
+      console.log(newArr);
+      // 过滤出3的倍数，打印过滤后的结果数组
+      let resultArr = arr.filter(item => item % 3 === 0);
+      console.log(resultArr);
+      // 判断arr中是否所有元素都是3的倍数
+      console.log(arr.every(item => item % 3 === 0));
+      // 判断arr中是否有元素是3的倍数
+      console.log(arr.some(item => item % 3 === 0));
+      // 从数组中找出第一个3的倍数
+      console.log(arr.find(item => item % 3 === 0));
+    }
+    fn04();
+
+    /* 封装一个函数求任意两个Date对象的时间差，以【xx天xx小时xx分xx秒】形式输出 */
+    function fn05() {
+      function getDateDiffer(d1, d2) {
+        const timeSecondDiffer = Math.abs(d2 - d1) / 1000;
+        const days = parseInt(timeSecondDiffer / (60 * 60 * 24));
+        const hours = parseInt((timeSecondDiffer % (60 * 60 * 24)) / (60 * 60));
+        const minutes = parseInt((timeSecondDiffer % (60 * 60)) / 60);
+        const seconds = Math.round(timeSecondDiffer % 60);
+        return `${days}天${hours}小时${minutes}分${seconds}秒`;
+      }
+      console.log(getDateDiffer(new Date(2008, 7, 8, 8), new Date()));
+    }
+    fn05();
+
+    /* 在页面上显示10秒的倒计时，然后显示“boom!!!” */
+    function fn06() {
+      const h2 = document.createElement('h2');
+      h2.style.textAlign = 'center';
+      document.body.appendChild(h2);
+      h2.innerHTML = 10;
+      let timer = setInterval(() => {
+        h2.innerHTML--;
+        if (h2.innerHTML == 0) {
+          clearInterval(timer);
+          h2.innerText = 'boom!!!';
+
+          h2.style.position = 'relative';
+          let shakeTime = setInterval(() => {
+            h2.style.top = '5px';
+            setTimeout(() => {
+              h2.style.top = '-5px';
+            }, 0);
+            setTimeout(() => {
+              clearInterval(shakeTime);
+              h2.style.top = '0';
+            }, 500);
+          }, 50);
+        }
+      }, 1000);
+    }
+    fn06();
+
+    /* 手写深拷贝：deepCopy(obj)返回一个obj的深拷贝副本 */
+    function fn07() {
+      function deepCopy(obj) {
+        if (obj === null || typeof (obj) !== 'object') {
+          return obj;
+        } else {
+          let result = Array.isArray(obj) ? [] : {};
+          for (const key in obj) {
+            result[key] = deepCopy(obj[key]);
+          }
+          return result;
+        }
+      }
+
+      const jack = {
+        name: "jack",
+        age: 20,
+        gender: "男",
+        clazz: "2207",
+        wife: {
+          name: "rose",
+          age: 20,
+          friends: [
+            { name: "张三", hobby: "打拳" },
+            { name: "赵四", hobby: "跳舞" },
+          ],
+        },
+      };
+
+      const jackCopy = deepCopy(jack);
+
+      /* 修改深拷贝副本不应影响本体 */
+      jackCopy.age++;
+      jackCopy.wife.age++;
+      jackCopy.wife.friends[1].hobby = "dance";
+      console.log(jack, jackCopy);
+    }
+    fn07();
+
+    /* 将数据渲染为隔行变色的数据表格（参考试卷头部style标签内的样式） */
+    function fn08() {
+      const arr = [
+        {
+          name: "Jack",
+          age: 18,
+          gender: "男",
+        },
+        {
+          name: "Rose",
+          age: 20,
+          gender: "女",
+        },
+        {
+          name: "Top",
+          age: 22,
+          gender: "男",
+        },
+        {
+          name: "Jack",
+          age: 18,
+          gender: "男",
+        },
+        {
+          name: "Rose",
+          age: 20,
+          gender: "女",
+        },
+        {
+          name: "Top",
+          age: 22,
+          gender: "男",
+        },
+      ];
+
+      let htmlStr = '';
+      let tbodyStr = '<tbody>';
+      arr.forEach((obj, index) => {
+        if (index === 0) {
+          htmlStr += '<thead><tr>';
+          for (const key in obj) {
+            htmlStr += `<th>${key}</th>`;
+          }
+          htmlStr += '</tr></thead>';
+        }
+
+        // 注意模板字符串里面的字符都是默认拼串的，${}返回值就算是一个字符串，就算是已经带好了引号，
+        // 相当于模板字符串里的其他字符串，与${}返回值的字符串，两者做了字符串拼接，两个字符串拼接只保留最外层的引号；
+        // 就是说${}的返回值，就算是字符串，他也不会带有引号出现在最终的字符串里面
+        // 解决方法，    ` "  ${}  " `   外面的"与返回值的字符做了字符串拼接，  \" + 'even'  === ' "even '
+
+        // 浏览器自动将  class = even  修正（改正你低级的错误）==>  class = "even"
+        // 所以当类名只有一个时候，貌似看不出什么问题，但是但多个类名时，就会如下
+        // class = even jack    浏览器把jack当成下一个属性的属性名===>   class = "even"; jack
+        tbodyStr += `<tr class = "${index % 2 === 0 ? 'even' : ''}">`;
+        for (const key in obj) {
+          tbodyStr += `<td>${obj[key]}</td>`;
+        }
+        tbodyStr += '</tr>';
+      });
+      tbodyStr += '</tbody>';
+      htmlStr += tbodyStr;
+
+      const table = document.createElement('table');
+      table.innerHTML = htmlStr;
+      document.body.appendChild(table);
+    }
+    fn08();
+
+    /* 原型链语法实现如下继承关系 */
+    // Animal{属性:[type,food],方法:[eat]}
+    //     ->Person{属性:[name],方法:[think]}
+    //         ->Student{属性:[zhuanye],方法:[study]}
+    // 造一个学生实例并输出，令其吃饭、思考、学习
+    function fn09() {
+      function Animal(type, food) {
+        this.type = type;
+        this.food = food;
+      }
+      Animal.prototype.eat = function () {
+        console.log(`一只动物类型为${this.type}的动物正在吃${this.food}`);
+      };
+
+      function Person(name) {
+        Animal.call(this, '人类', '五谷杂粮');
+        this.name = name;
+      }
+      Person.prototype = new Animal();
+      Person.prototype.think = function () {
+        console.log('A man is thinking now.');
+      };
+
+      function Student(name, zhuangye) {
+        Person.apply(this, [name]);
+        this.zhuangye = zhuangye;
+      }
+      Student.prototype = new Person();
+      Student.prototype.study = function () {
+        console.log('A student is studying now');
+      };
+
+      const studentJack = new Student('Jack', '金数');
+      console.log(studentJack);
+      studentJack.eat();
+      studentJack.think();
+      studentJack.study();
+    }
+    fn09();
+
+    /* 手封动画框架 */
+    function fn10() {
+      function animate(el, target, duration = 1000, callback = null) {
+        const totalFrams = 25 * (duration / 1000);
+        let framCount = 0;
+        const startStylesObj = getComputedStyle(el);
+        let targetStyles;
+        let speed;
+        let unit;
+
+        for (const key in target) {
+          targetStyles = target[key];
+          speed = (parseFloat(targetStyles) - parseFloat(startStylesObj[key])) / totalFrams;
+          unit = typeof (targetStyles) === 'number' ? '' : 'px';
+
+          target[key] = [parseFloat(targetStyles), speed, unit];
+        }
+
+        let timer = setInterval(() => {
+          for (const key in target) {
+            [, speed, unit] = target[key];
+            el.style[key] = (parseFloat(getComputedStyle(el)[key]) + speed) + unit;
+          }
+          framCount++;
+
+          if (framCount === totalFrams) {
+            clearInterval(timer);
+
+            for (const key in target) {
+              [targetValue, , unit] = target[key];
+              el.style[key] = targetValue + unit;
+            }
+
+            callback && callback();
+          }
+        }, 40);
+
+
+      }
+
+      document.querySelectorAll(".box").forEach((box) => {
+        box.addEventListener("click", () => {
+          animate(
+            box,
+            {
+              left: "300px",
+              top: "400px",
+              width: "250px",
+              height: "250px",
+              fontSize: "50px",
+              opacity: 0.3,
+            },
+            3000,
+            () => console.log("动画完成")
+          );
+        });
+      });
+    }
+    fn10();
+
+  </script>
+</body>
+
+</html>

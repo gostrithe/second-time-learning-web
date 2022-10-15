@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    username <input type="text" id="ipUsername"><br>
+    password <input type="text" id="ipPassword"><br>
+    <button id="btn">Register</button>
+
+    <script>
+        // var validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"
+        // function check(str=""){
+        //     var chars = Array.from(str)
+        //     return chars.every(
+        //         function(char,index){
+        //             return validChars.includes(char)
+        //         }
+        //     ) && (chars.length >= 6 && chars.length <= 20)
+        // }
+
+        /*check with [regular expression] */
+        var re = /^[\w]{6,20}$/
+        function check(str) {
+            return re.test(str)
+        }
+
+        var btn = document.querySelector("#btn")
+        btn.addEventListener(
+            "click",
+            function(e){
+                var username = ipUsername.value,password = ipPassword.value
+                if(check(username) && check(password)){
+                    alert("register ok")
+                }else{
+                    alert("invalid username or password")
+                }
+            }
+        )
+    </script>
+
+</body>
+</html>

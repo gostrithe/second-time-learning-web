@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 
+  execute执行 chief excutive officer
+  global全局的
+  ignore忽略
+  multi-多... multimedia多媒体 single单个 double双重 tripple三重 Quadruple四重
+  sticky粘性的
+   -->
+
+  <script>
+    // 标识符是写在正则外面的东西
+    // 1. g
+    // 全局搜索
+    // 写了 g 以后
+    // 第一次搜索是从字符串索引0开始
+    // 第二次搜索是从上次结束的位置开始
+    // 第三次搜索是从第二次结束的位置开始
+    // 直到找不到内容了 返回 null
+    // 再下一次的时候又从 索引 0 开始搜索
+
+
+    /* g 全局匹配 */
+    // 此处的正则如果没有全局匹配标识符g 则永远只会检索到第一个子串
+    // reg.lastIndex游标当前的实时位置 在【全局模式下】游标会实时地移动 常规模式下执行一次匹配后游标归零
+    // let reg = /\d{3}/g
+    // let str = 'abcd324sdfsdf333asd234fs'
+    // console.log(reg.lastIndex);//0
+    // console.log(reg.exec(str),reg.lastIndex);//[324  ...]7
+    // console.log(reg.exec(str),reg.lastIndex);//[333 ...] 16
+    // console.log(reg.exec(str),reg.lastIndex);//[234 ...] 22
+    // console.log(reg.exec(str),reg.lastIndex);//null 0
+
+    // 2. i
+    // 忽略大小写 ignore
+    // 表示再查找的时候忽略大小写问题
+    // 揪出所有的英文单词
+    let reg1 = /[a-z]+/gi
+    let str = "123321凯哥今晚要吃鸡Brother Kai Will Eat Chicken 666"
+    console.log(reg1.exec(str));
+    console.log(reg1.exec(str));
+    console.log(reg1.exec(str));
+    console.log(reg1.exec(str));
+    console.log(reg1.exec(str));
+    
+
+  </script>
+</body>
+
+</html>

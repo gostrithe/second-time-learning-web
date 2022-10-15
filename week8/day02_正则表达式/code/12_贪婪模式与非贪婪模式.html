@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    greedy贪婪的
+     -->
+    <script>
+        // 正则描述：中文若干+数字若干
+        // var reg = /(([\u4e00-\u9fa5]*)(\d*))/
+        // var str = "吃鸡123"
+        // console.log( reg.exec(str) );
+
+        function testRegGreedy() {
+            // 贪婪模式（.尽量多地匹配）
+            var reg1 = /(.*)(\d+)/
+            var str = "吃鸡1234567890"
+
+            console.log(reg1.exec(str));
+
+
+            // // 非贪婪模式（.尽量少地匹配）
+            var reg2 = /(.*?)(\d+)/   
+            console.log(reg2.exec(str));       
+        }
+        testRegGreedy()
+    </script>
+
+</body>
+
+</html>

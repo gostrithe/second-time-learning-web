@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 创建QQ邮箱的正则表达式
+    let regQQEmail = /\d{5,}@qq\.com/
+
+    // 待检测的字符串
+    let str = "今晚吃鸡的请联系99999@qq.com"
+
+    // 检测str中是否包含QQ邮箱 返回true/false
+    let qqEmailInside = regQQEmail.test(str)
+
+    // 返回true代表str中包含QQ邮箱
+    console.log("str中是否包含QQ邮箱？",qqEmailInside);//true
+  </script>
+
+</body>
+</html>

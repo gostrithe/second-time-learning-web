@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- 
+  match匹配
+  search检索
+  replace替换
+   -->
+    <script>
+      // 是属于字符串的方法
+      // let str = 'abcdabcd123abcd456abcd789abcd'
+
+      // 1. match()
+      // 语法： str.match(正则) 以数组形式返回匹配到的全部子串（不含下标信息）
+      function demoMatch() {
+        // 没有全局模式g 结果与reg.exec(str)一样 以数组的形式的返回匹配到的第一个子串的详细信息
+        // let reg = /\d{3}/
+        // console.log(
+        //   str.match(reg)
+        // );
+        // console.log(
+        //   reg.exec(str)
+        // );
+
+        /* 正则开启了全局模式时 str.match(reg)一步到位得到所有匹配到的子串数组 */
+        let str = "abcdabcd123abcd456abcd789abcd";
+        let reg = /\d{3}/g;
+        console.log(
+          str.match(reg) //['123', '456', '789']
+        );
+
+        /* 以上功能使用reg.exec(str)实现会很麻烦 */
+        // let subs = []
+        // let retArr = []
+        // while(retArr){
+        //   retArr = reg.exec(str)
+        //   console.log(retArr);
+        //   retArr && subs.push(retArr[0])
+        // }
+        // console.log("执行结束");
+        // console.log(subs);
+      }
+
+      // 有全局模式g 返回所有匹配到的子串的数组
+      // console.log(str.match(/\d{3}/g));//["123", "456", "789"]
+
+      // 2. search() 功能与str.indexOf(sub)类似
+      // 语法： str.search(正则)
+      // 返回值： 如果找到对应内容，返回对应索引，如果没有找到对应的内容。返回 -1
+      function demoSeatch() {
+        let str = "abcdabcd123abcd456abcd789abcd";
+        let reg = /\d{6}/;
+        console.log(str.search(reg));
+      }
+
+      // 3. str.replace(子串正则,新子串)
+      // str.replaceAll(子串正则（必须有g）,新子串)
+      function demoReplace() {
+        let str = "asdasdasdfuckasdasdasdhhasdshitadasdHhasdad你妹啊";
+        // console.log(
+        //   str.replace("fuck","****")
+        // );
+        let regDirty = /(fuck|shit|damn|你妹)/g;
+        // console.log(
+        //   str.replace(regDirty,"****")
+        // );
+        // console.log(
+        //   str.replaceAll(regDirty,"****")
+        // );
+
+        /* 一行代码替换所有脏话子串为等量的* */
+        console.log(str.replace(regDirty, (sub) => sub.replace(/./g, "*")));
+
+        /* 分解动作 */
+        // let newStr = str.replace(
+        //   // 脏话的正则
+        //   regDirty,
+
+        //   // 对每一个脏话子串，旧串进去，新串出来
+        //   // 有几个脏话子串，该处理器函数就执行几遍
+        //   (os)=>{
+        //     // 将脏话子串中的每个字符，都替换为*
+        //     let ns = os.replace(/./g,"*")
+        //     return ns
+        //   }
+        // )
+        // console.log(newStr);
+      }
+    
+    </script>
+  </body>
+</html>

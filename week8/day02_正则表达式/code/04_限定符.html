@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>04_限定符</title>
+</head>
+<body>
+
+
+
+  <script>
+    // 限定符是来限制前面一个元字符出现的次数
+
+    // 1. 星号 *
+    // 表示 0 次到 正无穷
+
+    // 下面正则表示 \d 出现 0 ~ 正无穷次都可以
+    // var reg = /\d*/
+    // console.log(reg.test('abc12345'));
+    // console.log(reg.test('abc1'));
+    // console.log(reg.test('abc'));
+
+    // 2. +
+    // 表示 1 次到正无穷次
+    // 下面这则表示数字出现 1 ~ 正无穷次
+    // var reg = /\d+/
+    // console.log(reg.test('abc12345'));//t
+    // console.log(reg.test('abc1'));//t
+    // console.log(reg.test('abc'));//f
+
+    // 3. ?
+    // 表示 0 ~ 1 次
+    // 表示你检测的字符串里面有一段字符是 0 ~ 1 次的数字
+    // var reg = /\d?/
+    // console.log(reg.test('abc12345'));//TRUE
+    // console.log(reg.test('abc1'));//t
+    // console.log(reg.test('abc'));//t
+
+    // 4. {n} n 是一个数字
+    // 表示只能出现 n 次
+    // var reg = /\d{3}/
+    // console.log(reg.test('abc123'));//t
+    // console.log(reg.test('abc12345'));//t
+    // console.log(reg.test('abc'));//f
+
+    // 5. {n,}
+    // 表示至少出现 n 次   n ~ 正无穷次
+    // var reg = /\d{3,}/
+    // console.log(reg.test('abc123'));//t
+    // console.log(reg.test('abc12345'));//t
+    // console.log(reg.test('abc12'));//f
+
+    // 6. {n,m}  n ~ m 次
+    // 表示出现 n ~ m 次
+    // var reg = /\d{3,5}/
+    // console.log(reg.test('abc123'));//t
+    // console.log(reg.test('abc12345'));//t
+    // console.log(reg.test('abc1234567'));//t
+
+  </script>
+</body>
+</html>

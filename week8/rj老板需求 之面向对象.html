@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box"></div>
+
+
+
+    <script>
+        class randomLottery {
+            constructor(rootEl) {
+                this.rootEl = rootEl;
+
+                this.render();
+
+
+
+                this.animation();
+            }
+
+            render() {
+                this.rootEl.innerHTML = `
+                    <div class="container" style="padding: 20px; background: #000; font-size: 50px; text-align: center; color: #fff;">
+                        <span style="background: skyblue;">${'00'}</span>&nbsp;
+                        <span style="background: skyblue;">${'00'}</span>&nbsp;
+                        <span style="background: skyblue;">${'00'}</span>&nbsp;
+                        <span style="background: skyblue;">${'00'}</span>&nbsp;
+                        <span style="background: skyblue;">${'00'}</span>&nbsp;
+                        <span style="color: red; background: yellowgreen;">${'00'}</span>&nbsp;
+                        <span style="color: red; background: yellowgreen;">${'00'}</span>&nbsp;
+                    </div>
+                `;
+
+                const spans = document.querySelectorAll('.container>span');
+                this.spans = spans;
+                this.spans.forEach(span => {
+                    span.style.display = 'inline-block';
+                    span.style.width = '100px';
+                    span.style.height = '100px';
+                    span.style.lineHeight = '100px';
+                    span.style.borderRadius = '50%';
+                    
+                });
+            }
+
+            getRondomNumber(a, b) {
+                const number = parseInt(Math.random() * (b - a + 1)) + a;
+                return this.addPreZero(number);
+            }
+
+            onlyDifferentNumber(arr) {
+                let max = arr.length > 5 ? 12 : 35;
+                let numberNotInArr = this.getRondomNumber(1, max);
+                while (arr.includes(`${numberNotInArr}`)) {
+                    numberNotInArr = this.getRondomNumber(1, max);
+                }
+                return numberNotInArr;
+            }
+
+            addPreZero(n) {
+                return n < 10 ? '0' + n : n;
+            }
+
+            run(el, min, max, targetNumber) {
+                let timer = setInterval(() => {
+                    el.innerText = this.getRondomNumber(min, max);
+
+                    setTimeout(() => {
+                        clearInterval(timer);
+                        el.innerText = targetNumber;
+                    }, 2000);
+                }, 40);
+            }
+
+            animation() {
+                const spansArr = this.spans;
+                let index = 0;
+                this.run(spansArr[index], 1, 35, this.getRondomNumber(1, 35));
+
+                let arr = [];
+                let timer = setInterval(() => {
+                    let openedNumber = spansArr[index].innerText;
+                    console.log(openedNumber);
+                    arr.push(openedNumber);
+                    console.log(arr);
+                    let targetNumber = this.onlyDifferentNumber(arr);
+                    console.log('targetNumber', targetNumber);
+
+                    index++;
+                    this.run(spansArr[index], 1, 35, targetNumber);
+                    index === spansArr.length - 1 && (clearInterval(timer));
+                }, 2500);
+            }
+        }
+
+        const box = document.querySelector('.box');
+
+        new randomLottery(box)
+
+
+
+    </script>
+</body>
+
+</html>
